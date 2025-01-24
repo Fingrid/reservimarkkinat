@@ -35,9 +35,8 @@ jobs:
         run: |
           yarn install --immutable
           yarn build
-          touch out/.nojekyll
       - name: Upload Pages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
   deploy:
