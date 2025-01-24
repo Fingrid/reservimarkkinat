@@ -28,14 +28,13 @@ jobs:
           node-version: 22
           cache: yarn
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
         with:
           static_site_generator: next
       - name: Build
         run: |
           yarn install --immutable
           yarn build
-          yarn export
           touch out/.nojekyll
       - name: Upload Pages
         uses: actions/upload-artifact@v3
