@@ -18,6 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: enable corepack and set yarn version to latest stable
+        run: |
+          corepack enable
+          yarn set version stable
       - uses: actions/setup-node@v4
         with:
           # update the Node version to meet your needs
