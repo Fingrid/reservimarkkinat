@@ -35,6 +35,7 @@ jobs:
         run: |
           yarn install --immutable
           yarn build
+          touch ./out/.nojekyll # Prevent Jekyll from processing the site
       - name: Upload Pages
         uses: actions/upload-pages-artifact@v3
         with:
