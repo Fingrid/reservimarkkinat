@@ -2,8 +2,8 @@ import nextra from "nextra";
 
 const nextConfig = {
   output: 'export',
-  assetPrefix: isProd ? '/your-repository-name/' : '',
-  basePath: isProd ? '/your-repository-name' : '',
+  assetPrefix: isProd ? '/resurssimarkkinat-dev/' : '',
+  basePath: isProd ? '/resurssimarkkinat-dev/' : '',
   images: {
     unoptimized: true // mandatory, otherwise won't export
   }
