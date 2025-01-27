@@ -8,6 +8,15 @@
 console.log("Hello world, a code block!");
 ```
 
+```html
+<html>
+	<head>
+		<title>esimerkki</title>
+	</head>
+</html>
+
+```
+
 ## Mermaid -kaavio
 
 ```mermaid
@@ -40,3 +49,11 @@ Z --> G
 >
 > Blockquote
 > 
+
+
+# Pääotsikko
+
+## Alaotsikko
+
+* lista
+* toinen listan palikka
