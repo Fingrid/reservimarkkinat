@@ -3,6 +3,7 @@
 - [x] Tee pohjat
 - [ ] Tyylitys
 - [ ] Liitä validaattori
+- [ ] Testaa koko homma
 
 ```ts
 console.log("Hello world, a code block!");
