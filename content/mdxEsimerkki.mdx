@@ -1,17 +1,17 @@
-# Perus Markdown toimii kyllä
+# MDX Laajennos
 
-# Ja sitä voi laajentaa näin:
+import { Blockquote } from "@app/mdx-components/Blockquote.tsx";
 
-import { useState } from 'react'
- 
-export function Counter({ children }) {
-  const [count, setCount] = useState(0)
+<Blockquote>Tämä on lainaus</Blockquote>
+
+export function MyComponent() {
+  const array = [1, 2, 3, 4, 5];
   return (
-    <button onClick={() => setCount(prev => prev + 1)}>
-      {children}
-      {count}
-    </button>
-  )
+    <div>
+      <h1>My Component tulostaa:</h1>
+      { array.map((item) => { return <span>[{item}]</span>}) }
+      <p>Ja tässä on vielä jotain tekstiä / My Component OUT</p>
+    </div>)
 }
- 
-<Counter>**Clicks**: </Counter>
+
+<MyComponent />
