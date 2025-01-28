@@ -1,5 +1,5 @@
 # XML-viestejä
- Tällä sivulla on esimerkki virheellisestä ACK-viestistä.
+ Tällä sivulla on muutama esimerkki virheellisestä ACK-viestistä.
 
 ## Virheellinen ACK
 
