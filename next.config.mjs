@@ -12,7 +12,7 @@ const nextConfig = {
 }
 
 const withNextra = nextra({
-  latex: true,
+  latex: { renderer: 'mathjax' },
   search: {
     codeblocks: false,
   }
@@ -20,5 +20,5 @@ const withNextra = nextra({
 
 export default withNextra({
   ...nextConfig,
-  reactStrictMode: true,
+  reactStrictMode: false,
 });
