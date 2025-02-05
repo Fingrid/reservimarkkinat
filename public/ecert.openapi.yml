@@ -1,0 +1,339 @@
+openapi: "3.0.0"
+info:
+  title: Ecert API
+  version: "1.0"
+security:
+  - jwtAuth: []
+
+components:
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    400:
+      description: Invalid request parameter
+    401:
+      description: Authentication information is missing or invalid
+    404:
+      description: Entity with requested identifier does not exist
+    500:
+      description: Unexpected server error
+  schemas:
+    TransactionType:
+      description: |
+        Type of the transaction
+        * ISSUING: Certificates have been issued to the beneficiary's account
+        * TRANSFER: Certificates have been domestically transferred from one account to other
+        * CANCELLATION: Certifictaes have been cancelled (used) from the account
+        * CANCELLATION_ROLLBACK: Cancellation that has been performed at some point in time has been rolled back (undone) and certificates from the rolled back transaction have been returned to the account
+        * CORRECTION: A certain amount of certifictaes have been removed from beneficiary's account to fix incorrect balance
+        * EXTERNAL_TRANSFER: Certificates have been externally (internationally) transferred from one account to other as import or export
+        * EXTERNAL_TRANSFER_ROLLBACK: External transfer that has been performed at some point in time has been rolled back (undone) and certificates from the rolled back transaction have been returned to the account
+        * EXPIRATION: Certificates were removed from the account due to expiration
+      type: string
+      enum:
+        - ISSUING,
+        - TRANSFER,
+        - CANCELLATION,
+        - CANCELLATION_ROLLBACK
+        - CORRECTION,
+        - EXTERNAL_TRANSFER,
+        - EXTERNAL_TRANSFER_ROLLBACK,
+        - EXPIRATION
+      example: "ISSUING"
+
+paths:
+  /account:
+    get:
+      summary: Get a list of all accounts
+      responses:
+        "200":
+          description: A JSON array of accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Account unique identifier
+                      type: integer
+                      format: int64
+                      minimum: 1
+                      example: 12345
+                    accountNumber:
+                      description: The unique account number
+                      type: string
+                      example: 41XI4RIYWS
+                    name:
+                      description: Name of the account
+                      type: string
+                      example: Päätili / Main Account
+                    bundleCount:
+                      description: Number of certificate bundles currently on the account
+                      type: integer
+                      format: int32
+                      minimum: 0
+                      example: 3
+                    certificateCount:
+                      description: Number of certificates currently on the account
+                      type: integer
+                      format: int64
+                      minimum: 0
+                      example: 300
+        "401":
+          $ref: "#/components/responses/401"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /account/{accountId}:
+    get:
+      summary: Get details of a single account by ID
+      parameters:
+        - name: accountId
+          in: path
+          description: Numeric ID of the account to get
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A JSON Object containing account information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    description: Account unique identifier
+                    type: integer
+                    format: int64
+                    minimum: 1
+                    example: 12345
+                  accountNumber:
+                    description: The unique account number
+                    type: string
+                    example: 41XI4RIYWS
+                  name:
+                    description: Name of the account
+                    type: string
+                    example: Päätili / Main Account
+                  mainAccount:
+                    description: Tells if this is the main account of the organization
+                    type: boolean
+                    example: true
+                  public:
+                    description: Tells if this account is publicly visible
+                    type: boolean
+                    example: true
+                  bundles:
+                    description: Array of certificate bundles currently on the account
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        numberRangeStart:
+                          description: Start of certificate identifier number range
+                          type: string
+                          example: "643005592101400000000186508450"
+                        numberRangeEnd:
+                          description: End of certificate identifier number range
+                          type: string
+                          example: "643005592101400000000186508451"
+                        productionMonth:
+                          description: Year-month information when the enercy was produced
+                          type: string
+                          format: year-month
+                          pattern: ^\d{4}-(0[1-9])$
+                          example: "2021-04"
+                        technologyType:
+                          description: The technology type code of the technology that was used produced the energy. Enumeration with values defined in AIB fact sheet FS05
+                          type: string
+                          example: "T050302"
+                        countryOfIssue:
+                          description: The country where to certificates were issued. Enumeration with values defined in ISO 3166-1 (alpha-2)
+                          type: string
+                          example: "FI"
+                        icsMarks:
+                          description: Tells if certifictes in the bundle have any ICS marks
+                          type: boolean
+                          example: true
+                        support:
+                          description: Tells if produced energy has benefited from investment support, poduction support or both
+                          type: boolean
+                          example: true
+                        amount:
+                          description: Number of certificates in the bundle
+                          type: integer
+                          format: int64
+                          minimum: 1
+                          example: 2
+                        deviceGsrn:
+                          description: GSRN identifier of the device that produced the energy
+                          type: string
+                          example: "643005592000000226"
+                        deviceName:
+                          description: Name of the device that produced the energy
+                          type: string
+                          example: "Koivuniemen voimalaitos"
+                        deviceCapacity:
+                          description: The capapicty (MW) of the device that produced the energy
+                          type: number
+                          format: float
+                          example: 3.7
+                        deviceCommissionDate:
+                          description: The commission date of the device that produced the energy
+                          type: string
+                          format: date
+                          example: "2009-09-15"
+                  transactions:
+                    description: Array of transactions that have been performed on the account. Only transactions that are not older than one year are returned
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Transaction unique identifier
+                          type: integer
+                          format: int64
+                          minimum: 1
+                          example: 11223344
+                        time:
+                          description: The time when the transaction was performed. Value is UTC time without timezone infromation
+                          type: string
+                          format: date-time
+                          example: "2020-10-04T10:41:26"
+                        type:
+                          $ref: "#/components/schemas/TransactionType"
+                        participantAccountNumber:
+                          description: Account number of the transaction participant
+                          type: string
+                          example: "8718182491197"
+                        participantName:
+                          description: Name of the transaction participant
+                          type: string
+                          example: "AFS Energy B.V."
+                        amount:
+                          description: Number of certificates processed in the transaction. Positive if certificates were added to the account or negative if certificates wehre deducted
+                          type: integer
+                          format: int64
+                          example: 2000
+        "401":
+          $ref: "#/components/responses/401"
+        "404":
+          $ref: "#/components/responses/404"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /transaction:
+    get:
+      summary: Get a list of transactions performed at any account owned by the requesting organization
+      parameters:
+        - in: query
+          name: startDate
+          description: Returns the transaction that were performed at or after this date. If not given the default value is the current date. Days between startDate and endDate must not be more than 100. Value is UTC date
+          schema:
+            type: string
+            format: date
+          required: false
+          example: "2021-01-01"
+        - in: query
+          name: endDate
+          description: Returns the transaction that were performed at or before this date. If not given the default value is the current date. Days between startDate and endDate must not be more than 100. Value is UTC date
+          schema:
+            type: string
+            format: date
+          required: false
+          example: "2021-01-31"
+      responses:
+        "200":
+          description: A array of requested transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Transaction unique identifier
+                      type: integer
+                      format: int64
+                      minimum: 1
+                      example: 11111
+                    time:
+                      description: The time when the transaction was performed. Value is UTC time without timezone infromation
+                      type: string
+                      format: date-time
+                      example: "2021-01-04T10:41:26"
+                    type:
+                      $ref: "#/components/schemas/TransactionType"
+                    sourceAccountNumber:
+                      description: Account number of the transaction participant who initiated the transaction. Null if transaction does not have source, such as issuing
+                      type: string
+                      nullable: true
+                      example: null
+                    sourceOrganizationName:
+                      description: Organization name of the transaction participant who initiated the transaction. Null if transaction does not have source, such as issuing
+                      type: string
+                      nullable: true
+                      example: null
+                    targetAccountNumber:
+                      description: Account number of the transaction participant who received the transaction. Null if transaction does not have target, such as cancellation
+                      type: string
+                      nullable: true
+                      example: "41XNKTHUVD"
+                    targetOrganizationName:
+                      description: Organization name of the transaction participant who received the transaction. Null if transaction does not have target, such as cancellation
+                      type: string
+                      nullable: true
+                      example: "Test Company"
+                    amount:
+                      description: Number of certificates processed in the transaction
+                      type: integer
+                      format: int64
+                      minimum: 0
+                      example: 2
+                    bundles:
+                      description: Array of certificate bundles processed in the transaction
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          numberRangeStart:
+                            description: Start of certificate identifier number range
+                            type: string
+                            example: "643005592101400000000186508450"
+                          numberRangeEnd:
+                            description: End of certificate identifier number range
+                            type: string
+                            example: "643005592101400000000186508451"
+                          productionMonth:
+                            description: Year-month information when the enercy was produced
+                            type: string
+                            format: year-month
+                            pattern: ^\d{4}-(0[1-9])$
+                            example: "2020-12"
+                          technologyType:
+                            description: The technology type code of the technology that was used produced the energy. Enumeration with values defined in AIB fact sheet FS05
+                            type: string
+                            example: "T050302"
+                          countryOfIssue:
+                            description: The country where to certificates were issued. Enumeration with values defined in ISO 3166-1 (alpha-2)
+                            type: string
+                            example: "FI"
+                          amount:
+                            description: Number of certificates in the bundle
+                            type: integer
+                            format: int64
+                            minimum: 1
+                            example: 2
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "500":
+          $ref: "#/components/responses/500"

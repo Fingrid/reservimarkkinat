@@ -9,7 +9,7 @@ export function MyComponent() {
   return (
     <div>
       <h1>My Component tulostaa:</h1>
-      { array.map((item) => { return <span>[{item}]</span>}) }
+      { array.map((item) => { return <span key={item}>[{item}]</span>}) }
       <p>Ja tässä on vielä jotain tekstiä / My Component OUT</p>
     </div>)
 }

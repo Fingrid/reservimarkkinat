@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@scalar/api-reference-react": "^0.4.24",
+    "@scalar/nextjs-api-reference": "^0.5.6",
     "next": "^15.1.6",
     "nextra": "^4.0.5",
     "nextra-theme-docs": "^4.0.5",
