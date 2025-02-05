@@ -3,6 +3,9 @@
 import { ApiReferenceReact } from "@scalar/api-reference-react";
 import "@scalar/api-reference-react/style.css";
 
+const isProd = process.env.NODE_ENV === 'production';
+const assetPrefix = isProd ? '/reservimarkkinat' : '';
+
 const ScalarUI = () => {
     return <ApiReferenceReact
       configuration={{
@@ -10,7 +13,7 @@ const ScalarUI = () => {
         hideTestRequestButton: true,
         hideDownloadButton: true,
         spec: {
-          url: "/ecert.openapi.yml",
+          url: assetPrefix + "/ecert.openapi.yml",
         },
       }}
     />;
