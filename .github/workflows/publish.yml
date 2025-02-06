@@ -28,7 +28,7 @@ jobs:
           cache: yarn
       - name: Setup .yarnrc.yml
         run: |
-            yarn config set npmScopes.fingrid.npmRegistryServer "https://npm.pkg.github.com"
+            yarn config set npmScopes.fingrid.npmRegistryServer "https://pkgs.dev.azure.com/fingrid/Ohjelmistokehitys/_packaging/fingrid-npm/npm/registry/"
             yarn config set npmScopes.fingrid.npmAlwaysAuth true
             yarn config set npmScopes.fingrid.npmAuthToken $NPM_AUTH_TOKEN
         env:
