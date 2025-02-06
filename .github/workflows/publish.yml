@@ -24,9 +24,15 @@ jobs:
           yarn set version stable
       - uses: actions/setup-node@v4
         with:
-          # update the Node version to meet your needs
           node-version: 22
           cache: yarn
+      - name: Setup .yarnrc.yml
+        run: |
+            yarn config set npmScopes.fingrid.npmRegistryServer "https://npm.pkg.github.com"
+            yarn config set npmScopes.fingrid.npmAlwaysAuth true
+            yarn config set npmScopes.fingrid.npmAuthToken $NPM_AUTH_TOKEN
+          env:
+            NPM_AUTH_TOKEN: ${{ secrets.ADO_PAT }}
       - name: Setup Pages
         uses: actions/configure-pages@v5
         #with: // Still fails - this time due to type error

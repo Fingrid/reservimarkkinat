@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fingrid/design-system-components": "^0.96.0",
     "@scalar/api-reference-react": "^0.4.24",
     "@scalar/nextjs-api-reference": "^0.5.6",
     "next": "^15.1.6",

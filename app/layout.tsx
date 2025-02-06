@@ -1,8 +1,12 @@
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
-import 'nextra-theme-docs/style.css'
+
 import { PropsWithChildren } from 'react'
+
+import 'nextra-theme-docs/style.css'
+import "@fingrid/design-system-components/dist/style.css";
+import "@fingrid/design-system-components/static/styles/variables.css";
  
 export const metadata = {
   // Define your metadata here
@@ -12,7 +16,7 @@ export const metadata = {
 const banner = <Banner storageKey="some-key">Liity mukaan 🎉</Banner>
 const navbar = (
   <Navbar
-    logo={<b>Resurssimarkkinat kehittäjäportaali</b>}
+    logo={<b>Reservimarkkinat kehittäjäportaali</b>}
     // ... Your additional navbar options
   />
 )
