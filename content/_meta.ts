@@ -1,4 +1,5 @@
 export default {
+    index: 'Developer portal',
     general: 'General',
     mFRR_C: 'Balancing capacity markets (mFRR)',
     mFRR_E: 'Balancing energy markets (mFRR)',
