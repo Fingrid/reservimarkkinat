@@ -16,7 +16,7 @@ export const metadata = {
 const banner = <Banner storageKey="some-key">Liity mukaan 🎉</Banner>
 const navbar = (
   <Navbar
-    logo={<b>Reservimarkkinat kehittäjäportaali</b>}
+    logo={<b>Developer portal wiki for reserve markets</b>}
     // ... Your additional navbar options
   />
 )
