@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Facebook, Footer as FingridFooter, Instagram, Linkedin, Rss, Twitter } from "@fingrid/design-system-components";
 import type { FC } from "react";

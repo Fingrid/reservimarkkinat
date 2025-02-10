@@ -1,0 +1,17 @@
+@import url("@fingrid/design-system-components/dist/style.css");
+@import url("../node_modules/@fingrid/design-system-components/dist/static/styles/variables.css");
+
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@layer base {
+  ul,
+  ol {
+    list-style: revert;
+  }
+
+  .contains-task-list {
+    list-style: none;
+  }
+}

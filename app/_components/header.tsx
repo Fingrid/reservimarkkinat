@@ -6,17 +6,15 @@ import type { FC } from "react";
 export const Header: FC = () => {
   return (
     <FingridHeader
-      announcementsOnPress={function Zi() {}}
-      className=""
-      languageOnChange={function Zi() {}}
+      languageOnChange={() => {}}
       languages={[]}
       hideAnnouncements={true}
       hideServices={true}
       nameOfTheService="Developer Portal"
       selectedLocale="fi-FI"
       user={{
-        initials: "+",
-        name: "Login",
+        initials: "",
+        name: "",
       }}
     />
   );

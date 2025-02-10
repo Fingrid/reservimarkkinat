@@ -1,5 +1,5 @@
 import { withGitHubAlert } from "nextra/components";
-import { ComponentProps, FC, PropsWithChildren } from "react";
+import { ComponentProps, PropsWithChildren } from "react";
 
 type Props = {
   type: "note" | "tip" | "important" | "warning" | "caution";

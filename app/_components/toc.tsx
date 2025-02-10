@@ -1,5 +1,4 @@
 "use client";
-
 import type { Heading } from 'nextra'
 import type { FC } from 'react'
 import { SidePanel } from "@fingrid/design-system-components";
