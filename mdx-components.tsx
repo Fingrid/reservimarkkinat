@@ -3,6 +3,7 @@ import { useMDXComponents as docsComponents } from 'nextra-theme-docs';
 import { Blockquote } from './app/mdx-components/Blockquote';
 import { ScalarUI } from './app/mdx-components/ScalarUI';
 import { TOC } from './app/_components/toc';
+import * as Headings from './app/mdx-components/Headers';
 
 // Get the default MDX components
 const defaultComponents = getNextraComponents({
@@ -26,6 +27,12 @@ export function useMDXComponents(components?: MDXComponents) {
     ...defaultComponents,
     ...components ?? {},
     ...docsComponents,
+    h1: Headings.H1,
+    h2: Headings.H2,
+    h3: Headings.H3,
+    h4: Headings.H4,
+    h5: Headings.H5,
+    h6: Headings.H6,
     blockquote: Blockquote,
     scalarUI: ScalarUI
   }
