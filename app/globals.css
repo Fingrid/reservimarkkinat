@@ -4,42 +4,42 @@
 
 @font-face {
     font-family: "Lab Grotesque Web";
-    src: url("@/fonts/LabGrotesqueWeb-Light.woff");
+    src: url("../app/fonts/LabGrotesqueWeb-Light.woff");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Lab Grotesque Web";
-    src: url("@/fonts/LabGrotesqueWeb-LightItalic.woff");
+    src: url("../app/fonts/LabGrotesqueWeb-LightItalic.woff");
     font-weight: normal;
     font-style: italic;
 }
 
 @font-face {
     font-family: "Lab Grotesque Web";
-    src: url("@/fonts/LabGrotesqueWeb-Bold.woff");
+    src: url("../app/fonts/LabGrotesqueWeb-Bold.woff");
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Lab Grotesque Web";
-    src: url("@/fonts/LabGrotesqueWeb-BoldItalic.woff");
+    src: url("../app/fonts/LabGrotesqueWeb-BoldItalic.woff");
     font-weight: bold;
     font-style: italic;
 }
 
 @font-face {
     font-family: "Lab Grotesque Web";
-    src: url("@/fonts/LabGrotesqueWeb-Regular.woff");
+    src: url("../app/fonts/LabGrotesqueWeb-Regular.woff");
     font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Lab Grotesque Web";
-    src: url("@/fonts/LabGrotesqueWeb-Italic.woff");
+    src: url("../app/fonts/LabGrotesqueWeb-Italic.woff");
     font-weight: 500;
     font-style: italic;
 }

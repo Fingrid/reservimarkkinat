@@ -4,8 +4,8 @@ import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import type { FC, ReactNode } from 'react'
 import { Footer } from '@/_components/footer'
-import { FingridLogo } from "@fingrid/design-system-components";
 import { labGrotesqueWeb } from '@/fonts'
+import { FingridLogo } from '@/_components/FingridLogo'
 import "./globals.css";
  
 export const metadata: Metadata = {
