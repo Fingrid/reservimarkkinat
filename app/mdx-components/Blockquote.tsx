@@ -52,6 +52,8 @@ const Callout = ({ type, children }: PropsWithChildren<Props>) => {
       }}
     >
       &gt;&gt; {children}
+
+      <pre>{JSON.stringify(children)}</pre>
     </div>
   );
 };
