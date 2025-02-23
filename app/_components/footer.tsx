@@ -1,11 +1,13 @@
 "use client";
 import React from "react";
 import { Facebook, Footer as FingridFooter, Instagram, Linkedin, Rss, Twitter } from "@fingrid/design-system-components";
+import { labGrotesqueWeb } from "@/fonts";
 import type { FC } from "react";
 
 export const Footer: FC = () => {
   return (
     <FingridFooter
+      className={labGrotesqueWeb.className}
       bottomLinks={[
         <a href=".">Legal</a>,
         <a href=".">Terms and conditions</a>,

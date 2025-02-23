@@ -1,17 +1,112 @@
 @import url("@fingrid/design-system-components/dist/style.css");
 @import url("../node_modules/@fingrid/design-system-components/dist/static/styles/variables.css");
+@import url("nextra-theme-docs/style.css");
 
-@import "tailwindcss";
+@font-face {
+    font-family: "Lab Grotesque Web";
+    src: url("@/fonts/LabGrotesqueWeb-Light.woff");
+    font-weight: normal;
+    font-style: normal;
+}
 
-@plugin "@tailwindcss/typography";
+@font-face {
+    font-family: "Lab Grotesque Web";
+    src: url("@/fonts/LabGrotesqueWeb-LightItalic.woff");
+    font-weight: normal;
+    font-style: italic;
+}
 
-@layer base {
-  ul,
-  ol {
-    list-style: revert;
-  }
+@font-face {
+    font-family: "Lab Grotesque Web";
+    src: url("@/fonts/LabGrotesqueWeb-Bold.woff");
+    font-weight: bold;
+    font-style: normal;
+}
 
-  .contains-task-list {
-    list-style: none;
-  }
+@font-face {
+    font-family: "Lab Grotesque Web";
+    src: url("@/fonts/LabGrotesqueWeb-BoldItalic.woff");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Lab Grotesque Web";
+    src: url("@/fonts/LabGrotesqueWeb-Regular.woff");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Lab Grotesque Web";
+    src: url("@/fonts/LabGrotesqueWeb-Italic.woff");
+    font-weight: 500;
+    font-style: italic;
+}
+
+html {
+    font-family: var(--font-lab-grotesque-web);
+}
+
+body {
+    font-size: 1rem;
+    text-decoration: none;
+    font-family: Lab Grotesque Web;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 0;
+    line-height: 1.5rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-decoration: none;
+    font-family: Lab Grotesque Web;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 0;
+    line-height: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    text-decoration: none;
+    font-family: Lab Grotesque Web;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 0;
+    line-height: 2rem;
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-family: Lab Grotesque Web;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 0;
+    line-height: 1.5rem;
+}
+
+.nextra-sidebar {
+    :hover {
+        text-decoration-color: red;
+        color: red;
+    }
+
+    a {
+        border-radius: 0;
+    }
+    
+    .active {
+        a {
+            background-color: red;
+            color: white;
+        }
+    }
 }
