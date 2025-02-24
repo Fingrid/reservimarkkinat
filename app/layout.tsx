@@ -26,10 +26,12 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
       <Head faviconGlyph="FG" />
       <body className="h-full">
         <Layout
-          navbar={<Navbar 
-            logo={ <div><FingridLogo width={'100%'}/><p>Developer Portal</p></div> } 
-            logoLink={'https://www.fingrid.fi/'}
-          />}
+          navbar={
+            <Navbar 
+              logo={ <div className='flex align-center items-center'><FingridLogo width={'100%'}/><p className='pl-3'>Developer&nbsp;Portal</p></div> } 
+              logoLink={'https://www.fingrid.fi/'}
+            />
+          }
           sidebar={{ autoCollapse: true }}
           pageMap={await getPageMap()}
           darkMode={false}

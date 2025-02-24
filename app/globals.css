@@ -2,6 +2,12 @@
 @import url("../node_modules/@fingrid/design-system-components/dist/static/styles/variables.css");
 @import url("nextra-theme-docs/style.css");
 
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@layer theme, base, components, utilities;
+
 @font-face {
     font-family: "Lab Grotesque Web";
     src: url("../app/fonts/LabGrotesqueWeb-Light.woff");
@@ -44,69 +50,77 @@
     font-style: italic;
 }
 
-html {
-    font-family: var(--font-lab-grotesque-web);
+@theme {
+    --font-display: var(--font-lab-grotesque-web);
 }
 
-body {
-    font-size: 1rem;
-    text-decoration: none;
-    font-family: Lab Grotesque Web;
-    font-weight: 400;
-    font-style: normal;
-    font-stretch: normal;
-    letter-spacing: 0;
-    line-height: 1.5rem;
-}
-
-h1 {
-    font-size: 2.5rem;
-    text-decoration: none;
-    font-family: Lab Grotesque Web;
-    font-weight: 400;
-    font-style: normal;
-    font-stretch: normal;
-    letter-spacing: 0;
-    line-height: 2.5rem;
-}
-
-h2 {
-    font-size: 2rem;
-    text-decoration: none;
-    font-family: Lab Grotesque Web;
-    font-weight: 400;
-    font-style: normal;
-    font-stretch: normal;
-    letter-spacing: 0;
-    line-height: 2rem;
-    font-size: 1.5rem;
-}
-
-h3 {
-    font-size: 1.5rem;
-    text-decoration: none;
-    font-family: Lab Grotesque Web;
-    font-weight: 400;
-    font-style: normal;
-    font-stretch: normal;
-    letter-spacing: 0;
-    line-height: 1.5rem;
-}
-
-.nextra-sidebar {
-    :hover {
-        text-decoration-color: red;
-        color: red;
+:root {
+    html {
+        color: var(--color-text-text-primary);
     }
 
-    a {
-        border-radius: 0;
+    body {
+        font-size: 1rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: 0;
+        line-height: 1.5rem;
     }
-    
-    .active {
+
+    h1 {
+        font-size: 2.5rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: 0;
+        line-height: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: 0;
+        line-height: 2rem;
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: 0;
+        line-height: 1.5rem;
+    }
+
+    .nextra-sidebar {
+        background-color: var(--color-secondary-secondary-light-4);
+
+        :hover {
+            text-decoration-color: var(--color-text-text-highlight);
+            color: var(--color-text-text-highlight);
+        }
+
         a {
-            background-color: red;
-            color: white;
+            border-radius: 0;
+        }
+        
+        .active {
+            a {
+                background-color: var(--color-brand-fingrid);
+                color: var(--color-text-text-invert);
+            }
         }
     }
 }
