@@ -32,7 +32,7 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
               logoLink={'https://www.fingrid.fi/'}
             />
           }
-          sidebar={{ autoCollapse: true }}
+          sidebar={{ autoCollapse: false, defaultMenuCollapseLevel: 1 }}
           pageMap={await getPageMap()}
           darkMode={false}
           nextThemes={{ defaultTheme: 'light' }}

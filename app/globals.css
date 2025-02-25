@@ -52,6 +52,7 @@
 
 @theme {
     --font-display: var(--font-lab-grotesque-web);
+    --color-text-sidebar: #3e5660;
 }
 
 :root {
@@ -81,7 +82,7 @@
         line-height: 2.5rem;
     }
 
-    h2 {
+    h2 {        
         font-size: 2rem;
         text-decoration: none;
         font-family: var(--font-display);
@@ -104,22 +105,127 @@
         line-height: 1.5rem;
     }
 
+    .nextra-breadcrumb {
+        span:last-child {
+            font-weight: 700;
+        }
+    }
+
+    .nextra-sidebar-footer {
+        position: relative;
+        order: 0;
+    }
+
     .nextra-sidebar {
-        background-color: var(--color-secondary-secondary-light-4);
+        background-color: var(--color-secondary-secondary-light-3);
+
+        &:has(button[aria-expanded="true"]) {
+            @apply w-86;
+        }
+
+        &:has(button[aria-expanded="false"]) {
+            @apply w-20;
+        }
 
         :hover {
             text-decoration-color: var(--color-text-text-highlight);
             color: var(--color-text-text-highlight);
         }
 
-        a {
+        a, button {
             border-radius: 0;
+            color: var(--color-text-sidebar);
+            font-weight: 500;
+            margin-top: 2px;
         }
-        
-        .active {
+
+        a {
+            background-color: white;
+        }
+
+        button {
+            background-color: #f8fafc;
+            font-weight: 700;
+        }
+
+        & > div {
+            @apply px-6;
+        }
+
+        & > div:first-child > div:first-child > ul:first-child > li:first-child {
+            &.active {
+                border-color: transparent;
+            }
+
             a {
-                background-color: var(--color-brand-fingrid);
-                color: var(--color-text-text-invert);
+                @apply mt-2;
+
+                background-color: transparent;
+                padding: 0;
+                margin-bottom: 0.5rem;
+                font-size: 1.2rem;
+                font-weight: 700;
+                line-height: 1.2rem;
+            }
+        }
+
+        ul {
+            row-gap: 4px;
+        }
+
+        li {
+            border-left: 0.2rem solid transparent;
+        }
+
+        ul li ul {
+            padding: 0;
+            margin: 0;
+            border: 0;
+
+            margin-top: 2px;
+
+            &::before {
+                background-color: transparent;
+            }
+
+            li {
+                @apply pl-3;
+
+                margin: 0;
+                background-color: white;
+            }
+
+            &:last-child {
+                padding-bottom: .5rem;
+            }
+        }
+
+        .active {
+            border-color: var(--color-brand-fingrid);
+
+            a {
+                color: var(--color-brand-fingrid);
+                text-decoration-color: var(--color-brand-fingrid);;
+                border-color: var(--color-brand-fingrid);
+                background-color: white;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .nextra-search {
+        input {
+            border-radius: 0;
+            border-color: var(--color-secondary-secondary-light-1);
+            border-width: 1px;
+            background-color: transparent;
+        }
+    }
+
+    nav div ul li {
+        &:has(.x\:text-primary-600) {
+            a {
+                color: red;
             }
         }
     }
