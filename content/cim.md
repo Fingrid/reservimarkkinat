@@ -1,7 +1,7 @@
 # Common Information Model - CIM
 ## Overview
 
-The Common Information Model (CIM) is a standard developed by the International Electrotechnical Commission (IEC) for describing the information about an electrical network. The CIM is widely adopted by the European Network of Transmission System Operators for Electricity (ENTSO-E) to harmonize energy market data exchanges across Europe. This model facilitates the integration and interoperability of various systems used by Transmission System Operators (TSOs) and other market participants.
+The Common Information Model (CIM) is a standard developed by the International Electrotechnical Commission (IEC) for describing the information about an electrical network. The CIM is widely adopted by the European Network of Transmission System Operators for Electricity (ENTSO-E) to harmonize energy market data exchanges across Europe. This model facilitates the integration and interoperability of various systems used by Transmission System Operators (TSOs) and other market participants. Majority of the message exchange over ECP utilizes CIM. 
 
 ## Purpose and Benefits
 
@@ -47,13 +47,7 @@ The implementation of the CIM involves several steps, including the development 
 - **Validation Tools**: Software tools that validate the compliance of CIM implementations with the standard.
 - **Training and Support**: Training programs and support services to help stakeholders understand and implement the CIM.
 
-## Case Studies
-
-Several TSOs and market participants have successfully implemented the CIM to enhance their operations and data exchange capabilities. Some notable examples include:
-
-- **Fingrid**: The Finnish TSO has adopted the CIM for its market management and balancing systems, enabling seamless data exchange with other TSOs and market participants.
-- **ENTSO-E Transparency Platform**: The platform uses the CIM to provide standardized and transparent access to electricity market data across Europe.
-
-## Conclusion
-
-The Common Information Model (CIM) is a vital standard for the energy industry, enabling efficient and accurate data exchange between different systems and stakeholders. By adopting the CIM, TSOs and market participants can enhance their interoperability, scalability, and efficiency, ultimately contributing to a more integrated and reliable energy market.
+## References
+* [Entso-E CIM Model description](https://www.entsoe.eu/data/cim/) containing general description of the CIM model
+* [Entso-E EDI Library](https://www.entsoe.eu/publications/electronic-data-interchange-edi-library/) containing technical documents on the model
+* NBM message implementations (https://nordic-balancing.pages.fifty.eu/information/index.html) contains the extensions for CIM model in the scope of Nordic Balancing Model (NBM)
