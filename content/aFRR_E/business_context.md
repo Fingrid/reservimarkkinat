@@ -1,3 +1,6 @@
+---
+asIndexPage: true
+---
 # Business Context
 ## Overall process overview
 Automatic Frequency Restoration Reserve (aFRR) is a reserve whose purpose is to restore the power grid's frequency to its nominal value of 50 Hz. aFRR activates automatically based on an activation signal sent by the TSO, and demand is based on the frequency deviation of the Nordic area as well as the results of the aFRR Capacity Market. the aFRR energy market started operating in Finland in June 2024, and Fingrid will join the European PICASSO platform in March 2025.

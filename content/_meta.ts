@@ -6,7 +6,7 @@ export default {
     cim: 'Common Information Model - CIM',
     about: 'About',
     '1###': { type: 'separator', title: 'Market Platforms' },
-    mFRR_C: 'Balancing capacity markets (mFRR)',
+    mFRR_C: { type: 'page', title: 'Balancing capacity markets (mFRR)', display: 'hidden' },
     mFRR_E: 'Balancing energy markets (mFRR)',
     aFRR_C: 'Automatic frequency restoration reserve capacity markets (aFRR)',
     aFRR_E: 'Automatic frequency restoration reserve energy markets (aFRR)',
