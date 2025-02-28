@@ -1,7 +1,7 @@
 # Document structure
 In this page you can find information about the structure and attributes of various documents related to the market.
 ## Bid document
-aFRR energy bids are submitted to the market as a *ReserveBid_MarketDocument*. The document contains one or multiple Bid Time Series, along with other document-wide information.
+aFRR energy bids are submitted to the market using a *ReserveBid_MarketDocument*. The document contains one or multiple Bid Time Series, along with other document-wide information. For aFRR energy market, version 7.4 of the *ReserveBid_MarketDocument* is used. 
 ### Bid Time Series
 The bid time series contains attributes related to individual bids. A Bid document may contain multiple Bid Time Series.
 ## Availability document
