@@ -43,6 +43,13 @@ The bid time series contains attributes related to individual bids. A Bid docume
 | energy_Price.amount | Offered price in euros | 
 ### Example message
 ## Availability document
-Availability documents are sent one minute after the bid availability period has ended. BSPs receive one if the bid has been set to partially or completely unavailable during the market period. If the bid was available, no availability document will be sent, as bids are available by default.
+Availability documents are sent one minute after the bid availability period has ended. BSPs receive one if the bid has been set to partially or completely unavailable during the market period. If the bid was available, no availability document will be sent, as bids are available by default. The availability document will include a reason code for every unavailable bid, accompanied by a description text.
+| Reason Code | Description | Use case |
+|-----------|-------------|-------------|
+| B16 | Tender unavailable in merit order list (MOL) | Unavailability due to conditional links |
+| B18 | Failure | Unavailable either due to the BSP's request |
+| B09 | Bid not accepted | - |
+| B58 | Insufficient reserves | Unavailability due to TSO request |
+| B59 | Unavailability of reserve providing units | Real time connection with BSP lost |
 ## Acknowledgement document
 A bid is submitted to the market once the bid document has been acknowledged with a positive acknowledgement document.
