@@ -2,10 +2,12 @@
 In this page you can find information about the structure and attributes of various documents related to the market.
 ## General document rules
 * Dates and times should be in UTC, with the format YYYY-MM-DDThh:mm:ssZ. The last ‘Z’ stands for Zero and indicates UTC+0. The time period the document covers, however, should be in the same day in **CET/CEST**. This means the day is from 23:00 to 23:00 during winter time, and 22:00 to 22:00 during summer time.
-* Each document must have an unique identifier in UUID format. The revision number is always 1.
+* When changing from winter time to summer time, the document covers 23 hours (from 23:00 to 22:00). When changing from summer time to winter time, the document covers 25 hours (from 22:00 to
+23:00). 
+* Each document must have an unique identifier in UUID format. The document revision number is always 1.
 * One document may contain at most 2000 time series. If you want to submit more than that, they must be split into multiple messages.
 ## Bid document
-aFRR energy bids are submitted to the market as a *ReserveBid_MarketDocument*. The document contains one or multiple Bid Time Series, along with other document-wide information.
+aFRR energy bids are submitted to the market as a *ReserveBid_MarketDocument*. Currently the version 7.4 of the document is used. The document contains one or multiple Bid Time Series, along with other document-wide information.
 ### Table of bid document attributes
 | Attribute | Description |
 |-----------|-------------|
