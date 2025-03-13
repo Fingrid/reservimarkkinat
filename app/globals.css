@@ -105,7 +105,21 @@
         line-height: 1.5rem;
     }
 
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--color-text-text-primary);
+
+        &:where(.dark *) {
+            color: var(--color-secondary-secondary-light-2);
+        }
+    }
+
     .nextra-breadcrumb {
+        color: var(--color-text-text-primary);
+
+        &:where(.dark *) {
+            color: var(--color-secondary-secondary-light-2);
+        }
+
         span:last-child {
             font-weight: 700;
         }
@@ -119,6 +133,10 @@
     .nextra-sidebar {
         background-color: var(--color-secondary-secondary-light-3);
 
+        &:where(.dark *) {
+            background-color: var(--color-neutral-black);
+        }
+
         &:has(button[aria-expanded="true"]) {
             @apply w-86;
         }
@@ -127,25 +145,38 @@
             @apply w-20;
         }
 
-        :hover {
-            text-decoration-color: var(--color-text-text-highlight);
-            color: var(--color-text-text-highlight);
-        }
-
         a, button {
+            background-color: white;
             border-radius: 0;
             color: var(--color-text-sidebar);
             font-weight: 500;
             margin-top: 2px;
+
+            &:hover {
+                text-decoration-color: var(--color-text-text-highlight);
+                color: var(--color-text-text-highlight);
+            }
+
+            &:where(.dark *) {
+                color: var(--color-secondary-secondary-light-2);
+            }
         }
 
         a {
-            background-color: white;
+            font-weight: 700;
+
+            &:where(.dark *) {
+                background-color: var(--color-neutral-black);
+            }
         }
 
         button {
             background-color: #f8fafc;
             font-weight: 700;
+
+            &:where(.dark *) {
+                background-color: var(--color-neutral-black);
+            }
         }
 
         & > div {
@@ -166,15 +197,36 @@
                 font-size: 1.2rem;
                 font-weight: 700;
                 line-height: 1.2rem;
+                border-width: 0;
             }
         }
 
         ul {
-            row-gap: 4px;
+            row-gap: 0.2rem;
         }
 
         li {
-            border-left: 0.2rem solid transparent;
+            color: var(--color-text-sidebar);
+
+            &:where(.dark *) {
+                color: var(--color-secondary-secondary-light-4);
+            }
+
+            div {
+                padding-top: 0.2rem;
+            }
+
+            &:not(:empty):not(:has(*)) {
+                padding: 0;
+                margin: 0;
+
+                padding-top: 0.3rem;
+            }
+
+            a {
+                
+                border-left: 0.2rem solid transparent;
+            }
         }
 
         ul li ul {
@@ -182,34 +234,71 @@
             margin: 0;
             border: 0;
 
-            margin-top: 2px;
-
             &::before {
                 background-color: transparent;
             }
 
             li {
-                @apply pl-3;
-
                 margin: 0;
                 background-color: white;
+
+                &:where(.dark *) {
+                    background-color: transparent;
+                }
             }
 
             &:last-child {
                 padding-bottom: .5rem;
             }
+            
+            a {
+                @apply pl-7;
+            }
         }
 
         .active {
-            border-color: var(--color-brand-fingrid);
-
-            a {
+            & > a {
                 color: var(--color-brand-fingrid);
                 text-decoration-color: var(--color-brand-fingrid);;
                 border-color: var(--color-brand-fingrid);
-                background-color: white;
                 font-weight: 700;
+
+                &:where(.dark *) {
+                    background-color: var(--color-neutral-neutral-20);
+                }
             }
+        }
+    }
+
+    .nextra-callout {
+        border-radius: 8px;
+        font-weight: 400;
+        border: none;
+        color: var(--color-text-text-primary);
+
+        &.info {
+            background-color: var(--color-secondary-secondary-light-4);
+        }
+
+        &.tip {
+            background-color: var(--color-blue-blue-95);
+        }
+
+        &.warning {
+            background-color: var(--color-orange-orange-95);
+        }
+
+        &.important {
+            background-color: var(--color-blue-blue-95);
+        }
+
+        &.error {
+            background-color: var(--color-red-red-95);
+        }
+
+        div > p {
+            padding: 0;
+            margin: 0;
         }
     }
 
@@ -219,6 +308,14 @@
             border-color: var(--color-secondary-secondary-light-1);
             border-width: 1px;
             background-color: transparent;
+        }
+    }
+
+    nav {
+        color: var(--color-text-text-primary);
+
+        &:where(.dark *) {
+            color: var(--color-secondary-secondary-light-2);
         }
     }
 
