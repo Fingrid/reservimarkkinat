@@ -48,6 +48,55 @@ The bid time series contains attributes related to individual bids. A Bid docume
 | quantity.quantity | Offered quantity in megawatts | 
 | energy_Price.amount | Offered price in euros | 
 ### Example message
+This is an example message of a bid being submitted to the aFRR energy market.
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<ReserveBid_MarketDocument xmlns="urn:iec62325.351:tc57wg16:451-7:reservebiddocument:7:4"> <!-- XML schema identification, must match -->
+  <mRID>8a55a8bb-6d62-54ef-bc64-654321abcdef</mRID> <!-- Unique document identification -->
+  <revisionNumber>1</revisionNumber>
+  <type>A37</type> <!-- A37 for reserveBidDocument -->
+  <process.processType>A51</process.processType> <!-- A51 for aFRR -->
+  <sender_MarketParticipant.mRID codingScheme="A01">-----------</sender_MarketParticipant.mRID> <!-- The sender's EIC code -->
+  <sender_MarketParticipant.marketRole.type>A46</sender_MarketParticipant.marketRole.type> <!-- A46 for BSP -->
+  <receiver_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</receiver_MarketParticipant.mRID> <!-- Fingrid's EIC code -->
+  <receiver_MarketParticipant.marketRole.type>A04</receiver_MarketParticipant.marketRole.type> <!-- A04 for TSO -->
+  <createdDateTime>2025-03-14T08:31:03Z</createdDateTime> <!-- Time of document creation in UTC -->
+  <reserveBid_Period.timeInterval> <!-- Same format as above for bid time period -->
+    <start>2025-03-14T09:45Z</start>
+    <end>2025-03-14T10:00Z</end>
+  </reserveBid_Period.timeInterval>
+  <domain.mRID codingScheme="A01">10YFI-1--------U</domain.mRID> <!-- Finland's domain ID -->
+  <subject_MarketParticipant.mRID codingScheme="A01">-----------</subject_MarketParticipant.mRID> <!-- The market participant's EIC code (can be the same as the sender) -->
+  <subject_MarketParticipant.marketRole.type>A46</subject_MarketParticipant.marketRole.type> <!-- A46 for BSP -->
+  <Bid_TimeSeries>
+    <mRID>68a55a8bb-6d62-54ef-bc64-654321abcde</mRID> <!-- Unique bid identification -->
+    <businessType>B74</businessType> <!-- B74 for offer -->
+    <acquiring_Domain.mRID codingScheme="A01">10Y1001A1001A91G</acquiring_Domain.mRID> <!-- domain ID for Nordic Market Area -->
+    <connecting_Domain.mRID codingScheme="A01">10YFI-1--------U</connecting_Domain.mRID> <!-- Unique document identification -->
+    <quantity_Measurement_Unit.name>MAW</quantity_Measurement_Unit.name> <!-- Megawatt -->
+    <currency_Unit.name>EUR</currency_Unit.name>
+    <divisible>A01</divisible> <!-- A01 for fully divisible bids -->
+    <status>
+      <value>A06</value> <!-- A06 for available bids -->
+    </status>
+    <flowDirection.direction>A02</flowDirection.direction> <!-- A02 for down regulation, A01 for up -->
+    <energyPrice_Measurement_Unit.name>MWH</energyPrice_Measurement_Unit.name>
+    <standard_MarketProduct.marketProductType>A01</standard_MarketProduct.marketProductType> <!-- A01 for standard product -->
+    <Period>
+      <timeInterval> <!-- Time period where bid is valid (UTC), can differ from document time period as long as it is contained within the document time period -->
+        <start>2025-03-14T09:45Z</start>
+        <end>2025-03-14T10:00Z</end>
+      </timeInterval>
+      <resolution>PT15M</resolution> <!-- 15 minute resolution -->
+      <Point>
+        <position>1</position>
+        <quantity.quantity>10</quantity.quantity> <!-- Bid volume in megawatts -->
+        <energy_Price.amount>-15</energy_Price.amount> <!-- Bid price in EUR -->
+      </Point>
+    </Period>
+  </Bid_TimeSeries>
+</ReserveBid_MarketDocument>
+```
 ## Availability document
 Availability documents are sent one minute after the bid availability period has ended. BSPs receive one if the bid has been set to partially or completely unavailable during the market period. If the bid was available, no availability document will be sent, as bids are available by default. The availability document will include a reason code for every unavailable bid, accompanied by a description text.
 | Reason Code | Description | Use case |
