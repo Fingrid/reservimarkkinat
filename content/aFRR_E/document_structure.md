@@ -190,7 +190,7 @@ These are two different example acknowledgement messages: One positive, one nega
   <mRID>ab87dff2a8ad4cc0977b408b66a6c100</mRID> <!-- Unique document identification -->
   <createdDateTime>2025-03-14T08:32:11Z</createdDateTime> <!-- Time of document creation in UTC -->
   <sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!-- Fingrid's EIC code -->
-  <sender_MarketParticipant.marketRole.type>A34</sender_MarketParticipant.marketRole.type>
+  <sender_MarketParticipant.marketRole.type>A04</sender_MarketParticipant.marketRole.type> <!-- A04 for TSO -->
   <receiver_MarketParticipant.mRID codingScheme="A01">---------------</receiver_MarketParticipant.mRID> <!-- Receiver's EIC code -->
   <received_MarketDocument.mRID>632146ca657041d18e665eb14156bad</received_MarketDocument.mRID> <!-- Identification of the document this acknowledgement concerns -->
   <received_MarketDocument.revisionNumber>1</received_MarketDocument.revisionNumber> 
@@ -206,7 +206,7 @@ These are two different example acknowledgement messages: One positive, one nega
   <mRID>86d859750f734930972f-595fc95a6242</mRID> <!-- Unique document identification -->
   <createdDateTime>2025-03-14T07:05:08Z</createdDateTime> <!-- Time of document creation in UTC -->
   <sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!-- Fingrid's EIC code -->
-  <sender_MarketParticipant.marketRole.type>A34</sender_MarketParticipant.marketRole.type>
+  <sender_MarketParticipant.marketRole.type>A04</sender_MarketParticipant.marketRole.type> <!-- A04 for TSO -->
   <receiver_MarketParticipant.mRID codingScheme="A01">---------------</receiver_MarketParticipant.mRID> <!-- Receiver's EIC code -->
   <received_MarketDocument.mRID>1d09394780f54a208f0eb5169a048efc</received_MarketDocument.mRID> <!-- Identification of the document this acknowledgement concerns -->
   <received_MarketDocument.revisionNumber>1</received_MarketDocument.revisionNumber>
