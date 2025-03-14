@@ -4,7 +4,7 @@ export default {
     market_platforms: 'Market platforms',
     information_exchange: 'Information exchange',
     cim: 'Common Information Model - CIM',
-    about: 'About',
+    about: { type: 'page', title: 'About', display: 'hidden' },
     '1###': { type: 'separator', title: 'Market Platforms' },
     mFRR_C: { type: 'page', title: 'Balancing capacity markets (mFRR)', display: 'hidden' },
     mFRR_E: { type: 'page', title: 'Balancing energy markets (mFRR)', display: 'hidden'},
