@@ -8,8 +8,8 @@ export default {
     '1###': { type: 'separator', title: 'Market Platforms' },
     mFRR_C: { type: 'page', title: 'Balancing capacity markets (mFRR)', display: 'hidden' },
     mFRR_E: { type: 'page', title: 'Balancing energy markets (mFRR)', display: 'hidden'},
-    aFRR_C: 'Automatic frequency restoration reserve capacity markets (aFRR)',
+    aFRR_C: { type: 'page', title: 'Automatic frequency restoration reserve capacity markets (aFRR)', display: 'hidden'},
     aFRR_E: 'Automatic frequency restoration reserve energy markets (aFRR)',
-    FCR: 'Frequency containment reserves (FCR products)', 
-    FFR: 'Fast Frequency Reserve (FFR)',
+    FCR: { type: 'page', title: 'Frequency containment reserves (FCR products)', display: 'hidden'}, 
+    FFR: { type: 'page', title: 'Fast Frequency Reserve (FFR)', display: 'hidden'},
   }
