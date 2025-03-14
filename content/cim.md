@@ -50,4 +50,4 @@ The implementation of the CIM involves several steps, including the development 
 ## References
 * [Entso-E CIM Model description](https://www.entsoe.eu/data/cim/) containing general description of the CIM model
 * [Entso-E EDI Library](https://www.entsoe.eu/publications/electronic-data-interchange-edi-library/) containing technical documents on the model
-* NBM message implementations (https://nordic-balancing.pages.fifty.eu/information/index.html) contains the extensions for CIM model in the scope of Nordic Balancing Model (NBM)
+* [NBM message implementations](https://nordic-balancing.pages.fifty.eu/information/index.html) contains the extensions for CIM model in the scope of Nordic Balancing Model (NBM)
