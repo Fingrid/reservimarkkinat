@@ -8,6 +8,6 @@ The information flow from the BSP perspective consists of the following:
 
 In the picture below, messages are represented with an arrow and acknowledgements are represented with dashed arrows. Real time signals are represented as blue arrows. 
 
-![Sequence diagram for Energy Market bid information on energy market](img/SequenceDiagram_aFRR_E.png)
+![Sequence diagram for Energy Market bid information on energy market](./img/SequenceDiagram_aFRR_E.png)
 
 Fingrid's market management system VAKSI will handle all BSP messages and forward them to the PICASSO market place. 
