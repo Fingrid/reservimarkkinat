@@ -128,6 +128,38 @@ Availability documents are sent one minute after the bid availability period has
 | businessType | One of C40 (Conditional bid), C41 (Thermal limit), or C42 (Frequency limit) |
 | domain.mRID | Unique identification of the bid in UUID form |
 ### Example message
+This is an example of a bid availability document sent by Fingrid after a validity period has ended.
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<BidAvailability_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-n:bidavailabilitydocument:1:1">
+  <mRID>fb22d5d2hcbcc623b998aaecf0a1d5f22</mRID> <!-- Unique document identification -->
+  <revisionNumber>1</revisionNumber>
+  <type>B45</type>
+  <process.processType>A51</process.processType>
+  <sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!-- Fingrid's EIC code -->
+  <sender_MarketParticipant.marketRole.type>A04</sender_MarketParticipant.marketRole.type> <!-- A04 for TSO -->
+  <receiver_MarketParticipant.mRID codingScheme="A01">-----------</receiver_MarketParticipant.mRID> <!-- Receiver's EIC code -->
+  <receiver_MarketParticipant.marketRole.type>A39</receiver_MarketParticipant.marketRole.type> <!-- A39 for Service Provider/Data Provider -->
+  <createdDateTime>2025-03-14T08:01:02Z</createdDateTime> <!-- Time of document creation in UTC -->
+  <time_Period.timeInterval> <!-- Same format as above for the time period covered by the document -->
+    <start>2025-03-14T07:45Z</start>
+    <end>2025-03-14T08:00Z</end>
+  </time_Period.timeInterval>
+  <BidTimeSeries>
+    <mRID>b99c420d-4206-5566-bfcc-bde434bdad88</mRID> <!-- Unique bid identification -->
+    <bidDocument_MarketDocument.mRID>NA</bidDocument_MarketDocument.mRID>
+    <bidDocument_MarketDocument.revisionNumber>1</bidDocument_MarketDocument.revisionNumber>
+    <requestingParty_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</requestingParty_MarketParticipant.mRID> <!-- EIC code of the party requesting unavailability, Fingrid in this case -->
+    <requestingParty_MarketParticipant.marketRole.type>A49</requestingParty_MarketParticipant.marketRole.type> <!-- A49 for TSO -->
+    <businessType>C42</businessType> <!-- C42 for frequency limit -->
+    <domain.mRID codingScheme="A01">10YFI-1--------U</domain.mRID> <!-- Finland's domain ID -->
+    <Reason>
+      <code>B59</code> <!-- B59 for unavailability of reserve providing units -->
+      <text>Lost connection to BSP</text> <!-- More detailed reason text -->
+    </Reason>
+  </BidTimeSeries>
+</BidAvailability_MarketDocument>
+```
 ## Acknowledgement document
 A bid is submitted to the market once the bid document has been acknowledged with a positive acknowledgement document. The acknowledgement document is never partially positive, documents are always either fully rejected or fully accepted. The document contains the offending time series in case of rejection accompanied with a reason code and text.
 ### Table of Acknowledgement document attributes
