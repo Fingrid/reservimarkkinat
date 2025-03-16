@@ -1,9 +1,9 @@
 ---
-description: Code Style Guidelines
+description: Code Style Guidelines for Reservimarkkinat Portal
 globs: "**/*.{js,ts,tsx,jsx}"
 ---
 # Code Style Guidelines
-Standards for maintaining consistent code style across the project.
+Standards for maintaining consistent code style across the Reservimarkkinat Portal project.
 
 <rule>
 name: code_style_standards
@@ -13,57 +13,80 @@ filters:
     pattern: "\\.(js|ts|tsx|jsx)$"
   - type: event
     pattern: "file_create|file_modify"
-
 actions:
   - type: suggest
     message: |
-      When writing code for this project:
+      When writing code for the Reservimarkkinat Portal:
 
-      1. Use TypeScript for all new code
-      2. Follow functional programming principles where possible:
-         - Prefer pure functions
-         - Avoid mutations when practical
-         - Use immutable data structures
-      
-      3. Naming conventions:
-         - camelCase for variables and functions
-         - PascalCase for classes, interfaces, and React components
-         - UPPER_CASE for constants
-      
-      4. Always define proper types:
-         - Avoid `any` type unless absolutely necessary
-         - Use interfaces for object shapes
-         - Use generics appropriately
-      
-      5. Component structure:
+      1. Use TypeScript for all code:
+         - No JavaScript files allowed
+         - Always use strict type checking
+         - Create type definitions for all data structures
+
+      2. Next.js & React patterns:
+         - Use Server Components by default
+         - Only use 'use client' when necessary
+         - Follow the App Router directory structure
+         - Leverage Next.js built-in optimizations
+         - Use React.Suspense for loading states
+
+      3. Component structure:
+         - Place components in app/_components/
+         - Create page-specific components in their respective page directories
+         - Use MDX for content-heavy pages
+         - Follow atomic design principles
          - Keep components small and focused
-         - Extract reusable logic to custom hooks
-         - Follow the single responsibility principle
-         - Use React 19 features appropriately
 
-      6. Code quality tools:
-         - All code must pass ESLint checks with the project's configuration
-         - Run linting before submitting code for review: `yarn lint`
-         - Use IDE extensions to enable real-time linting feedback
-         - Do not disable eslint rules with inline comments unless absolutely necessary and documented
-         - Use knip to detect unused code and dependencies: `yarn knip`
-         - Ensure package versions follow conventions enforced by syncpack
+      4. Data and State Management:
+         - Use Server Components for data fetching
+         - Implement proper error boundaries
+         - Handle loading states consistently
+         - Use React hooks for client-side state
+         - Follow React 19 best practices
+
+      5. Naming conventions:
+         - camelCase for functions, variables, and file names
+         - PascalCase for components and type definitions
+         - Use descriptive names that indicate purpose
+         - Prefix hooks with 'use'
+         - Suffix types with 'Type' and interfaces with 'Props' when appropriate
+
+      6. Code organization:
+         - Group related components together
+         - Maintain clear separation of concerns
+         - Keep business logic separate from UI components
+         - Use barrel exports (index.ts) for component directories
+
+      7. Quality standards:
+         - Follow ESLint rules without exceptions
+         - Use Prettier for formatting
+         - Run `yarn lint` before commits
+         - Keep dependencies updated and in sync
+         - Run `yarn knip` to detect unused code
 
 examples:
   - input: |
       // Bad
-      function get_data(obj: any) {
-        obj.processed = true;
-        return obj;
+      export default function data() {
+        const [stuff, setStuff] = useState<any>()
+        return <div>{stuff}</div>
       }
       
       // Good
-      function getData<T extends object>(obj: T): T & { processed: boolean } {
-        return { ...obj, processed: true };
+      interface DataProps {
+        initialData?: string
+      }
+      
+      export default function DataDisplay({ initialData }: DataProps) {
+        const { data, isLoading } = useData(initialData)
+        
+        if (isLoading) return <LoadingSpinner />
+        
+        return <DisplayComponent data={data} />
       }
 
 metadata:
   priority: high
   version: 1.0
-  categories: ["code-quality", "typescript"]
+  categories: ["code-quality", "typescript", "next.js", "react"]
 </rule>

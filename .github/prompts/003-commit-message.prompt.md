@@ -7,7 +7,7 @@ Standards for writing clear and consistent commit messages.
 
 <rule>
 name: commit_message_format
-description: Enforce consistent commit message format
+description: Enforce consistent commit message format for the reserve markets documentation portal
 filters:
   - type: file_name
     pattern: "COMMIT_EDITMSG"
@@ -20,34 +20,41 @@ actions:
       Commit messages should follow the Conventional Commits specification, which is enforced by husky:
 
       1. Format: `<type>[optional scope]: <description>`
-         - feat: A new feature
-         - fix: A bug fix
-         - docs: Documentation only changes
-         - style: Changes that don't affect the meaning of the code
+         - feat: A new feature (e.g., new market documentation)
+         - fix: A bug fix (e.g., correcting message format descriptions)
+         - docs: Documentation only changes (e.g., improving readability)
+         - style: Changes that don't affect the meaning (e.g., formatting)
          - refactor: Code change that neither fixes a bug nor adds a feature
-         - perf: Code changes that improve performance
+         - perf: Performance improvements
          - test: Adding missing tests or correcting existing tests
-         - chore: Changes to the build process or auxiliary tools
+         - chore: Changes to build process or auxiliary tools
       
-      2. Keep the first line under 72 characters
+      2. Scopes for this project:
+         - afrr: aFRR market related changes
+         - mfrr: mFRR market related changes
+         - fcr: FCR market related changes
+         - ffr: FFR market related changes
+         - common: Common components or documentation
       
-      3. Add detailed description in the body if needed, separated by a blank line
+      3. Keep the first line under 72 characters
       
-      4. For breaking changes, add BREAKING CHANGE: at the beginning of the body
+      4. Add detailed description in the body if needed, separated by a blank line
       
-      5. Note: Husky will automatically verify your commit messages conform to these standards and will prevent commits that don't follow the convention
+      5. For breaking changes, add BREAKING CHANGE: at the beginning of the body
+      
+      6. Note: Husky will automatically verify your commit messages conform to these standards
 
 examples:
   - input: |
       # Bad
-      updated code
+      updated aFRR docs
       
       # Good
-      feat(auth): implement user authentication flow
+      docs(afrr): update energy market message format documentation
       
-      - Add login form component
-      - Integrate with backend API
-      - Store tokens in secure storage
+      - Add new bid document example
+      - Clarify acknowledgement document attributes
+      - Update validation rules for bid rejection
 
 metadata:
   priority: medium
