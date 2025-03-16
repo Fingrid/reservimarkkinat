@@ -24,7 +24,7 @@ actions:
 
       1. Always place rule files in PROJECT_ROOT/.github/prompts/
       2. Follow naming conventions:
-         - Core rules must be prefixed with '000-core-'
+         - Core rules must be prefixed with '001-core-'
          - Use kebab-case
          - Always include .prompt.md extension
          - Make names descriptive
@@ -35,16 +35,16 @@ actions:
       .prompts/core-my-rule.prompt.md
 
       # Good: Rule file in correct location with proper naming
-      .github/prompts/000-prompt-organization.prompt.md     # Core rule
+      .github/prompts/001-prompt-organization.prompt.md     # Core rule
       .github/prompts/033-search-guidelines.prompt.md               # Feature-specific rule
 
       When organizing Copilot prompts:
 
-      1. Core Rules (000-xxx):
-         - Must start with "000-" prefix
+      1. Core Rules (001-xxx):
+         - Must start with "001-" prefix
          - Reserved for the fundamental rules
          - Should not be changed without receiving specific instructions to do so
-         - Example: 000-prompt-organization.prompt.md
+         - Example: 001-prompt-organization.prompt.md
 
       2. Feature Rules (NNN-):
          - Group related rules by feature/domain
@@ -52,7 +52,7 @@ actions:
          - Example structure:
          ```
          .github/prompts/
-         ├── 000-prompt-organization.prompt.md
+         ├── 001-prompt-organization.prompt.md
          ├── 032-navigation-guidelines.prompt.md
          ├── 033-search-guidelines.prompt.md
          └── ...
@@ -63,7 +63,7 @@ actions:
          - Include feature/domain prefix
          - Be descriptive and specific
          - Examples:
-           * 000-core-prompt-location.prompt.md
+           * 001-core-prompt-location.prompt.md
            * 032-navigation-guidelines.prompt.md
            * 033-search-guidelines.prompt.md
 
@@ -87,7 +87,7 @@ examples:
       1-coding.prompt.md
 
       # Good
-      000-core-prompt-location.prompt.md
+      001-core-prompt-location.prompt.md
       032-navigation-guidelines.prompt.md
       033-search-guidelines.prompt.md
 
