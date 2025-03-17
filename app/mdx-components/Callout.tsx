@@ -10,7 +10,7 @@ const TypeToEmoji = {
   default: <TipsAndUpdates height="20" className="x:mt-1" />,
   error: <ErrorOutline height="20" className="x:mt-1" />,
   info: <Info height="20" className="x:mt-1" />,
-  important: <TipsAndUpdates height="20" className="x:mt-1" />,
+  important: <Info height="20" className="x:mt-1" />,
   warning: <WarningAmber height="20" className="x:mt-1" />,
 }
 
@@ -40,12 +40,12 @@ export const Callout: FC<CalloutProps> = ({
       className={cn(
         labGrotesqueWeb.variable,
         'nextra-callout x:overflow-x-auto x:mt-6 x:flex x:rounded-lg x:border x:py-2 x:pe-4',
-        'x:contrast-more:border-current! bddfv',
+        'x:contrast-more:border-current!',
         classes[type]
       )}
     >
       <div
-        className="x:select-none x:text-xl x:ps-3 x:pe-2 m-auto asdasdas"
+        className="x:select-none x:text-xl x:ps-3 x:pe-2 m-auto"
         data-pagefind-ignore="all"
       >
         {emoji}
