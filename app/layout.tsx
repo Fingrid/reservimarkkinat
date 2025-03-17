@@ -23,7 +23,9 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
     lang="en" 
     dir="ltr" 
     suppressHydrationWarning={true}>
-      <Head faviconGlyph="FG" />
+      <Head faviconGlyph="FG">
+        <script defer data-domain="developers.fingrid.fi" src="https://plausible.io/js/script.file-downloads.outbound-links.pageview-props.tagged-events.js"></script>
+      </Head>
       <body className="h-full">
         <Layout
           navbar={
