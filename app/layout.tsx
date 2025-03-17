@@ -24,6 +24,7 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
     dir="ltr" 
     suppressHydrationWarning={true}>
       <Head faviconGlyph="FG">
+        <link rel="shortcut icon" href="/favicon.ico" />
         <script defer data-domain="developers.fingrid.fi" src="https://plausible.io/js/script.file-downloads.outbound-links.pageview-props.tagged-events.js"></script>
       </Head>
       <body className="h-full">
