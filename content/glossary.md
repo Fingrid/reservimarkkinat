@@ -6,7 +6,6 @@ Here are the most commonly used terms and abbreviations used in the reserve mark
 |-------------|-------------|-------------|
 |AOF |Activation Optimization Function |The role to operate the algorithm applied for the optimisation of the activation of Balancing Energy bids within a Coordinated Balancing Area. |
 |BEGCT |Balancing Energy Gate closure time |The point in time when submission or update of a balancing energy bid is no longer permitted |
-|(BSP GCT) |||
 |BEGOT |Balancing Energy Gate opening time |The first point in time when submission of a balancing energy bid is permitted |
 |BRP |Balance Responsible Party |A market participant or its chosen representative responsible for its imbalances |
 |BSP |Balancing Services Provider |A market participant with reserve-providing units or reserve-providing groups able to provide balancing services to TSOs |
@@ -14,8 +13,7 @@ Here are the most commonly used terms and abbreviations used in the reserve mark
 |CMOL|Common Merit Order List|A combined list of local balancing energy bid lists (MOL) from each price area maintained by the PICASSO platform|
 |CZC |Cross Zonal Capacity |The cross-zonal transmission capacity between two bidding zones |
 |FAT |Full Activation Time |The period between the activation request by the connecting TSO and the corresponding full delivery of the concerned product |
-|FRCE|Frequency Restoration Control Error|PICASSO platform calculates every optimization cycle a frequency restoration control error for each LFC area. This error acts as an input for the LFC optimization calculation. |
-|||The sign convention is: positive value where the LFC area is in power surplus and indicates that negative aFRR balancing energy needs to be activated; and negative value where the LFC area is in power deficit and indicates that positive aFRR balancing energy needs to be activated.|
+|FRCE|Frequency Restoration Control Error|PICASSO platform calculates every optimization cycle a frequency restoration control error for each LFC area. This error acts as an input for the LFC optimization calculation. The sign convention is: positive value where the LFC area is in power surplus and indicates that negative aFRR balancing energy needs to be activated; and negative value where the LFC area is in power deficit and indicates that positive aFRR balancing energy needs to be activated.|
 |ECP |Energy Communication Platform |Reference implementation of MADES standard |
 |ETP|Entso-E Transparency Platform|The ENTSO-E Transparency Platform is an online data platform for European electricity system data|
 |ISP |Imbalance Settlement Period |The time unit for which balance responsible parties' imbalance is calculated |
@@ -28,6 +26,6 @@ Here are the most commonly used terms and abbreviations used in the reserve mark
 |CC|Control Cycle|Period in which a single optimization result is calculated in LFC and new control signals (if changed from previous cycle) are sent from TSO to BSP’s|
 |OC|Optimization cycle|Period in which a single optimization result is calculated in PICASSO platform and new FRCE values are sent to each LFC area. Current optimization cycle is 4 seconds, equal to MTU. |
 |TSO |Transmission System Operator |A party that is responsible for a stable power system operation (including the organisation of physical balance) through a transmission grid in a geographical area. In the Nordic synchronous area, there are four TSOs: Svenska kraftnät, Fingrid, Energinet.dk and Statnett. |
-||Connecting TSO |the TSO that operates the scheduling area in which balancing service providers and balance responsible parties shall be compliant with the terms and conditions related to balancing; |
+|Connecting TSO |Connecting Transmission System Operator |The TSO that operates the scheduling area in which balancing service providers and balance responsible parties shall be compliant with the terms and conditions related to balancing; |
 |TSO GCT |TSO energy bid submission gate closure time |The latest point in time when a connecting TSO can forward the balancing energy bids received from a balancing service provider to the activation optimisation function |
 |VP|Validity Period|The time period when the balancing energy bid offered by the BSP can be activated, whereas all the characteristics of the product are respected. The amount of time for which a bid is valid and firm. The first validity period of each day begins right at 00:00 market time. Validity periods are consecutive and not overlapping. The length of a single validity period is 15 minutes. |
