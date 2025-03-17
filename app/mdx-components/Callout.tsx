@@ -3,14 +3,14 @@
 import { labGrotesqueWeb } from '@/fonts'
 import cn from 'clsx'
 import type { FC, ReactElement, ReactNode } from 'react'
-import { TipsAndUpdates, Info, ErrorOutline, WarningAmber, StarOutline } from "@fingrid/design-system-components";
+import { TipsAndUpdates, Info, ErrorOutline, WarningAmber } from "@fingrid/design-system-components";
 
 
 const TypeToEmoji = {
   default: <TipsAndUpdates height="20" className="x:mt-1" />,
   error: <ErrorOutline height="20" className="x:mt-1" />,
   info: <Info height="20" className="x:mt-1" />,
-  important: <StarOutline height="20" className="x:mt-1" />,
+  important: <TipsAndUpdates height="20" className="x:mt-1" />,
   warning: <WarningAmber height="20" className="x:mt-1" />,
 }
 
