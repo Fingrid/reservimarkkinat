@@ -4,7 +4,7 @@ Here you can find useful information about the reserve markets and the message e
 
 > [!TIP]
 > 
-> If you would like to jump right into the deep end, check our [aFRR energy market document structure description](mFRR_E/document_structure.md)!
+> If you would like to jump right into the deep end, check our [aFRR energy market document structure description](aFRR_E/document_structure.md)!
 
 ![Power lines](./img/Fingrid_110515_MI-0370_hires.jpg)
 
