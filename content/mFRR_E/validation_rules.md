@@ -40,10 +40,10 @@ Technical links link bids between consecutive quarter-hours: When a technically 
 * Technical links are allowed on both simple and complex bids.
 * Technical links must be unique within the quarter-hour: One bid or complex bid group can use the same technical link ID within the same quarter-hour.
 ### Bid linking: Conditional linking
-Conditional links allow for more complex interactions between bids compared to technical linking. Depending on the exact condition, conditional bids may start as available or unavailable and change into the other state when the condition is met. For more details on conditional links, see the Document Structure page.
+Conditional links allow for more complex interactions between bids compared to technical linking. Depending on the exact condition, conditional bids may start as available or unavailable and change into the other state when the condition is met. For more details on conditional link conditions, see the Document Structure page.
 * Conditional links are only allowed for simple bids
 * A bid can only have conditional links to three bids in the previous quarter-hour (QH-1) and to three bids in the quarter-hour before the previous (QH-2), for a total of six conditional links.
 * Only one conditional link is allowed between any two bids.
-* Each link must have a condition.
+* Each link must have a condition. See Document Structure for details on different conditions.
 * If a bid within a conditionally linked chain is cancelled, the entire chain after it will become invalid and unable to be activated. BSPs are notified with an Availability Document when they cause an invalid link.
 ## Acknowledgement rules
