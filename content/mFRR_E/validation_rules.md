@@ -46,4 +46,15 @@ Conditional links allow for more complex interactions between bids compared to t
 * Only one conditional link is allowed between any two bids.
 * Each link must have a condition. See Document Structure for details on different conditions.
 * If a bid within a conditionally linked chain is cancelled, the entire chain after it will become invalid and unable to be activated. BSPs are notified with an Availability Document when they cause an invalid link.
+## Rules for bid updates
+To update a bid, the BSP can send the bid again with the same mRID and updated attributes. Additionally, the new bid document must have a unique mRID with a fixed revision number of 1, as well as a newer created timestamp than the previous document. Existing bids can be cancelled by setting their volume to 0 in the message.
+* Cannot change market product type. If you want to change it, the bid must first be cancelled and then sent again with the correct market product type.
+* Bids cannot be changed from simple to complex.
+* A complex bid group cannot be partially canceled. The entire group must be cancelled at once. Alternatively, a bid in a complex group can be changed into a simple bid, then cancelled.
+* Cannot change the bid's time period.
+* Cannot change the bid's resource object (RO). 
 ## Acknowledgement rules
+* For each bid message received, an acknowledgement document is sent back to the BSP
+* Messages are never partially accepted, only fully accepted or fully rejected; if a bid document contains one erroneous bid time series, none of the bids will be accepted even if the rest don't contain errors.
+* The acknowledgement message contains the erroneuous timeseries and a reason text indicating the error. List of error texts can be found on the Document structure page.
+* Document level error code is A01 for accepted message, A02 for fully rejected message. 
