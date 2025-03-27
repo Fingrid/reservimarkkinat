@@ -19,7 +19,7 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
   const pageMap = await getPageMap()
   return (
     <html 
-    className={`${labGrotesqueWeb.variable} h-full`}
+    className={`${labGrotesqueWeb.variable}`}
     lang="en" 
     dir="ltr" 
     suppressHydrationWarning={true}>
@@ -27,17 +27,21 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
         <link rel="shortcut icon" href="/favicon.ico" />
         <script defer data-domain="developers.fingrid.fi" src="https://plausible.io/js/script.file-downloads.outbound-links.pageview-props.tagged-events.js"></script>
       </Head>
-      <body className="h-full">
+      <body>
         <Layout
           navbar={
             <Navbar 
-              logo={ <div className='flex align-center items-center'><FingridLogo width={'100%'}/><p className='pl-3'>Developer&nbsp;Portal</p></div> } 
+              logo={ <div className='flex align-center items-center'>
+                <FingridLogo width={'100%'}/>
+                  <p className='pl-3 ml-3 border-l-[1px] border-l-[var(--color-separator)] dark:border-l-[var(--color-separator-dark)]'>
+                    Developer&nbsp;Portal
+                  </p>
+                </div> } 
               logoLink={'https://www.fingrid.fi/'}
             />
           }
           sidebar={{ autoCollapse: false, defaultMenuCollapseLevel: 1 }}
           pageMap={await getPageMap()}
-          darkMode={false}
           nextThemes={{ defaultTheme: 'light' }}
           footer={<Footer />}
           editLink={ null }

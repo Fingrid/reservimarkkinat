@@ -17,9 +17,7 @@ const ScalarUI = ({spec}: Props) => {
         hideDownloadButton: true,
         showSidebar: false,
         //layout: "classic",
-        spec: {
-          url: `${assetPrefix}/${spec}`,
-        },
+        url: `${assetPrefix}/${spec}`,
       }}
     />;
 };

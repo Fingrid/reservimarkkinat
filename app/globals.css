@@ -2,370 +2,560 @@
 @import url("../node_modules/@fingrid/design-system-components/dist/static/styles/variables.css");
 @import url("nextra-theme-docs/style.css");
 
-@import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer theme, base, components, utilities;
 
 @font-face {
-    font-family: "Lab Grotesque Web";
-    src: url("../app/fonts/LabGrotesqueWeb-Light.woff");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Lab Grotesque Web";
+  src: url("../app/fonts/LabGrotesqueWeb-Bold.woff");
+  font-weight: bold;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "Lab Grotesque Web";
-    src: url("../app/fonts/LabGrotesqueWeb-LightItalic.woff");
-    font-weight: normal;
-    font-style: italic;
+  font-family: "Lab Grotesque Web";
+  src: url("../app/fonts/LabGrotesqueWeb-Regular.woff");
+  font-weight: 400 600;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "Lab Grotesque Web";
-    src: url("../app/fonts/LabGrotesqueWeb-Bold.woff");
-    font-weight: bold;
-    font-style: normal;
+  font-family: "Lab Grotesque Web";
+  src: url("../app/fonts/LabGrotesqueWeb-Light.woff");
+  font-weight: 100 300;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "Lab Grotesque Web";
-    src: url("../app/fonts/LabGrotesqueWeb-BoldItalic.woff");
-    font-weight: bold;
-    font-style: italic;
+  font-family: "Lab Grotesque Web";
+  src: url("../app/fonts/LabGrotesqueWeb-BoldItalic.woff");
+  font-weight: bold;
+  font-style: italic;
 }
 
 @font-face {
-    font-family: "Lab Grotesque Web";
-    src: url("../app/fonts/LabGrotesqueWeb-Regular.woff");
-    font-weight: 500;
-    font-style: normal;
+  font-family: "Lab Grotesque Web";
+  src: url("../app/fonts/LabGrotesqueWeb-Italic.woff");
+  font-weight: 400 600;
+  font-style: italic;
 }
 
 @font-face {
-    font-family: "Lab Grotesque Web";
-    src: url("../app/fonts/LabGrotesqueWeb-Italic.woff");
-    font-weight: 500;
-    font-style: italic;
+  font-family: "Lab Grotesque Web";
+  src: url("../app/fonts/LabGrotesqueWeb-LightItalic.woff");
+  font-weight: 100 300;
+  font-style: italic;
 }
+
+
 
 @theme {
-    --font-display: var(--font-lab-grotesque-web);
-    --color-text-sidebar: #3e5660;
+  --Font-Family: var(--font-lab-grotesque-web);
+
+  --color-text: #3e5660;
+
+  --color-background-level-1: #ffffff;
+  --color-background-level-2: #f3f6f8;
+  --color-background-level-3: #e9eef2;
+
+  --color-separator: #D5DDE3;
+
+  --color-primary-action: #D5121E;
+  --color-primary-hover: ##6D838F;
+  --color-secondary-action: #3e5660;
+
+  --color-disabled: #b3b3b3;
+
+  --color-breadcrumb: #7d8699;
+
+  /* Callout colors */
+  --color-info-background: #F2F2F2;
+  --color-info-text: #4d4d4d;
+
+  --color-tip-background: #e8f8fc;
+  --color-tip-text: #0a4a5c;
+
+  --color-important-background: #e8f8fc;
+  --color-important-text: #0a4a5c;
+
+  --color-warning-background: #fef5e6;
+  --color-warning-text: #634003;
+
+  --color-error-background: #FFEBE5;
+  --color-error-text: #992400;
+
+  /* Dark mode vars */
+  --color-dark-text: #ffffff;
+
+  --color-dark-background-level-1: #141517;
+  --color-dark-background-level-2: #1F2024;
+  --color-dark-background-level-3: #28292e;
+
+  --color-dark-separator: #45464f;
+
+  --color-dark-primary-action: #169fc5;
+  --color-dark-primary-hover: #7d8699;
+  --color-dark-secondary-action: #7d8699;
+
+  --color-dark-disabled: #4d4d4d;
+
+  --color-dark-breadcrumb-path-item: #7d8699;
+
+  --color-dark-info-background: #333333;
+  --color-dark-info-text: #ffffff;
+
+  --color-dark-tip-background: #0A4A5C;
+  --color-dark-tip-text: #ffffff;
+
+  --color-dark-important-background: #0A4A5C;
+  --color-dark-important-text: #ffffff;
+
+  --color-dark-warning-background: #956004;
+  --color-dark-warning-text: #ffffff;
+
+  --color-dark-error-background: #661800;
+  --color-dark-error-text: #ffffff;
 }
 
 :root {
-    html {
-        color: var(--color-text-text-primary);
+  html {
+    @apply bg-[var(--color-background-level-1)];
+    @apply text-[var(--color-text)];
+    @apply dark:bg-[var(--color-dark-background-level-1)];
+    @apply dark:text-[var(--color-dark-text)];
+
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+
+    @apply bg-[var(--color-background-level-1)];
+    @apply text-[var(--color-text)];
+    @apply dark:bg-[var(--color-dark-background-level-1)];
+    @apply dark:text-[var(--color-dark-text)];
+
+    font-family: var(--Font-Family, "Lab Grotesque Web");
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+  }
+
+  h1 {
+    font-family: var(--Font-Family, "Lab Grotesque Web");
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.5rem;
+  }
+
+  h2 {
+    font-family: var(--Font-Family, "Lab Grotesque Web");
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2rem
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-family: var(--Font-Family, "Lab Grotesque Web");
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.5rem;
+  }
+
+  h4 {
+    font-family: var(--Font-Family, "Lab Grotesque Web");
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-[var(--color-text)];
+    @apply dark:text-[var(--color-dark-text)];
+  }
+
+  h2 {
+    @apply border-t border-b-0 pt-8;
+  }
+
+  header {
+    @apply bg-[var(--color-background-level-1)];
+    @apply dark:bg-[var(--color-dark-background-level-1)];
+    border: 0;
+
+    .nextra-navbar-blur {
+      @apply bg-[var(--color-background-level-1)];
+      @apply dark:bg-[var(--color-dark-background-level-1)];
+      border: 0;
+    }
+  }
+
+  nav {
+    @apply bg-[var(--color-background-level-1)];
+    @apply dark:bg-[var(--color-dark-background-level-1)];
+    @apply border-b-[1px] border-b-[var(--color-separator)];
+    @apply dark:border-b-[var(--color-dark-separator)];
+
+    p {
+      @apply text-[var(--color-text)];
+      @apply dark:text-[var(--color-dark-text)];
+
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.5rem;
     }
 
-    body {
-        font-size: 1rem;
-        text-decoration: none;
-        font-family: var(--font-display);
-        font-weight: 400;
-        font-style: normal;
-        font-stretch: normal;
-        letter-spacing: 0;
-        line-height: 1.5rem;
+    a {
+      @apply text-[var(--color-text)];
+      @apply dark:text-[var(--color-dark-text)];
+
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 1.5rem;
+    }
+  }
+
+  nav div ul li {
+    @apply text-[var(--color-text)];
+    @apply dark:text-[var(--color-dark-text)];
+
+    &:has(.x\:text-primary-600) {
+      a {
+        @apply text-[var(--color-primary-action)];
+        @apply dark:text-[var(--color-dark-primary-action)];
+      }
+    }
+  }
+
+  .nextra-breadcrumb {
+    @apply text-[var(--color-breadcrumb-path-item)];
+    @apply dark:text-[var(--color-dark-breadcrumb-path-item)];
+
+    span:last-child {
+      font-weight: 700;
+      color: var(--color-text);
     }
 
-    h1 {
-        font-size: 2.5rem;
-        text-decoration: none;
-        font-family: var(--font-display);
-        font-weight: 400;
-        font-style: normal;
-        font-stretch: normal;
-        letter-spacing: 0;
-        line-height: 2.5rem;
+    svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 3px;
+    }
+  }
+
+  .nextra-sidebar {
+    @apply bg-[var(--color-background-level-1)];
+    @apply dark:bg-[var(--color-dark-background-level-1)];
+
+    color: var(--color-text);
+    padding: 1.5rem;
+
+    &:has(button:last-child[aria-expanded="true"]) {
+      @apply w-86;
     }
 
-    h2 {        
-        font-size: 2rem;
-        text-decoration: none;
-        font-family: var(--font-display);
-        font-weight: 400;
+    &:has(button:last-child[aria-expanded="false"]) {
+      @apply w-20;
+    }
+
+    a,
+    button {
+      position: relative;
+      border-radius: 0;
+      margin-top: 0;
+      padding: 0;
+      
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: bold;
+      line-height: 1.625rem;
+      
+      @apply bg-[var(--color-background-level-2)];
+      @apply border-b-[1px] border-b-[var(--color-separator)];
+      @apply border-l-[3px] border-l-[transparent];
+      @apply text-[var(--color-text)];
+
+      @apply dark:bg-[var(--color-dark-background-level-2)];
+      @apply dark:border-b-[1px] dark:border-b-[var(--color-dark-separator)];
+      @apply dark:border-l-[3px] dark:border-l-[transparent];
+      @apply dark:text-[var(--color-dark-text)];
+
+      &:hover {
+        @apply text-[var(--color-primary-hover)];
+        @apply dark:text-[var(--color-dark-primary-hover)];
+      }
+    }
+
+    button {
+      @apply dark:bg-[var(--color-dark-background-level-3)];
+      @apply border-t-[1px] border-t-[var(--color-separator)];
+      @apply dark:border-t-[1px] dark:border-t-[var(--color-dark-separator)];
+    }
+
+    & > div {
+      padding: 0;
+    }
+
+    & > div:first-child {
+      padding: 0;
+      padding-top: 1rem;
+      padding-right: 0.5rem;
+    }
+
+    & > div:first-child > div:first-child > ul:first-child > li:first-child {
+      background-color: transparent;
+      border: none;
+
+      &.active {
+        @apply text-[var(--color-primary-action)];
+        @apply dark:text-[var(--color-dark-primary-action)];
+      }
+
+      button {
+        padding: 0;
+        margin: 0;
+
+        @apply bg-[var(--color-background-level-3)];
+        @apply dark:bg-[var(--color-dark-background-level-3)];
+      }
+
+      a {
+        padding: 0;
+        margin: 0;
+
+        font-family: var(--Font-Family, "Lab Grotesque Web");
+        font-size: 1.5rem;
         font-style: normal;
-        font-stretch: normal;
-        letter-spacing: 0;
+        font-weight: 700;
         line-height: 2rem;
-        font-size: 1.5rem;
-    }
 
-    h3 {
-        font-size: 1.5rem;
-        text-decoration: none;
-        font-family: var(--font-display);
-        font-weight: 400;
-        font-style: normal;
-        font-stretch: normal;
-        letter-spacing: 0;
-        line-height: 1.5rem;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-        color: var(--color-text-text-primary);
-
-        &:where(.dark *) {
-            color: var(--color-secondary-secondary-light-2);
-        }
-    }
-
-    h2 {
-        @apply border-t border-b-0 pt-8
-    }
-
-    .nextra-breadcrumb {
-        color: var(--color-secondary-secondary-light-1);
-
-        &:where(.dark *) {
-            color: var(--color-secondary-secondary-light-2);
-        }
-
-        span:last-child {
-            font-weight: 700;
-            color: var(--color-secondary-secondary-light-1);
-        }
-
-        svg {
-            width: 14px;
-            height: 14px;
-            stroke-width: 3px;
-        }
-    }
-
-    .nextra-sidebar-footer {
-        position: relative;
-        order: 0;
-    }
-
-    .nextra-sidebar {
-        background-color: var(--color-secondary-secondary-light-3);
-
-        &:where(.dark *) {
-            background-color: var(--color-neutral-black);
-        }
-
-        &:has(button[aria-expanded="true"]) {
-            @apply w-86;
-        }
-
-        &:has(button[aria-expanded="false"]) {
-            @apply w-20;
-        }
-
-        a, button {
-            background-color: white;
-            border-radius: 0;
-            color: var(--color-text-sidebar);
-            font-weight: 500;
-            margin-top: 2px;
-
-            &:hover {
-                text-decoration-color: var(--color-text-text-highlight);
-                color: var(--color-text-text-highlight);
-            }
-
-            &:where(.dark *) {
-                color: var(--color-secondary-secondary-light-2);
-            }
-        }
-
-        a {
-            font-weight: 700;
-
-            &:where(.dark *) {
-                background-color: var(--color-neutral-black);
-            }
-        }
-
-        button {
-            background-color: #f8fafc;
-            font-weight: 700;
-
-            &:where(.dark *) {
-                background-color: var(--color-neutral-black);
-            }
-        }
-
-        & > div {
-            @apply px-6;
-        }
-
-        & > div:first-child > div:first-child > ul:first-child > li:first-child {
-            &.active {
-                border-color: transparent;
-            }
-
-            a {
-                @apply mt-2;
-
-                background-color: transparent;
-                padding: 0;
-                margin-bottom: 0.5rem;
-                font-size: 1.2rem;
-                font-weight: 700;
-                line-height: 1.2rem;
-                border-width: 0;
-            }
-        }
-
-        ul {
-            row-gap: 0.2rem;
-        }
-
-        li {
-            color: var(--color-text-sidebar);
-
-            &:where(.dark *) {
-                color: var(--color-secondary-secondary-light-4);
-            }
-
-            div {
-                padding-top: 0.2rem;
-            }
-
-            &:not(:empty):not(:has(*)) {
-                padding: 0;
-                margin: 0;
-
-                padding-top: 0.3rem;
-            }
-
-            a {
-                @apply pl-8;
-                border-left: 0.2rem solid transparent;
-            }
-        }
-
-        ul li ul {
-            padding: 0;
-            margin: 0;
-            border: 0;
-
-            &::before {
-                background-color: transparent;
-            }
-
-            li {
-                margin: 0;
-                background-color: white;
-
-                &:where(.dark *) {
-                    background-color: transparent;
-                }
-            }
-
-            &:last-child {
-                padding-bottom: .5rem;
-            }
-            
-            a {
-                @apply pl-7;
-            }
-        }
-
-        .active {
-            & > a {
-                color: var(--color-brand-fingrid);
-                text-decoration-color: var(--color-brand-fingrid);;
-                border-color: var(--color-brand-fingrid);
-                font-weight: 700;
-
-                &:where(.dark *) {
-                    background-color: var(--color-neutral-neutral-20);
-                }
-            }
-        }
-    }
-
-    .nextra-callout {
-        border-radius: 8px;
-        font-weight: 400;
+        background-color: transparent;
         border: none;
-        color: var(--color-text-text-primary);
 
-        &.info {
-            background-color: var(--color-secondary-secondary-light-4);
-            color: var(--color-text-text-primary);
-
-            svg {
-                fill: var(--color-text-text-primary);
-            }
-        }
-
-        &.tip {
-            background-color: var(--color-blue-blue-95);
-            color: var(--color-blue-blue-20);
-
-            svg {
-                fill: var(--color-blue-blue-20);
-            }
-        }
-
-        &.warning {
-            background-color: var(--color-orange-orange-95);
-            color: var(--color-orange-orange-30);
-
-            svg {
-                fill: var(--color-orange-orange-30);
-            }
-        }
-
-        &.important {
-            background-color: var(--color-blue-blue-95);
-            color: var(--color-blue-blue-20);
-
-            svg {
-                fill: var(--color-blue-blue-20);
-            }
-        }
-
-        &.error {
-            background-color: var(--color-red-red-95);
-            color: var(--color-red-red-30);
-
-            svg {
-                fill: var(--color-red-red-30);
-            }
-        }
-
-        div > p {
-            padding: 0;
-            margin: 0;
-        }
+        margin-bottom: 0.5rem;
+        padding-bottom: 1rem;
+      }
     }
 
-    .nextra-search {
-        input {
-            border-radius: 0;
-            border-color: var(--color-secondary-secondary-light-1);
-            border-width: 1px;
-            background-color: transparent;
-        }
+    ul {
+      row-gap: 0;
     }
 
-    nav {
-        color: var(--color-text-text-primary);
+    li {
+      @apply text-[var(--color-text)];
+      @apply dark:text-[var(--color-dark-text)];
 
-        &:where(.dark *) {
-            color: var(--color-secondary-secondary-light-2);
-        }
-    }
+      div {
+        padding-top: 0;
+        padding-bottom: 1rem;
+        padding-left: 0;
+      }
 
-    nav div ul li {
-        &:has(.x\:text-primary-600) {
-            a {
-                color: var(--color-text-text-highlight);
-            }
-        }
-    }
+      &:not(:empty):not(:has(*)) {
 
-    article div:last-child a {
-        color: var(--color-text-text-highlight);
-        line-height: 1.5rem;
+        margin-top: 1rem;
+        padding-top: 0rem;
+        padding-bottom: 0.3rem;
+        padding-left: 1.25rem;
+
+        font-family: var(--Font-Family, "Lab Grotesque Web");
         font-size: 1rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.2rem;
+
+      }
+
+      a, button {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+
+      a {
+        padding-left: 2.25rem;
+      }
+
+      button {
+        padding-left: 1.25rem;
+      }
     }
+
+    ul li ul {
+      padding: 0;
+      margin: 0;
+      border: 0;
+
+      &::before {
+        background-color: transparent;
+      }
+
+      li {
+        margin: 0;
+      }
+
+      &:last-child {
+        padding-bottom: 0.5rem;
+      }
+
+      a {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+    }
+
+    .active {
+      & > a {
+        @apply text-[var(--color-primary-action)];
+        @apply dark:text-[var(--color-dark-primary-action)];
+        @apply border-l-[var(--color-primary-action)];
+        @apply dark:border-l-[var(--color-dark-primary-action)];
+
+        @apply border-l-[3px];
+      }
+    }
+  }
+
+  .nextra-sidebar-footer {
+    @apply bg-[var(--color-background-level-1)];
+    @apply border-[var(--color-background-level-1)];
+
+    @apply dark:bg-[var(--color-dark-background-level-1)];
+    @apply dark:border-[var(--color-dark-background-level-1)];
+
+    position: relative;
+    margin: 1rem;
+
+
+    a, button {
+      @apply bg-transparent;
+
+      font-family: var(--Font-Family, "Lab Grotesque Web");
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.5rem;
+      border: none;
+    }
+  }
+
+  .nextra-callout {
+    border-radius: 8px;
+    font-weight: 400;
+    border: none;
+
+    @apply text-[var(--color-info-text)];
+    @apply dark:text-[var(--color-dark-info-text)];
+
+    &.info {
+      @apply bg-[var(--color-info-background)];
+      @apply dark:bg-[var(--color-dark-info-background)];
+      @apply text-[var(--color-info-text)];
+      @apply dark:text-[var(--color-dark-info-text)];
+
+      svg {
+        @apply fill-[var(--color-info-text)];
+        @apply dark:fill-[var(--color-dark-info-text)];
+      }
+    }
+
+    &.tip {
+      @apply bg-[var(--color-tip-background)];
+      @apply dark:bg-[var(--color-dark-tip-background)];
+      @apply text-[var(--color-tip-text)];
+      @apply dark:text-[var(--color-dark-tip-text)];
+
+      svg {
+        @apply fill-[var(--color-tip-text)];
+        @apply dark:fill-[var(--color-dark-tip-text)];
+      }
+    }
+
+    &.warning {
+      @apply bg-[var(--color-warning-background)];
+      @apply dark:bg-[var(--color-dark-warning-background)];
+      @apply text-[var(--color-warning-text)];
+      @apply dark:text-[var(--color-dark-warning-text)];
+
+      svg {
+        @apply fill-[var(--color-warning-text)];
+        @apply dark:fill-[var(--color-dark-warning-text)];
+      }
+    }
+
+    &.important {
+      @apply bg-[var(--color-important-background)];
+      @apply dark:bg-[var(--color-dark-important-background)];
+      @apply text-[var(--color-important-text)];
+      @apply dark:text-[var(--color-dark-important-text)];
+
+      svg {
+        @apply fill-[var(--color-important-text)];
+        @apply dark:fill-[var(--color-dark-important-text)];
+      }
+    }
+
+    &.error {
+      @apply bg-[var(--color-error-background)];
+      @apply dark:bg-[var(--color-dark-error-background)];
+      @apply text-[var(--color-error-text)];
+      @apply dark:text-[var(--color-dark-error-text)];
+
+      svg {
+        @apply fill-[var(--color-error-text)];
+        @apply dark:fill-[var(--color-dark-error-text)];
+      }
+    }
+
+    div > p {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .nextra-search {
+    input {
+      @apply border-[var(--color-secondary-action)];
+      @apply dark:border-[var(--color-dark-secondary-action)];
+
+      border-radius: 0;
+      border-width: 1px;
+      background-color: transparent;
+    }
+  }
+
+  article {
+    @apply bg-[var(--color-background-level-1)];
+    @apply dark:bg-[var(--color-dark-background-level-1)];
+
+    @apply border-l-[var(--color-separator)];
+    @apply dark:border-l-[var(--color-dark-separator)];
+
+    @apply border-l-[1px];
+  }
+
+  article div:last-child a {
+    @apply text-[var(--color-primary-action)];
+    @apply dark:text-[var(--color-dark-primary-action)];
+
+    line-height: 1.5rem;
+    font-size: 1rem;
+  }
 }
