@@ -115,6 +115,26 @@ The BSP receiving activation messages sends an acknowledgement document to confi
 ## Availability Document
 After the 15-minute market period ends, an Availability Document is sent to the BSPs containing the bids that had been unavailable in the MTU, along with reasons why they were set as unavailable. Additionally, if a BSP causes an invalid conditional link by cancelling a linked bid, they will be immediately notified of such unavailabilities with an Availability Document.
 ### Table of document attributes
+| Attribute | Description |
+|-----------|-------------|
+| mRID | Unique identification of the bid in UUID form |
+| revisionNumber | Always 1 |
+| Type | Always B45 (Availability document) |
+| process.processType | Always A47 (mFRR) |
+| sender_MarketParticipant.mRID  | The TSO's EIC identification | 
+| sender_MarketParticipant.marketRole.type | Always A04 (TSO) | 
+| receiver_MarketParticipant.mRID | Identification of the receiving party |
+| receiver_MarketParticipant.marketRole.type | Always A46 (BSP) | 
+| createdDateTime  | Time of document creation in UTC+0, format: YYYY-MM-DDTHH:MM:SSZ | 
+| time_Period.timeInterval | Time period covered by the bids in the document, same format as above, start and end time | 
+| **BidTimeSeries: one or more instances** |
+| mRID | Unique identification of the bid in UUID form |
+| bidDocument_MarketDocument.mRID | Always NA |
+| bidDocument_MarketDocument.revisionNumber | Always 1 |
+| requestingParty_MarketParticipant.mRID | EIC code of the party requesting bid availability update |
+| requestingParty_MarketParticipant.marketRole.type | One of A46 (BSP), A49 (TSO) or A50 (Distribution System Operator) |
+| businessType | One of C40 (Conditional bid), C41 (Thermal limit), C42 (Frequency limit), C43 (Voltage limit), C44 (Current limit), C45 (Short-circuit current limits), or C46 (Dynamic Stability limit) |
+| domain.mRID | Unique identification of the bid in UUID form |
 ### Example message
 ## Reserve Allocation Result Document
 After each imbalance settlement period (ISP), BSPs receive a report of every bid activated in the period as a *ReserveAllocationResult_MarketDocument.* The document contains which bids had been activated from the BSP, their activation volumes, time periods and prices, along with information on activation reason and type.
