@@ -117,10 +117,67 @@ After the 15-minute market period ends, an Availability Document is sent to the 
 ### Table of document attributes
 ### Example message
 ## Reserve Allocation Result Document
-After each imbalance settlement period (ISP), BSPs receive a report of every bid activated as a *ReserveAllocationResult_MarketDocument.*
+After each imbalance settlement period (ISP), BSPs receive a report of every bid activated in the period as a *ReserveAllocationResult_MarketDocument.* The document contains which bids had been activated from the BSP, their activation volumes, time periods and prices, along with information on activation reason and type.
 ### Table of document attributes
+| Attribute | Description |
+|-----------|-------------|
+| mRID | Unique identification of the document in UUID form |
+| revisionNumber | Always 1 |
+| Type | Always A38 (Reserve allocation result document) |
+| process.processType | Always A47 (mFRR) |
+| sender_MarketParticipant.mRID | The TSO's EIC identification |
+| sender_MarketParticipant.marketRole.type | Always A04 (TSO) | 
+| receiver_MarketParticipant.mRID  | Identification of the receiving party | 
+| receiver_MarketParticipant.marketRole.type | Always A46 (BSP) | 
+| createdDateTime  | Time of document creation in UTC+0, format: YYYY-MM-DDTHH:MM:SSZ | 
+| reserveBid_Period.timeInterval | Time period covered in the bid document, same format as above, start and end time | 
+| domain.mRID | EIC identification of the control area, for Finland 10YFI-1--------U | 
+| **TimeSeries: One or more instances per document** |
+| mRID | Unique identification of the time series in UUID form |
+| bid_Original_MarketDocument.bid_TimeSeries.mRID | UUID of the bid the time series refers to |
+| bid_Original_MarketDocument.tendering_MarketParticipant.mRID | Identification of the BSP according to the original bid document |
+| auction.mRID | Always MFRR_ENERGY_ACTIVATION_MARKET |
+| businessType | Always A97 (mFRR) |
+| acquiring_Domain.mRID | 10Y1001A1001A91G (Nordic Market Area) |
+| connecting_Domain.mRID | EIC Identification of the bidding zone, for Finland 10YFI-1--------U |
+| quantity_Measurement_Unit.name | Always MAW (Megawatt) |
+| currency_Unit.name | Always EUR | 
+| registeredResource.mRID | RO Code of the resource providing object | 
+| energyPrice_Measurement_Unit.name | MWH (Megawatt hour) | 
+| flowDirection.direction | One of A01 (Up) or A02 (Down) | 
+| standard_MarketProduct.marketProductType | A05 if bid is available for scheduled activation only. A07 if bid is available for both scheduled and direct activation. | 
+| **Series_Period: One or two per TimeSeries** |
+| timeInterval  | Start and end times for the bid's activation period. Must be in UTC+0. Format: YYYY-MM-DDTHH:MMZ | 
+| Resolution | Must match the activation time. Examples: PT15M for scheduled activation, PT24M for a 24 minute direct activation. | 
+| **Point: Exactly one per Series_Period** |
+| Position | Always 1 | 
+| quantity.quantity | Activated quantity in megawatts | 
+| energy_Price.amount | Energy price for the activation | 
+| minimum_Quantity.quantity | Minimum offered quantity in megawatts if activated. Cannot be used for indivisible bids. If bid is divisible, the value can be 0 for fully divisible bids but must not exceed the bid's maximum quantity. | 
+| **Reason: Zero, one or multiple per TimeSeries** |
+| code | Populated with either reason codes for activation: B22 (System regulation) or B49 (Balancing); or activation type codes: Z58 (Scheduled activation) or Z59 (Direct activation) | 
+| text | May be used for additional explanations. | 
 ### Example message
 ## Acknowledgement Document
 BSPs receive an Acknowledgement Document for every Bid Document they send to the TSO. Additionally, BSPs send an Acknowledgement Document of their own in response to activation orders.
 ### Table of document attributes
+| Attribute | Description |
+|-----------|-------------|
+| mRID | Unique identification of the bid in UUID form |
+| createdDateTime  | Time of document creation in UTC+0, format: YYYY-MM-DDTHH:MM:SSZ | 
+| sender_MarketParticipant.mRID | Identification of the sender party |
+| sender_MarketParticipant.marketRole.type | One of A46 (BSP), A27 (Resource Provider), A34 (Reserve Allocator) or A04 (TSO) | 
+| receiver_MarketParticipant.mRID | Identification of the receiving party |
+| receiver_MarketParticipant.marketRole.type | One of A46 (BSP), A27 (Resource Provider), or A04 (TSO) | 
+| received_MarketDocument.mRID | Unique identification of the received document in UUID form |
+| received_MarketDocument.revisionNumber | Revision number of the received document |
+| received_MarketDocument.Type | Type of received document |
+| received_MarketDocument.process.processType | Process type of received document |
+| received_MarketDocument.createdDateTime  | Time of received document creation in UTC+0, format: YYYY-MM-DDTHH:MM:SSZ | 
+| **Document level Reason: one or more instances per document** |
+| code | One of A01 (Accepted) or A02 (Rejected) | 
+| text | Free text field, may be populated with an error message | 
+| **Bid level Reason: zero or more instances per erroneous bid time series** |
+| code | 999 - Error not specifically identified. Other error codes may be used. | 
+| text | Free text field, may be populated with an error message for a bid causing the acknowledgement document to be negative. | 
 ### Example message
