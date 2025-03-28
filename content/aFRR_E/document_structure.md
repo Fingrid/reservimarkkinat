@@ -118,7 +118,7 @@ Availability documents are sent one minute after the bid availability period has
 | receiver_MarketParticipant.mRID | Identification of the receiving party |
 | receiver_MarketParticipant.marketRole.type | One of A46 (BSP) or A39 (Service Provider/Data Provider) | 
 | createdDateTime  | Time of document creation in UTC+0, format: YYYY-MM-DDTHH:MM:SSZ | 
-| reserveBid_Period.timeInterval | Time period covered in the bid document, same format as above, start and end time | 
+| time_Period.timeInterval | Time period covered by bids in the document, same format as above, start and end time | 
 | **BidTimeSeries: one or more instances** |
 | mRID | Unique identification of the bid in UUID form |
 | bidDocument_MarketDocument.mRID | Always NA |
