@@ -120,6 +120,10 @@
 
   --color-dark-error-background: #661800;
   --color-dark-error-text: #ffffff;
+
+  --color-dark-footer-top: #28292E;
+  --color-dark-footer-bottom: #05252E
+  
 }
 
 :root {
@@ -206,6 +210,24 @@
     }
   }
 
+  footer {
+    div:first-child {
+      @apply dark:bg-[var(--color-dark-footer-top)];
+
+      path:first-child {
+        @apply dark:fill-[var(--color-dark-primary-action)];
+      }
+    }
+
+    > div:last-child {
+      @apply dark:bg-[var(--color-dark-footer-bottom)];
+
+      div {
+        @apply dark:bg-[var(--color-dark-footer-bottom)];
+      }
+    }
+  }
+
   nav {
     @apply bg-[var(--color-background-level-1)];
     @apply dark:bg-[var(--color-dark-background-level-1)];
@@ -231,18 +253,36 @@
       font-weight: 500;
       line-height: 1.5rem;
     }
-  }
 
-  nav div ul li {
-    @apply text-[var(--color-text)];
-    @apply dark:text-[var(--color-dark-text)];
-
-    &:has(.x\:text-primary-600) {
-      a {
-        @apply text-[var(--color-primary-action)];
-        @apply dark:text-[var(--color-dark-primary-action)];
+    div ul li {
+      @apply text-[var(--color-text)];
+      @apply dark:text-[var(--color-dark-text)];
+  
+      &:has(.x\:text-primary-600) {
+        a {
+          @apply text-[var(--color-primary-action)];
+          @apply dark:text-[var(--color-dark-primary-action)];
+        }
       }
     }
+  }
+
+  article {
+    @apply bg-[var(--color-background-level-1)];
+    @apply dark:bg-[var(--color-dark-background-level-1)];
+
+    @apply border-l-[var(--color-separator)];
+    @apply dark:border-l-[var(--color-dark-separator)];
+
+    @apply border-l-[1px];
+  }
+
+  article div:last-child a {
+    @apply text-[var(--color-primary-action)];
+    @apply dark:text-[var(--color-dark-primary-action)];
+
+    line-height: 1.5rem;
+    font-size: 1rem;
   }
 
   .nextra-breadcrumb {
@@ -539,23 +579,5 @@
       border-width: 1px;
       background-color: transparent;
     }
-  }
-
-  article {
-    @apply bg-[var(--color-background-level-1)];
-    @apply dark:bg-[var(--color-dark-background-level-1)];
-
-    @apply border-l-[var(--color-separator)];
-    @apply dark:border-l-[var(--color-dark-separator)];
-
-    @apply border-l-[1px];
-  }
-
-  article div:last-child a {
-    @apply text-[var(--color-primary-action)];
-    @apply dark:text-[var(--color-dark-primary-action)];
-
-    line-height: 1.5rem;
-    font-size: 1rem;
   }
 }
