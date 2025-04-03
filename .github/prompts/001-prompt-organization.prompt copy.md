@@ -18,7 +18,7 @@ filters:
     pattern: "file_create|file_modify"
 
 actions:
-  - type: suggest
+  - type: requirement
     message: |
        When creating Copilot prompts:
 

@@ -14,9 +14,9 @@ filters:
   - type: event
     pattern: "file_create|file_modify"
 actions:
-  - type: suggest
+  - type: suggestion
     message: |
-      When writing code for the Reservimarkkinat Portal:
+      When writing code:
 
       1. Use TypeScript for all code:
          - No JavaScript files allowed
@@ -37,32 +37,23 @@ actions:
          - Follow atomic design principles
          - Keep components small and focused
 
-      4. Data and State Management:
-         - Use Server Components for data fetching
-         - Implement proper error boundaries
-         - Handle loading states consistently
-         - Use React hooks for client-side state
-         - Follow React 19 best practices
-
-      5. Naming conventions:
+      4. Naming conventions:
          - camelCase for functions, variables, and file names
          - PascalCase for components and type definitions
          - Use descriptive names that indicate purpose
          - Prefix hooks with 'use'
          - Suffix types with 'Type' and interfaces with 'Props' when appropriate
 
-      6. Code organization:
+      5. Code organization:
          - Group related components together
          - Maintain clear separation of concerns
          - Keep business logic separate from UI components
          - Use barrel exports (index.ts) for component directories
 
-      7. Quality standards:
+      6. Quality standards:
          - Follow ESLint rules without exceptions
          - Use Prettier for formatting
          - Run `yarn lint` before commits
-         - Keep dependencies updated and in sync
-         - Run `yarn knip` to detect unused code
 
 examples:
   - input: |

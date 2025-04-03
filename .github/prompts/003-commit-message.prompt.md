@@ -15,7 +15,7 @@ filters:
     pattern: "file_create|file_modify"
 
 actions:
-  - type: suggest
+  - type: suggestion
     message: |
       Commit messages should follow the Conventional Commits specification, which is enforced by husky:
 
