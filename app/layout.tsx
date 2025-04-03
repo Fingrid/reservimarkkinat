@@ -31,9 +31,9 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
         <Layout
           navbar={
             <Navbar 
-              logo={ <div className='flex align-center items-center'>
-                <FingridLogo width={'100%'}/>
-                  <p className='pl-3 ml-3 border-l-[1px] border-l-[var(--color-separator)] dark:border-l-[var(--color-separator-dark)]'>
+              logo={ <div className='fingrid_logo flex align-center items-center'>
+                  <FingridLogo width={'100%'}/>
+                  <p className='pl-3 ml-3 border-l-[1px] border-l-[var(--color-separator)] dark:border-l-[var(--color-dark-separator)]'>
                     Developer&nbsp;Portal
                   </p>
                 </div> } 
