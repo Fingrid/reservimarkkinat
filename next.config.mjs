@@ -9,7 +9,7 @@ const nextConfig = {
   images: {
     unoptimized: true // mandatory, otherwise won't export
   }
-}
+};
 
 const withNextra = nextra({
   latex: { renderer: 'mathjax' },
