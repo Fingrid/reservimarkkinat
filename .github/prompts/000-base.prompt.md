@@ -15,7 +15,7 @@ Core prompt file referencing all project guidelines and standards. Rules for org
 ### Project Guidelines
 - [Code Style](./002-code-style.prompt.md) - Standards for writing code
 - [Commit Message](./003-commit-message.prompt.md) - Standards for writing clear and consistent commit messages
-- [Written Content](./004-written-content.md) - Instructions how the actual wiki content should be handled
+- [Written Content](./004-written-content.prompt.md) - Instructions how the actual wiki content should be handled
 
 ## General Guidelines
 - Do only what is asked
