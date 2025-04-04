@@ -109,7 +109,7 @@ The BSP receiving activation messages sends an acknowledgement document to confi
 | Position | Always 1 | 
 | quantity.quantity | Activated quantity in megawatts | 
 | **Reason: Exactly one per BidTimeSeries** |
-| code | In the activation order: One of B22 (System regulation) or B49 (Balancing). In the response: Only used to provide a reason when the bid is unavailable. i.e. marketObjectStatus.status = A11. In that case, one of B59 (Unavailability of reserve providing unit) or 999 (Unspecified error). | 
+| code | In the activation order: One of B22 (System regulation) or B49 (Balancing). <br>In the response: Only used to provide a reason when the bid is unavailable. i.e. marketObjectStatus.status = A11. In that case, one of B59 (Unavailability of reserve providing unit) or 999 (Unspecified error). | 
 | text  | Not used in the activation order. In the response, used to provide further reasoning for unavailability. | 
 ### Example message
 ## Availability Document
@@ -135,6 +135,9 @@ After the 15-minute market period ends, an Availability Document is sent to the 
 | requestingParty_MarketParticipant.marketRole.type | One of A46 (BSP), A49 (TSO) or A50 (Distribution System Operator) |
 | businessType | One of C40 (Conditional bid), C41 (Thermal limit), C42 (Frequency limit), C43 (Voltage limit), C44 (Current limit), C45 (Short-circuit current limits), or C46 (Dynamic Stability limit) |
 | domain.mRID | Unique identification of the bid in UUID form |
+| **Reason: one instance per time series** |
+| code | Various codes, depending on the value of _businessType_: <br> businessType = C40: B16 (Tender unavailable in MOL) <br> businessType = C41, C43, C44, C45 or C46: B18 (Failure), B46 (Internal congestion), B47 (Operational security constraints, or B60 (Unavailability of automated protection systems |
+| text | Free text explaining the unavailability reason |
 ### Example message
 ## Reserve Allocation Result Document
 After each imbalance settlement period (ISP), BSPs receive a report of every bid activated in the period as a *ReserveAllocationResult_MarketDocument.* The document contains which bids had been activated from the BSP, their activation volumes, time periods and prices, along with information on activation reason and type.
