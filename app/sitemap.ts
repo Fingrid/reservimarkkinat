@@ -56,8 +56,9 @@ const isMDXFile = (value: unknown): value is MdxFile =>
   "route" in value &&
   "frontMatter" in value;
 
-const filterHiddenEntries = ([_, value]: [string, Meta]): boolean => 
-  isPageType(value) && value.display !== "hidden";
+// Filter out hidden pages
+const isNotHiddenPage = ([_, value]: [string, Meta]): boolean => 
+  !isPageType(value) || value.display !== "hidden";
 
 const toSitemapEntry = (pageMapEntry: PageMapItem): SitemapEntry[] => {
   if (isFolder(pageMapEntry)) {
@@ -78,7 +79,7 @@ const parsePageMapItems = (items: PageMapItem[]): SitemapEntry[] => {
   const metadata = Object.entries(items.find((item) => isMetaJSONFile(item))?.data ?? []);
 
   const siteMapEntries: (SitemapEntry | null)[] = metadata
-    .filter(filterHiddenEntries)
+    .filter(isNotHiddenPage)
     .map(([key, _]) => items.find(
       (item) => "name" in item && item.name === key
     ))
