@@ -1,7 +1,6 @@
 import { MetadataRoute } from "next";
 import {
   Folder,
-  FrontMatter,
   MdxFile,
   Meta,
   MetaJsonFile,
@@ -85,7 +84,7 @@ const parsePageMapItems = (items: PageMapItem[]): SitemapEntry[] => {
     ))
     .filter((item): item is PageMapItem => !!item)
     .flatMap(pageMapEntry => toSitemapEntry(pageMapEntry));
-2
+
   return siteMapEntries.filter((entry): entry is SitemapEntry => !!entry)
 };
 
