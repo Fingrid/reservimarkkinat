@@ -1,0 +1,10 @@
+{
+	"id": "fg-nextra-dev",
+	"name": "FG Nextra Dev",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "FG Editor for Nextra Site",
+	"author": "Fingrid",
+	"authorUrl": "https://fingrid.fi",
+	"isDesktopOnly": false
+}
