@@ -8,4 +8,4 @@ From the BSP's perspective, information process flow consists of the following:
 * Receiving bid availability reports and activation reports
 Additionally, BSPs can receive market results from transparency platforms and activation settlement results from eSett, which will not be covered in detail in this wiki.
 
-\[add diagram image here\]
+![Diagram of message exchanges between different parties in mFRR energy market](./img/mFRR_E%20diagram.png)
