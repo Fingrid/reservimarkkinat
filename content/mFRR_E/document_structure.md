@@ -92,7 +92,7 @@ This is an example message of a simple, technically linked bid being submitted.
   <subject_MarketParticipant.mRID codingScheme="A01">----------------</subject_MarketParticipant.mRID> <!--Subject i.e. responsible BSP's ID-->
   <subject_MarketParticipant.marketRole.type>A46</subject_MarketParticipant.marketRole.type> <!--Type BSP-->
   <Bid_TimeSeries>
-    <mRID>8651c1fa-8e84-4e83-a25b-59b0e17ae260</mRID>
+    <mRID>8651c1fa-8e84-4e83-a25b-59b0e17ae260</mRID> <!--Unique UUID for new bids, existing UUID for bid updates-->
     <auction.mRID>MFRR_ENERGY_ACTIVATION_MARKET</auction.mRID>
     <businessType>B74</businessType> <!--Offer-->
     <acquiring_Domain.mRID codingScheme="A01">10Y1001A1001A91G</acquiring_Domain.mRID> <!--Nordic Market Area's domain code-->
@@ -188,7 +188,7 @@ This is an example of a scheduled activation order being sent to the BSP.
   <order_MarketDocument.mRID>0aa1b007fff447ebb3c5a4a9546e6706</order_MarketDocument.mRID>
   <order_MarketDocument.revisionNumber>1</order_MarketDocument.revisionNumber>
   <TimeSeries>
-    <mRID>3ebc7225-ddef-4cf1-81e0-3d3e09c80657</mRID>
+    <mRID>3ebc7225-ddef-4cf1-81e0-3d3e09c80657</mRID> <!--ID of the bid that was ordered for activation-->
     <resourceProvider_MarketParticipant.mRID codingScheme="A01">-------------</resourceProvider_MarketParticipant.mRID>
     <businessType>A97</businessType>
     <acquiring_Domain.mRID codingScheme="A01">10Y1001A1001A91G</acquiring_Domain.mRID> <!--Nordic Market Area's domain code-->
@@ -241,7 +241,7 @@ After the 15-minute market period ends, an Availability Document is sent to the 
 | code | Various codes, depending on the value of _businessType_: <br> businessType = C40: B16 (Tender unavailable in MOL) <br> businessType = C41, C43, C44, C45 or C46: B18 (Failure), B46 (Internal congestion), B47 (Operational security constraints, or B60 (Unavailability of automated protection systems |
 | text | Free text explaining the unavailability reason |
 ### Example message
-This is an example message of an availability document sent to the BSP. Includes a bid the TSO has marked unavailable, and a bid that's unavailable due to conditional links.
+This is an example of an availability document sent to the BSP. Includes a bid the TSO has marked unavailable, and a bid that's unavailable due to conditional links.
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <BidAvailability_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-n:bidavailabilitydocument:1:1"> <!--Schema version 1.1-->
@@ -259,7 +259,7 @@ This is an example message of an availability document sent to the BSP. Includes
     <end>2025-04-08T11:45Z</end>
   </time_Period.timeInterval>
   <BidTimeSeries>
-    <mRID>9661d797-f1b4-4719-bf98-7b5483831596</mRID>
+    <mRID>9661d797-f1b4-4719-bf98-7b5483831596</mRID> <!--ID of the bid that was unavailable-->
     <bidDocument_MarketDocument.mRID>NA</bidDocument_MarketDocument.mRID>
     <bidDocument_MarketDocument.revisionNumber>1</bidDocument_MarketDocument.revisionNumber>
     <requestingParty_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</requestingParty_MarketParticipant.mRID> <!--Fingrid's ID-->
@@ -272,7 +272,7 @@ This is an example message of an availability document sent to the BSP. Includes
     </Reason>
   </BidTimeSeries>
   <BidTimeSeries>
-    <mRID>aa3c927f-3458-4b75-b9d6-9b6f079d2ff9</mRID>
+    <mRID>aa3c927f-3458-4b75-b9d6-9b6f079d2ff9</mRID> <!--ID of the bid that was unavailable-->
     <bidDocument_MarketDocument.mRID>NA</bidDocument_MarketDocument.mRID>
     <bidDocument_MarketDocument.revisionNumber>1</bidDocument_MarketDocument.revisionNumber>
     <requestingParty_MarketParticipant.mRID codingScheme="A01">-----------------</requestingParty_MarketParticipant.mRID> <!--Fingrid's ID-->
@@ -348,7 +348,7 @@ This is an example of a Reserve Allocation Result document sent to the BSP, cont
   <domain.mRID codingScheme="A01">10YFI-1--------U</domain.mRID> <!--Finland's domain code-->
   <TimeSeries>
     <mRID>f68d5e68-aaa7-4e45-91e7-1e4cb999126e</mRID>
-    <bid_Original_MarketDocument.bid_BidTimeSeries.mRID>d151a1bc-0798-4172-8746-0c1fb78e1c47</bid_Original_MarketDocument.bid_BidTimeSeries.mRID>
+    <bid_Original_MarketDocument.bid_BidTimeSeries.mRID>d151a1bc-0798-4172-8746-0c1fb78e1c47</bid_Original_MarketDocument.bid_BidTimeSeries.mRID> <!--ID of the bid that was activated-->
     <bid_Original_MarketDocument.tendering_MarketParticipant.mRID codingScheme="A01">44X-000000000172</bid_Original_MarketDocument.tendering_MarketParticipant.mRID>
     <auction.mRID>MFRR_ENERGY_ACTIVATION_MARKET</auction.mRID>
     <businessType>A97</businessType>
@@ -401,4 +401,38 @@ BSPs receive an Acknowledgement Document for every Bid Document they send to the
 | **Bid level Reason: zero or more instances per erroneous bid time series** |
 | code | 999 - Error not specifically identified. Other error codes may be used. | 
 | text | Free text field, may be populated with an error message for a bid causing the acknowledgement document to be negative. | 
-### Example message
+### Example messages
+These are two examples of an acknowledgement for bid documents: One positive and one negative.
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Acknowledgement_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-1:acknowledgementdocument:8:1"> <!--Schema version 8.1-->
+  <mRID>efbeef04-46d8-4bc6-b544-8e8df6553ab7</mRID>
+  <createdDateTime>2025-04-08T12:31:39Z</createdDateTime> <!--Time and date in UTC+0-->
+  <sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!--Fingrid's ID-->
+  <sender_MarketParticipant.marketRole.type>A34</sender_MarketParticipant.marketRole.type> <!--Type Reserve Allocator-->
+  <receiver_MarketParticipant.mRID codingScheme="A01">----------------</receiver_MarketParticipant.mRID> <!--Receiver's ID-->
+  <received_MarketDocument.mRID>7a963d8f-7547-41e5-9bbc-52976f877383</received_MarketDocument.mRID> <!--ID of the document being acknowledged-->
+  <received_MarketDocument.revisionNumber>1</received_MarketDocument.revisionNumber>
+  <received_MarketDocument.createdDateTime>2025-04-08T12:31:34Z</received_MarketDocument.createdDateTime> 
+  <Reason>
+    <code>A01</code> <!--Positive ACK-->
+  </Reason>
+</Acknowledgement_MarketDocument>
+```
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Acknowledgement_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-1:acknowledgementdocument:8:1" ArchiveFilePath="D:\VAKSI\Sanomat\EntsoeSanomia\Archive\Cim15mFRRBidAckOut\AcknowledgementDocument_44X-00000000010G_638792937139662546.xml"> <!--Schema version 8.1-->
+	<mRID>94fbd3a4-8b59-483c-b9e8-f03b366abb2a</mRID>
+	<createdDateTime>2025-04-03T16:15:13Z</createdDateTime> <!--Time and date in UTC+0-->
+	<sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!--Fingrid's ID-->
+	<sender_MarketParticipant.marketRole.type>A34</sender_MarketParticipant.marketRole.type> <!--Type Reserve Allocator-->
+	<receiver_MarketParticipant.mRID codingScheme="A01">----------------</receiver_MarketParticipant.mRID> <!--Receiver's ID-->
+	<received_MarketDocument.mRID>1aeddd9a-c522-49a2-be20-3822d7d972be</received_MarketDocument.mRID> <!--ID of the document being acknowledged-->
+	<received_MarketDocument.revisionNumber>1</received_MarketDocument.revisionNumber>
+	<received_MarketDocument.createdDateTime>2025-04-03T16:13:39Z</received_MarketDocument.createdDateTime>
+	<Reason>
+		<code>A02</code> <!--Negative ACK-->
+		<text>Message was received after deadline, GateClosure.</text> <!--Explanation-->
+	</Reason>
+</Acknowledgement_MarketDocument>
+```
