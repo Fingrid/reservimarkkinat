@@ -127,18 +127,18 @@ This is an example message of a simple, technically linked bid being submitted.
 ## Activation Document
 Every 15 minutes at QH-7.5 minutes, activation orders are sent for bids selected for scheduled activation (SA) as an *Activation_MarketDocument*. Bids can also be selected for direct activation (DA) between QH-7.5 and QH+6 minutes. A single Activation Document may contain activation orders for one or multiple bids. 
 
-The BSP receiving activation messages sends an acknowledgement document to confirm the activation order has been received. Additionally, the BSP sends an activation response message as an *Activation_MarketDocument* within two minutes *of the TSO sending the order* to confirm whether the activation orders can or cannot be fulfilled.
+The BSP receiving activation messages sends an acknowledgement document to confirm the activation order has been received. Additionally, the BSP sends an activation response message as an *Activation_MarketDocument* within two minutes *of the TSO sending the order* to confirm whether the activation orders can or cannot be fulfilled. The activation response message has a similar structure to the activation order, but some attributes are different (see table below).
 ### Table of document attributes
 | Attribute | Description |
 |-----------|-------------|
 | mRID | Unique identification of the document in UUID form |
 | revisionNumber | Always 1 |
-| Type | For the activation order: One of A39 (Scheduled activation) or A40 (Direct activation).<br>For the response: always A41 (Response) |
+| Type | **For the activation order:** One of A39 (Scheduled activation) or A40 (Direct activation).<br>**For the response:** always A41 (Response) |
 | process.processType | Always A47 (mFRR) |
 | sender_MarketParticipant.mRID | Identification of the sender party |
-| sender_MarketParticipant.marketRole.type | For the activation order: Always A04 (Reserve Allocator).<br>For the response: one of A46 (BSP) or A27 (Resource Provider) | 
+| sender_MarketParticipant.marketRole.type | **For the activation order:** Always A04 (Reserve Allocator).<br>**For the response:** one of A46 (BSP) or A27 (Resource Provider) | 
 | receiver_MarketParticipant.mRID  | Identification of the receiving party | 
-| receiver_MarketParticipant.marketRole.type | For the activation order: one of A46 (BSP) or A27 (Resource Provider).<br>For the response: Always A04 (Reserve Allocator) | 
+| receiver_MarketParticipant.marketRole.type | **For the activation order:** one of A46 (BSP) or A27 (Resource Provider).<br>**For the response:** Always A04 (Reserve Allocator) | 
 | createdDateTime  | Time of document creation in UTC+0, format: YYYY-MM-DDTHH:MM:SSZ | 
 | activation_Time_Period.timeInterval | Time period covered in the activation document, same format as above, start and end time.<br>End time varies between scheduled and direct activations; Scheduled activations last until the end of the bid's MTU, direct activations last until the end of the **next** MTU. | 
 | domain.mRID | EIC identification of the control area, for Finland 10YFI-1--------U | 
@@ -153,7 +153,7 @@ The BSP receiving activation messages sends an acknowledgement document to confi
 | connecting_Domain.mRID | EIC Identification of the bidding zone, for Finland 10YFI-1--------U |
 | measurement_Unit.name | Always MAW (Megawatt) |
 | flowDirection.direction | One of A01 (Up) or A02 (Down) | 
-| marketObjectStatus.status | In the activation order: A10 (Ordered).<br>In the response: One of A07 (Activated) or A11 (Unavailable) | 
+| marketObjectStatus.status | **In the activation order:** A10 (Ordered).<br>**In the response:** One of A07 (Activated) or A11 (Unavailable) | 
 | registeredResource.mRID | RO Code of the resource providing object | 
 | **Series_Period: Exactly one per TimeSeries** |
 | timeInterval  | Start and end times for the bid's activation period. Must be in UTC+0. Format: YYYY-MM-DDTHH:MMZ | 
@@ -162,9 +162,58 @@ The BSP receiving activation messages sends an acknowledgement document to confi
 | Position | Always 1 | 
 | quantity.quantity | Activated quantity in megawatts | 
 | **Reason: Exactly one per BidTimeSeries** |
-| code | In the activation order: One of B22 (System regulation) or B49 (Balancing).<br>In the response: Only used to provide a reason when the bid is unavailable. i.e. marketObjectStatus.status = A11. In that case, one of B59 (Unavailability of reserve providing unit) or 999 (Unspecified error). | 
-| text  | Not used in the activation order. In the response, used to provide further reasoning for unavailability. | 
+| code | **In the activation order:** One of B22 (System regulation) or B49 (Balancing).<br>**In the response:** Only used to provide a reason when the bid is unavailable. i.e. marketObjectStatus.status = A11. In that case, one of B59 (Unavailability of reserve providing unit) or 999 (Unspecified error). | 
+| text  | Not used in the activation order. <br>**In the response,** used to provide further reasoning for unavailability. | 
 ### Example message
+This is an example of a scheduled activation order being sent to the BSP.
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Activation_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-7:activationdocument:6:2"> <!--Version 6.2 of the schema-->
+  <mRID>a576a8ed-cc43-4ea9-966a-d1d8a38daded</mRID>
+  <revisionNumber>1</revisionNumber>
+  <type>A39</type> <!--ActivationDocument-->
+  <process.processType>A47</process.processType> <!--mFRR-->
+  <sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!--Fingrid's ID-->
+  <sender_MarketParticipant.marketRole.type>A04</sender_MarketParticipant.marketRole.type> <!--Type Resource Allocator-->
+  <receiver_MarketParticipant.mRID codingScheme="A01">-------------</receiver_MarketParticipant.mRID> <!--Receiver's ID-->
+  <receiver_MarketParticipant.marketRole.type>A46</receiver_MarketParticipant.marketRole.type> <!--Type BSP-->
+  <createdDateTime>2025-04-08T12:22:29Z</createdDateTime> <!--Time and date in UTC+0-->
+  <activation_Time_Period.timeInterval>
+    <start>2025-04-08T12:30Z</start> <!--Time period of the activation-->
+    <end>2025-04-08T12:45Z</end>
+  </activation_Time_Period.timeInterval>
+  <domain.mRID codingScheme="A01">10YFI-1--------U</domain.mRID> <!--Finland's domain code-->
+  <subject_MarketParticipant.mRID codingScheme="A01">-------------</subject_MarketParticipant.mRID> <!--Subject i.e. responsible BSP's ID-->
+  <subject_MarketParticipant.marketRole.type>A46</subject_MarketParticipant.marketRole.type> <!--Type BSP-->
+  <order_MarketDocument.mRID>0aa1b007fff447ebb3c5a4a9546e6706</order_MarketDocument.mRID>
+  <order_MarketDocument.revisionNumber>1</order_MarketDocument.revisionNumber>
+  <TimeSeries>
+    <mRID>3ebc7225-ddef-4cf1-81e0-3d3e09c80657</mRID>
+    <resourceProvider_MarketParticipant.mRID codingScheme="A01">-------------</resourceProvider_MarketParticipant.mRID>
+    <businessType>A97</businessType>
+    <acquiring_Domain.mRID codingScheme="A01">10Y1001A1001A91G</acquiring_Domain.mRID> <!--Nordic Market Area's domain code-->
+    <connecting_Domain.mRID codingScheme="A01">10YFI-1--------U</connecting_Domain.mRID> <!--Finland's domain code-->
+    <measurement_Unit.name>MAW</measurement_Unit.name>
+    <flowDirection.direction>A02</flowDirection.direction> <!--Down regulation bid-->
+    <marketObjectStatus.status>A10</marketObjectStatus.status> <!--Ordered-->
+    <registeredResource.mRID codingScheme="A01">RXXXXX</registeredResource.mRID> <!--Code of the reserve object (RO)-->
+    <Period>
+      <timeInterval>
+        <start>2025-04-08T12:30Z</start> <!--Time period of the activation-->
+        <end>2025-04-08T12:45Z</end>
+      </timeInterval>
+      <resolution>PT15M</resolution> <!--Resolution of the activation, always 15 minutes for scheduled activation (SA)-->
+      <Point>
+        <position>1</position>
+        <quantity>1</quantity> <!--Activated quantity, may differ from the offered quantity if the bid is divisible-->
+      </Point>
+    </Period>
+    <Reason>
+      <code>B49</code> <!--Balancing-->
+    </Reason>
+  </TimeSeries>
+</Activation_MarketDocument>
+```
 ## Availability Document
 After the 15-minute market period ends, an Availability Document is sent to the BSPs containing the bids that had been unavailable in the MTU, along with reasons why they were set as unavailable. Additionally, if a BSP causes an invalid conditional link by cancelling a linked bid, they will be immediately notified of such unavailabilities with an Availability Document.
 ### Table of document attributes
