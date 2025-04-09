@@ -71,6 +71,59 @@ The bid time series contains attributes related to individual bids. A Bid docume
 
 Types A71 and A72 are not used in Finland.
 ### Example message
+This is an example message of a simple, technically linked bid being submitted.
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<ReserveBid_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-7:reservebiddocument:7:4"> <!--ReserveBidDocument schema version 7.4-->
+  <mRID>32e6eff4-9262-4f6b-a954-5f9d08a37a9b</mRID>
+  <revisionNumber>1</revisionNumber>
+  <type>A37</type> <!--ReserveBidDocument-->
+  <process.processType>A47</process.processType>
+  <sender_MarketParticipant.mRID codingScheme="A01">-----------------</sender_MarketParticipant.mRID> <!--Sender's ID-->
+  <sender_MarketParticipant.marketRole.type>A46</sender_MarketParticipant.marketRole.type> <!--Type BSP-->
+  <receiver_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</receiver_MarketParticipant.mRID> <!--Fingrid'S ID-->
+  <receiver_MarketParticipant.marketRole.type>A34</receiver_MarketParticipant.marketRole.type> <!--Type TSO-->
+  <createdDateTime>2025-04-08T12:31:00Z</createdDateTime> <!--Time and date in UTC+0-->
+  <reserveBid_Period.timeInterval>
+    <start>2025-04-08T14:00Z</start> <!--Time period of the document, all bids must fall within this period-->
+    <end>2025-04-08T18:00Z</end>
+  </reserveBid_Period.timeInterval>
+  <domain.mRID codingScheme="A01">10YFI-1--------U</domain.mRID> <!--Finland's domain code-->
+  <subject_MarketParticipant.mRID codingScheme="A01">----------------</subject_MarketParticipant.mRID> <!--Subject i.e. responsible BSP's ID-->
+  <subject_MarketParticipant.marketRole.type>A46</subject_MarketParticipant.marketRole.type> <!--Type BSP-->
+  <Bid_TimeSeries>
+    <mRID>8651c1fa-8e84-4e83-a25b-59b0e17ae260</mRID>
+    <auction.mRID>MFRR_ENERGY_ACTIVATION_MARKET</auction.mRID>
+    <businessType>B74</businessType> <!--Offer-->
+    <acquiring_Domain.mRID codingScheme="A01">10Y1001A1001A91G</acquiring_Domain.mRID> <!--Nordic Market Area's domain code-->
+    <connecting_Domain.mRID codingScheme="A01">10YFI-1--------U</connecting_Domain.mRID> <!--Finland's domain code-->
+    <quantity_Measurement_Unit.name>MAW</quantity_Measurement_Unit.name>
+    <currency_Unit.name>EUR</currency_Unit.name>
+    <divisible>A01</divisible> <!--Divisible bid-->
+    <linkedBidsIdentification>8dfaeebd-ccf2-409a-b172-cf0e24b0b531</linkedBidsIdentification> <!--This bid is technically linked. Identification must match between linked bid time series and pass validation rules-->
+    <status>
+      <value>A06</value> <!--Available-->
+    </status>
+    <registeredResource.mRID codingScheme="NFI">RXXXXXX</registeredResource.mRID> <!--Code of the reserve object (RO)-->
+    <flowDirection.direction>A02</flowDirection.direction> <!--Down regulation bid-->
+    <energyPrice_Measurement_Unit.name>MWH</energyPrice_Measurement_Unit.name>
+    <standard_MarketProduct.marketProductType>A07</standard_MarketProduct.marketProductType> <!--Available for both scheduled and direct activation (SA/DA)-->
+    <Period>
+      <timeInterval>
+        <start>2025-04-08T14:00Z</start> <!--Time period of the bid, must fall within document limits-->
+        <end>2025-04-08T14:15Z</end>
+      </timeInterval>
+      <resolution>PT15M</resolution>
+      <Point>
+        <position>1</position>
+        <quantity.quantity>12</quantity.quantity>
+        <minimum_Quantity.quantity>0</minimum_Quantity.quantity>
+        <energy_Price.amount>-12</energy_Price.amount>
+      </Point>
+    </Period>
+  </Bid_TimeSeries>
+</ReserveBid_MarketDocument>
+```
 ## Activation Document
 Every 15 minutes at QH-7.5 minutes, activation orders are sent for bids selected for scheduled activation (SA) as an *Activation_MarketDocument*. Bids can also be selected for direct activation (DA) between QH-7.5 and QH+6 minutes. A single Activation Document may contain activation orders for one or multiple bids. 
 
