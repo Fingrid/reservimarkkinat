@@ -328,6 +328,57 @@ After each imbalance settlement period (ISP), BSPs receive a report of every bid
 | code | Populated with either reason codes for activation: B22 (System regulation) or B49 (Balancing); or activation type codes: Z58 (Scheduled activation) or Z59 (Direct activation) | 
 | text | May be used for additional explanations. | 
 ### Example message
+This is an example of a Reserve Allocation Result document sent to the BSP, containing one bid that's been subjected to scheduled activation.
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ReserveAllocationResult_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-7:reserveallocationresultdocument:6:4"> <!--Schema version 6.4-->
+  <mRID>867ab704-2885-43e3-8be5-22953409007d</mRID>
+  <revisionNumber>1</revisionNumber>
+  <type>A38</type> <!--Reserve Allocation Result Document-->
+  <process.processType>A47</process.processType> <!--mFRR-->
+  <sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!--Fingrid's ID-->
+  <sender_MarketParticipant.marketRole.type>A04</sender_MarketParticipant.marketRole.type> <!--Type TSO-->
+  <receiver_MarketParticipant.mRID codingScheme="A01">----------------</receiver_MarketParticipant.mRID> <!--Receiver's ID-->
+  <receiver_MarketParticipant.marketRole.type>A46</receiver_MarketParticipant.marketRole.type> <!--Type BSP-->
+  <createdDateTime>2025-04-08T12:26:17Z</createdDateTime> <!--Time and date in UTC+0-->
+  <reserveBid_Period.timeInterval>
+    <start>2025-04-08T11:30Z</start> <!--Time period of the document, applies to the bids within-->
+    <end>2025-04-08T11:45Z</end>
+  </reserveBid_Period.timeInterval>
+  <domain.mRID codingScheme="A01">10YFI-1--------U</domain.mRID> <!--Finland's domain code-->
+  <TimeSeries>
+    <mRID>f68d5e68-aaa7-4e45-91e7-1e4cb999126e</mRID>
+    <bid_Original_MarketDocument.bid_BidTimeSeries.mRID>d151a1bc-0798-4172-8746-0c1fb78e1c47</bid_Original_MarketDocument.bid_BidTimeSeries.mRID>
+    <bid_Original_MarketDocument.tendering_MarketParticipant.mRID codingScheme="A01">44X-000000000172</bid_Original_MarketDocument.tendering_MarketParticipant.mRID>
+    <auction.mRID>MFRR_ENERGY_ACTIVATION_MARKET</auction.mRID>
+    <businessType>A97</businessType>
+    <acquiring_Domain.mRID codingScheme="A01">10Y1001A1001A91G</acquiring_Domain.mRID> <!--Nordic Market Area's domain code-->
+    <connecting_Domain.mRID codingScheme="A01">10YFI-1--------U</connecting_Domain.mRID> <!--Finland's domain code-->
+    <quantity_Measurement_Unit.name>MAW</quantity_Measurement_Unit.name>
+    <currency_Unit.name>EUR</currency_Unit.name>
+    <energy_Measurement_Unit.name>MWH</energy_Measurement_Unit.name>
+    <flowDirection.direction>A02</flowDirection.direction> <!--Down regulation bid-->
+    <Period>
+      <timeInterval>
+        <start>2025-04-08T11:30Z</start> <!--Time period of the activation-->
+        <end>2025-04-08T11:45Z</end>
+      </timeInterval>
+      <resolution>PT15M</resolution> <!--Resolution of the activation, always 15 minutes for scheduled activation (SA)-->
+      <Point>
+        <position>1</position>
+        <quantity>5</quantity>
+        <energy_Price.amount>-4.5</energy_Price.amount>
+      </Point>
+    </Period>
+    <Reason>
+      <code>B49</code> <!--Balancing-->
+    </Reason>
+    <Reason>
+      <code>Z58</code> <!--Scheduled activation (SA)-->
+    </Reason>
+  </TimeSeries>
+</ReserveAllocationResult_MarketDocument>
+```
 ## Acknowledgement Document
 BSPs receive an Acknowledgement Document for every Bid Document they send to the TSO. Additionally, BSPs send an Acknowledgement Document of their own in response to activation orders.
 ### Table of document attributes
