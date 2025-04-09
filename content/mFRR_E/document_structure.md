@@ -1,5 +1,5 @@
 # Document structure
-In this page you can find information about the structure and attributes of various documents related to the market. The most important message types related to the mFRR energy market are the bid document, activation document, bid availability document, reserve allocation result document, and the acknowledgement document.
+In this page you can find information about the structure and attributes of various documents related to the market. The most important message types related to the mFRR energy market are the bid document, activation document, bid availability document, reserve allocation result document, and the acknowledgement document. Messages are sent to the TSO's market platform via the Energy Communication Platform (ECP).
 ## General document rules
 * Dates and times should be in UTC, with the format YYYY-MM-DDThh:mm:ssZ. The last ‘Z’ stands for Zero and indicates UTC+0. The time period the document covers, however, should be in the same day in CET/CEST. This means the day is from 23:00 to 23:00 during winter time, and 22:00 to 22:00 during summer time.
 * When changing from winter time to summer time, the document covers 23 hours (from 23:00 to 22:00). When changing from summer time to winter time, the document covers 25 hours (from 22:00 to 23:00).
@@ -68,8 +68,9 @@ The bid time series contains attributes related to individual bids. A Bid docume
 | A68 | Unavailable (status = A66) | Available if linked bid not activated |
 | A69 | Unavailable (status = A66) | Available if linked bid subjected to SA |
 | A70 | Unavailable (status = A66) | Available if linked bid subjected to DA |
-
-Types A71 and A72 are not used in Finland.
+> [!NOTE]
+> 
+> Conditional links A71 and A72 are not used in Finland.
 ### Example message
 This is an example message of a simple, technically linked bid being submitted.
 ```xml
@@ -128,6 +129,9 @@ This is an example message of a simple, technically linked bid being submitted.
 Every 15 minutes at QH-7.5 minutes, activation orders are sent for bids selected for scheduled activation (SA) as an *Activation_MarketDocument*. Bids can also be selected for direct activation (DA) between QH-7.5 and QH+6 minutes. A single Activation Document may contain activation orders for one or multiple bids. 
 
 The BSP receiving activation messages sends an acknowledgement document to confirm the activation order has been received. Additionally, the BSP sends an activation response message as an *Activation_MarketDocument* within two minutes *of the TSO sending the order* to confirm whether the activation orders can or cannot be fulfilled. The activation response message has a similar structure to the activation order, but some attributes are different (see table below).
+> [!IMPORTANT]
+> 
+> BSPs are always accountable for activations after receiving the order, no matter if the response is positive or negative, or if any response is sent at all.
 ### Table of document attributes
 | Attribute | Description |
 |-----------|-------------|
@@ -380,7 +384,10 @@ This is an example of a Reserve Allocation Result document sent to the BSP, cont
 </ReserveAllocationResult_MarketDocument>
 ```
 ## Acknowledgement Document
-BSPs receive an Acknowledgement Document for every Bid Document they send to the TSO. Additionally, BSPs send an Acknowledgement Document of their own in response to activation orders.
+For every message detailed in this page, an acknowledgement document should be generated and sent back by the receiving party to indicate that the message has been successfully received. The document can be either positive (code A01) or negative (A02).
+> [!NOTE]
+> 
+> Activation acknowledgement and response documents are different messages that must be sent separately.
 ### Table of document attributes
 | Attribute | Description |
 |-----------|-------------|
