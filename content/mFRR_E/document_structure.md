@@ -60,10 +60,10 @@ The bid time series contains attributes related to individual bids. A Bid docume
 |-----------|-------------|-------------|
 | A55 | Available (status = A65) | Not available if linked bid activated |
 | A56 | Available (status = A65) | Not available if linked bid not activated |
-| A57 | Available (status = A65) | Not available if linked bid subjected to scheduled activation (SA) |
-| A58 | Available (status = A65) | Not available if linked bid subjected to direct activation (DA) |
-| A59 | Available (status = A65) | Not available for DA if linked bid subjected to DA |
-| A60 | Available (status = A65) | Not available for DA if linked bid subjected to SA |
+| A57 | Available (status = A65) | Not available for DA if linked bid subjected to direct activation (DA) |
+| A58 | Available (status = A65) | Not available for DA if linked bid subjected to scheduled activation (SA) |
+| A59 | Available (status = A65) | Not available if linked bid subjected to SA |
+| A60 | Available (status = A65) | Not available if linked bid subjected to DA |
 | A67 | Unavailable (status = A66) | Available if linked bid activated |
 | A68 | Unavailable (status = A66) | Available if linked bid not activated |
 | A69 | Unavailable (status = A66) | Available if linked bid subjected to SA |
