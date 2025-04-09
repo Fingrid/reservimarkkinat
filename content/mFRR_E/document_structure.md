@@ -241,6 +241,51 @@ After the 15-minute market period ends, an Availability Document is sent to the 
 | code | Various codes, depending on the value of _businessType_: <br> businessType = C40: B16 (Tender unavailable in MOL) <br> businessType = C41, C43, C44, C45 or C46: B18 (Failure), B46 (Internal congestion), B47 (Operational security constraints, or B60 (Unavailability of automated protection systems |
 | text | Free text explaining the unavailability reason |
 ### Example message
+This is an example message of an availability document sent to the BSP. Includes a bid the TSO has marked unavailable, and a bid that's unavailable due to conditional links.
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<BidAvailability_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-n:bidavailabilitydocument:1:1"> <!--Schema version 1.1-->
+  <mRID>2e37e4ad-5467-40b8-bf51-0159f23a5ea9</mRID>
+  <revisionNumber>1</revisionNumber>
+  <type>B45</type> <!--Availability document-->
+  <process.processType>A47</process.processType> <!--mFRR-->
+  <sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!--Fingrid's ID-->
+  <sender_MarketParticipant.marketRole.type>A04</sender_MarketParticipant.marketRole.type> <!--Type TSO-->
+  <receiver_MarketParticipant.mRID codingScheme="A01">----------------</receiver_MarketParticipant.mRID> <!--BSP's ID-->
+  <receiver_MarketParticipant.marketRole.type>A46</receiver_MarketParticipant.marketRole.type> <!--Type BSP-->
+  <createdDateTime>2025-04-08T11:45:09Z</createdDateTime> <!--Time and date in UTC+0-->
+  <time_Period.timeInterval>
+    <start>2025-04-08T11:30Z</start> <!--Time period of the document, applies to the bids within-->
+    <end>2025-04-08T11:45Z</end>
+  </time_Period.timeInterval>
+  <BidTimeSeries>
+    <mRID>9661d797-f1b4-4719-bf98-7b5483831596</mRID>
+    <bidDocument_MarketDocument.mRID>NA</bidDocument_MarketDocument.mRID>
+    <bidDocument_MarketDocument.revisionNumber>1</bidDocument_MarketDocument.revisionNumber>
+    <requestingParty_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</requestingParty_MarketParticipant.mRID> <!--Fingrid's ID-->
+    <requestingParty_MarketParticipant.marketRole.type>A49</requestingParty_MarketParticipant.marketRole.type> <!--Type TSO-->
+    <businessType>C41</businessType> <!--Thermal limit-->
+    <domain.mRID codingScheme="A01">10YFI-1--------U</domain.mRID> <!--Finland's domain code-->
+    <Reason>
+      <code>B46</code> <!--Internal congestion-->
+      <text>TSOs decision</text> <!--TSO set the bid unavailable-->
+    </Reason>
+  </BidTimeSeries>
+  <BidTimeSeries>
+    <mRID>aa3c927f-3458-4b75-b9d6-9b6f079d2ff9</mRID>
+    <bidDocument_MarketDocument.mRID>NA</bidDocument_MarketDocument.mRID>
+    <bidDocument_MarketDocument.revisionNumber>1</bidDocument_MarketDocument.revisionNumber>
+    <requestingParty_MarketParticipant.mRID codingScheme="A01">-----------------</requestingParty_MarketParticipant.mRID> <!--Fingrid's ID-->
+    <requestingParty_MarketParticipant.marketRole.type>A46</requestingParty_MarketParticipant.marketRole.type> <!--Type TSO-->
+    <businessType>C40</businessType> <!--Conditional bid-->
+    <domain.mRID codingScheme="A01">10YFI-1--------U</domain.mRID> <!--Finland's domain code-->
+    <Reason>
+      <code>B16</code> <!--Tender unavailable in MOL-->
+      <text>Due to conditional bid</text> <!--Conditional links set the bid unavailable-->
+    </Reason>
+  </BidTimeSeries>
+</BidAvailability_MarketDocument>
+```
 ## Reserve Allocation Result Document
 After each imbalance settlement period (ISP), BSPs receive a report of every bid activated in the period as a *ReserveAllocationResult_MarketDocument.* The document contains which bids had been activated from the BSP, their activation volumes, time periods and prices, along with information on activation reason and type.
 ### Table of document attributes
