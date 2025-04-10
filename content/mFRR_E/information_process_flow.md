@@ -9,6 +9,10 @@ From the BSP's perspective, information process flow consists of the following:
 
 Additionally, BSPs can receive market results from transparency platforms and activation settlement results from eSett, which will not be covered in detail in this wiki.
 
+The diagram below represents the message exchanges between the BSP, TSO and the common Nordic platform.
 ![Sequence diagram of mFRR message exchanges between BSP and TSO](./img/SequenceDiagram_mFRR_E.png)
+> [!NOTE]
+> 
+> Every message requires an acknowledgement document to be sent back to the sender. See the [Document Structure](./document_structure.md) page for more details.
 
 BSPs send bids to the VAKSI platform via ECP/EDX, and from there VAKSI will handle forwarding messages to the Nordic CMOL (and MARI when it is accessed). As a fallback solution, BSPs can also use the VAKSI web UI to send bids to the system, however this has limitations such as not being able to leave conditionally linked bids.
