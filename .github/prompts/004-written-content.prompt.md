@@ -2,7 +2,9 @@
 description: Written Content
 globs: content/*.{md,mdx,ts}
 ---
+
 # Written Content
+
 Do no make changes to content unless specifically instructed to do so.
 
 <rule>
@@ -17,15 +19,16 @@ filters:
     pattern: "file_create|file_modify"
 
 actions:
-  - type: requirement
-    message: |
-      No modifications to content unless specifically instructed to do so.
 
-      1. Do not create or modify content unless specifically asked
-      2. Content changes can be suggested in chat, but not directly written to file
+- type: requirement
+  message: |
+  No modifications to content unless specifically instructed to do so.
+
+  1. Do not create or modify content unless specifically asked
+  2. Content changes can be suggested in chat, but not directly written to file
 
 metadata:
-  priority: critical
-  version: 1.0
-  categories: ["core", "content"]
+priority: critical
+version: 1.0
+categories: ["core", "content"]
 </rule>

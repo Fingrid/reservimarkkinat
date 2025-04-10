@@ -52,8 +52,6 @@
   font-style: italic;
 }
 
-
-
 @theme {
   --Font-Family: var(--font-lab-grotesque-web);
 
@@ -63,10 +61,10 @@
   --color-background-level-2: #f3f6f8;
   --color-background-level-3: #e9eef2;
 
-  --color-separator: #D5DDE3;
+  --color-separator: #d5dde3;
 
-  --color-primary-action: #D5121E;
-  --color-primary-hover: ##6D838F;
+  --color-primary-action: #d5121e;
+  --color-primary-hover: ##6d838f;
   --color-secondary-action: #3e5660;
 
   --color-disabled: #b3b3b3;
@@ -74,7 +72,7 @@
   --color-breadcrumb: #7d8699;
 
   /* Callout colors */
-  --color-info-background: #F2F2F2;
+  --color-info-background: #f2f2f2;
   --color-info-text: #4d4d4d;
 
   --color-tip-background: #e8f8fc;
@@ -86,14 +84,14 @@
   --color-warning-background: #fef5e6;
   --color-warning-text: #634003;
 
-  --color-error-background: #FFEBE5;
+  --color-error-background: #ffebe5;
   --color-error-text: #992400;
 
   /* Dark mode vars */
   --color-dark-text: #ffffff;
 
   --color-dark-background-level-1: #141517;
-  --color-dark-background-level-2: #1F2024;
+  --color-dark-background-level-2: #1f2024;
   --color-dark-background-level-3: #28292e;
 
   --color-dark-separator: #45464f;
@@ -109,10 +107,10 @@
   --color-dark-info-background: #333333;
   --color-dark-info-text: #ffffff;
 
-  --color-dark-tip-background: #0A4A5C;
+  --color-dark-tip-background: #0a4a5c;
   --color-dark-tip-text: #ffffff;
 
-  --color-dark-important-background: #0A4A5C;
+  --color-dark-important-background: #0a4a5c;
   --color-dark-important-text: #ffffff;
 
   --color-dark-warning-background: #956004;
@@ -121,9 +119,8 @@
   --color-dark-error-background: #661800;
   --color-dark-error-text: #ffffff;
 
-  --color-dark-footer-top: #28292E;
-  --color-dark-footer-bottom: #05252E
-  
+  --color-dark-footer-top: #28292e;
+  --color-dark-footer-bottom: #05252e;
 }
 
 :root {
@@ -165,7 +162,7 @@
     font-size: 2rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 2rem
+    line-height: 2rem;
   }
 
   h3 {
@@ -257,7 +254,7 @@
     div ul li {
       @apply text-[var(--color-text)];
       @apply dark:text-[var(--color-dark-text)];
-  
+
       &:has(.x\:text-primary-600) {
         a {
           @apply text-[var(--color-primary-action)];
@@ -322,12 +319,12 @@
       border-radius: 0;
       margin-top: 0;
       padding: 0;
-      
+
       font-size: 1rem;
       font-style: normal;
       font-weight: bold;
       line-height: 1.625rem;
-      
+
       @apply bg-[var(--color-background-level-2)];
       @apply border-b-[1px] border-b-[var(--color-separator)];
       @apply border-l-[3px] border-l-[transparent];
@@ -410,7 +407,6 @@
       }
 
       &:not(:empty):not(:has(*)) {
-
         margin-top: 1rem;
         padding-top: 0rem;
         padding-bottom: 0.3rem;
@@ -421,10 +417,10 @@
         font-style: normal;
         font-weight: 700;
         line-height: 1.2rem;
-
       }
 
-      a, button {
+      a,
+      button {
         padding-top: 1rem;
         padding-bottom: 1rem;
       }
@@ -483,8 +479,8 @@
     position: relative;
     margin: 1rem;
 
-
-    a, button {
+    a,
+    button {
       @apply bg-transparent;
 
       font-family: var(--Font-Family, "Lab Grotesque Web");

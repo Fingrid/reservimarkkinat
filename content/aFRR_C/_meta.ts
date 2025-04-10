@@ -1,3 +1,3 @@
 export default {
-    business_context: 'Business context',
-  }
+  business_context: "Business context",
+};

@@ -3,15 +3,16 @@
 import { ApiReferenceReact } from "@scalar/api-reference-react";
 import "@scalar/api-reference-react/style.css";
 
-const isProd = process.env.NODE_ENV === 'production';
-const assetPrefix = isProd ? '/reservimarkkinat' : '';
+const isProd = process.env.NODE_ENV === "production";
+const assetPrefix = isProd ? "/reservimarkkinat" : "";
 
 type Props = {
-    spec?: string;
+  spec?: string;
 };
 
-const ScalarUI = ({spec}: Props) => {
-    return <ApiReferenceReact
+const ScalarUI = ({ spec }: Props) => {
+  return (
+    <ApiReferenceReact
       configuration={{
         hideTestRequestButton: true,
         hideDownloadButton: true,
@@ -19,7 +20,8 @@ const ScalarUI = ({spec}: Props) => {
         //layout: "classic",
         url: `${assetPrefix}/${spec}`,
       }}
-    />;
+    />
+  );
 };
 
 export { ScalarUI };

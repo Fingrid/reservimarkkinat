@@ -2,7 +2,7 @@ name: publish-to-github-pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
@@ -28,11 +28,11 @@ jobs:
           cache: yarn
       - name: Setup .yarnrc.yml
         run: |
-            yarn config set npmScopes.fingrid.npmRegistryServer "https://pkgs.dev.azure.com/fingrid/Ohjelmistokehitys/_packaging/fingrid-npm/npm/registry/"
-            yarn config set npmScopes.fingrid.npmAlwaysAuth true
-            yarn config set npmScopes.fingrid.npmAuthToken $NPM_AUTH_TOKEN
+          yarn config set npmScopes.fingrid.npmRegistryServer "https://pkgs.dev.azure.com/fingrid/Ohjelmistokehitys/_packaging/fingrid-npm/npm/registry/"
+          yarn config set npmScopes.fingrid.npmAlwaysAuth true
+          yarn config set npmScopes.fingrid.npmAuthToken $NPM_AUTH_TOKEN
         env:
-            NPM_AUTH_TOKEN: ${{ secrets.ADO_PAT }}
+          NPM_AUTH_TOKEN: ${{ secrets.ADO_PAT }}
       - name: Setup Pages
         uses: actions/configure-pages@v5
         #with: // Still fails - this time due to type error

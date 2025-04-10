@@ -1,0 +1,4 @@
+.obsidian
+public/*
+content/**/*.md
+content/**/*.mdx

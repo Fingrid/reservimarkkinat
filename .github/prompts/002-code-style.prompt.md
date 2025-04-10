@@ -2,7 +2,9 @@
 description: Code Style Guidelines for Reservimarkkinat Portal
 globs: "**/*.{js,ts,tsx,jsx}"
 ---
+
 # Code Style Guidelines
+
 Standards for maintaining consistent code style across the Reservimarkkinat Portal project.
 
 <rule>
@@ -57,28 +59,26 @@ actions:
          - Vitest is used to test the application
 
 examples:
-  - input: |
-      // Bad
-      export default function data() {
-        const [stuff, setStuff] = useState<any>()
-        return <div>{stuff}</div>
-      }
-      
-      // Good
-      interface DataProps {
-        initialData?: string
-      }
-      
-      export default function DataDisplay({ initialData }: DataProps) {
-        const { data, isLoading } = useData(initialData)
-        
-        if (isLoading) return <LoadingSpinner />
-        
-        return <DisplayComponent data={data} />
-      }
+
+- input: |
+  // Bad
+  export default function data() {
+  const [stuff, setStuff] = useState<any>()
+  return <div>{stuff}</div>
+  }
+  // Good
+  interface DataProps {
+  initialData?: string
+  }
+  export default function DataDisplay({ initialData }: DataProps) {
+  const { data, isLoading } = useData(initialData)
+      if (isLoading) return <LoadingSpinner />
+
+      return <DisplayComponent data={data} />
+  }
 
 metadata:
-  priority: high
-  version: 1.0
-  categories: ["code-quality", "typescript", "next.js", "react"]
+priority: high
+version: 1.0
+categories: ["code-quality", "typescript", "next.js", "react"]
 </rule>

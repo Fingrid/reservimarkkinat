@@ -1,11 +1,5 @@
 import { MetadataRoute } from "next";
-import {
-  Folder,
-  MdxFile,
-  Meta,
-  MetaJsonFile,
-  PageMapItem,
-} from "nextra";
+import { Folder, MdxFile, Meta, MetaJsonFile, PageMapItem } from "nextra";
 import { getPageMap } from "nextra/page-map";
 import { URL } from "url";
 
@@ -57,7 +51,7 @@ const isMDXFile = (value: unknown): value is MdxFile =>
   "frontMatter" in value;
 
 // Filter out hidden pages
-const isNotHiddenPage = ([_, value]: [string, Meta]): boolean => 
+const isNotHiddenPage = ([, value]: [string, Meta]): boolean =>
   !isPageType(value) || value.display !== "hidden";
 
 const toSitemapEntry = (pageMapEntry: PageMapItem): SitemapEntry[] => {
@@ -66,27 +60,31 @@ const toSitemapEntry = (pageMapEntry: PageMapItem): SitemapEntry[] => {
   } else if (isMDXFile(pageMapEntry)) {
     const { frontMatter, route } = pageMapEntry;
 
-    return [{
-      url: route,
-      lastModified: frontMatter?.timestamp ? new Date(frontMatter.timestamp).toISOString() : new Date().toISOString(),
-    }];
+    return [
+      {
+        url: route,
+        lastModified: frontMatter?.timestamp
+          ? new Date(frontMatter.timestamp).toISOString()
+          : new Date().toISOString(),
+      },
+    ];
   }
 
   return [];
-}
+};
 
 const parsePageMapItems = (items: PageMapItem[]): SitemapEntry[] => {
-  const metadata = Object.entries(items.find((item) => isMetaJSONFile(item))?.data ?? []);
+  const metadata = Object.entries(
+    items.find((item) => isMetaJSONFile(item))?.data ?? [],
+  );
 
   const siteMapEntries: (SitemapEntry | null)[] = metadata
     .filter(isNotHiddenPage)
-    .map(([key, _]) => items.find(
-      (item) => "name" in item && item.name === key
-    ))
+    .map(([key]) => items.find((item) => "name" in item && item.name === key))
     .filter((item): item is PageMapItem => !!item)
-    .flatMap(pageMapEntry => toSitemapEntry(pageMapEntry));
+    .flatMap((pageMapEntry) => toSitemapEntry(pageMapEntry));
 
-  return siteMapEntries.filter((entry): entry is SitemapEntry => !!entry)
+  return siteMapEntries.filter((entry): entry is SitemapEntry => !!entry);
 };
 
 const sitemap = async (): Promise<MetadataRoute.Sitemap> => {

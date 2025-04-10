@@ -32,14 +32,14 @@ const Callout = ({ type, children }: PropsWithChildren<Props>) => {
     type === "note"
       ? "#0070f3"
       : type === "tip"
-      ? "#47b881"
-      : type === "important"
-      ? "#f5a623"
-      : type === "warning"
-      ? "#f5a623"
-      : type === "caution"
-      ? "#f5a623"
-      : "#333";
+        ? "#47b881"
+        : type === "important"
+          ? "#f5a623"
+          : type === "warning"
+            ? "#f5a623"
+            : type === "caution"
+              ? "#f5a623"
+              : "#333";
 
   return (
     <div
@@ -52,7 +52,6 @@ const Callout = ({ type, children }: PropsWithChildren<Props>) => {
       }}
     >
       &gt;&gt; {children}
-
       <pre>{JSON.stringify(children)}</pre>
     </div>
   );
