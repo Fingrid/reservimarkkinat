@@ -1,6 +1,6 @@
 "use client";
 
-import { labGrotesqueWeb } from "@/fonts";
+import { labGrotesqueWeb } from "@/_fonts/fonts";
 import cn from "clsx";
 import type { FC, ReactElement, ReactNode } from "react";
 import {

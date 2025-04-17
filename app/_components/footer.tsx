@@ -8,7 +8,7 @@ import {
   Rss,
   Twitter,
 } from "@fingrid/design-system-components";
-import { labGrotesqueWeb } from "@/fonts";
+import { labGrotesqueWeb } from "@/_fonts/fonts";
 import type { FC } from "react";
 
 const footerContent = {

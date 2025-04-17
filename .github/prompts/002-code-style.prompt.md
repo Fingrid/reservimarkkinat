@@ -72,9 +72,10 @@ examples:
   }
   export default function DataDisplay({ initialData }: DataProps) {
   const { data, isLoading } = useData(initialData)
-      if (isLoading) return <LoadingSpinner />
+  if (isLoading) return <LoadingSpinner />
 
       return <DisplayComponent data={data} />
+
   }
 
 metadata:

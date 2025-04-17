@@ -4,31 +4,31 @@ export const labGrotesqueWeb = localFont({
   variable: "--font-lab-grotesque-web",
   src: [
     {
-      path: "./fonts/LabGrotesqueWeb-Bold.woff",
+      path: "./LabGrotesqueWeb-Bold.woff",
       style: "normal",
       weight: "bold",
     },
     {
-      path: "./fonts/LabGrotesqueWeb-Regular.woff",
+      path: "./LabGrotesqueWeb-Regular.woff",
       weight: "400 600",
     },
     {
-      path: "./fonts/LabGrotesqueWeb-Light.woff",
+      path: "./LabGrotesqueWeb-Light.woff",
       style: "normal",
       weight: "100 300",
     },
     {
-      path: "./fonts/LabGrotesqueWeb-BoldItalic.woff",
+      path: "./LabGrotesqueWeb-BoldItalic.woff",
       style: "italic",
       weight: "bold",
     },
     {
-      path: "./fonts/LabGrotesqueWeb-Italic.woff",
+      path: "./LabGrotesqueWeb-Italic.woff",
       weight: "400 600",
       style: "italic",
     },
     {
-      path: "./fonts/LabGrotesqueWeb-LightItalic.woff",
+      path: "./LabGrotesqueWeb-LightItalic.woff",
       style: "italic",
       weight: "100 300",
     },
