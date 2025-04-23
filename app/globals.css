@@ -591,4 +591,45 @@
       background-color: transparent;
     }
   }
+
+  .shiki {
+    code {
+      counter-reset: step;
+      counter-increment: step 0;
+
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.5rem;
+    }
+
+    code span.line {
+      &:before {
+        @apply text-[var(--color-primary-hover)];
+        @apply dark:text-[var(--color-dark-primary-hover)];
+
+        content: counter(step);
+        counter-increment: step;
+        width: 2rem;
+        margin-right: 1.5rem;
+        display: inline-block;
+        text-align: right;
+      }
+
+      &.dark-error-line {
+        @apply bg-[var(--color-dark-error-background)];
+
+        &:before {
+          @apply text-[var(--color-dark-error-text)];    
+        }
+      }
+      &.error-line {
+        @apply bg-[var(--color-error-background)];
+
+        &:before {
+          @apply text-[var(--color-error-text)];  
+        }
+      }
+    }
+  }
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import cn from "clsx";
 import { useValidatorStore } from "@/_store/validatorStore";
 
 const classes = {
@@ -22,23 +21,18 @@ const classes = {
 export function OutputSection() {
   const { validationResults, isValidating } = useValidatorStore();
 
-  // Format errors for display
-  const formatErrorsOutput = () => {
-    if (!validationResults?.errors || validationResults.errors.length === 0) {
-      return "";
-    }
-
-    return validationResults.errors
-      .map((error) => `Line ${error.line}: ${error.message}`)
-      .join("\n");
-  };
+  if(!validationResults && !isValidating) {
+    return <></>;
+  }
 
   return (
     <div id="output-section" className={classes.container}>
       <div className={classes.wrapper}>
-        <label htmlFor="xml-output" className={classes.label}>
-          Validation Results
-        </label>
+        <div className="flex justify-between items-center">
+          <label htmlFor="xml-output" className={classes.label}>
+            Validation Results
+          </label>
+        </div>
 
         {validationResults && (
           <div
@@ -53,10 +47,10 @@ export function OutputSection() {
             ) : (
               <>
                 <p>❌ XML is invalid</p>
-                {validationResults.errors &&
-                  validationResults.errors.length > 0 && (
+                {validationResults.details &&
+                  validationResults.details.length > 0 && (
                     <ul className={classes.errorsList}>
-                      {validationResults.errors.map((error, index) => (
+                      {validationResults.details.map((error, index) => (
                         <li key={index} className={classes.errorItem}>
                           Line {error.line}: {error.message}
                         </li>
@@ -72,16 +66,6 @@ export function OutputSection() {
           <div className="p-3 bg-blue-50 text-blue-800 dark:bg-blue-900 dark:text-blue-100 rounded mb-3">
             <p>Validating XML...</p>
           </div>
-        )}
-
-        {validationResults?.errors && validationResults.errors.length > 0 && (
-          <textarea
-            id="xml-output"
-            rows={6}
-            className={cn(classes.textarea)}
-            readOnly
-            value={formatErrorsOutput()}
-          ></textarea>
         )}
       </div>
     </div>

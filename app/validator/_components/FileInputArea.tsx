@@ -63,28 +63,33 @@ const UploadIcon = () => (
 export function FileInputArea() {
   const [isDragging, setIsDragging] = useState(false);
   const [highlightedXml, setHighlightedXml] = useState<string>('');
-  const { fileInput, fileContent, setFileInput, setFileContent } =
+  // Read validationResults as well for highlighting error lines
+  const { fileInput, fileContent, currentSchemaInfo, validationResults, setFileInput, setFileContent } =
     useValidatorStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const fileName = fileInput?.name || null;
 
-  // Update highlighted XML when fileContent changes
+  // Update highlighted XML when fileContent or validationResults change
   useEffect(() => {
     if (fileContent) {
-      highlightCode(fileContent)
+      // Pass error lines from validationResults if available
+      highlightCode(fileContent, validationResults?.details?.map((error: { line: number }) => error.line) || []) // Added type for error
         .then(highlighted => setHighlightedXml(highlighted))
-        .catch(error => console.error('Error highlighting XML:', error));
+        .catch((error: Error) => console.error('Error highlighting XML:', error)); // Added type for error
     } else {
       setHighlightedXml('');
     }
-  }, [fileContent]);
+  }, [fileContent, validationResults]); // Keep validationResults dependency
 
+  // Modified readFileContent to call setFileContent from the store
   const readFileContent = async (file: File) => {
     try {
       const content = await file.text();
-      setFileContent(content);
+      setFileContent(content); // Call store action, which now handles schema info extraction
     } catch (error) {
       console.error("Error reading file:", error);
+      // Optionally clear content/schema info on error
+      setFileContent("");
     }
   };
 
@@ -170,8 +175,28 @@ export function FileInputArea() {
 
       {fileContent && (
         <div className="mt-2">
+          <div className="flex justify-between items-center mb-1">
+            <label className={classes.label}>File Content:</label>
+            {currentSchemaInfo && (
+              <div className="text-xs text-gray-500 dark:text-gray-400">
+                {currentSchemaInfo.urn && (
+                  <span className="mr-2">URN: {currentSchemaInfo.urn}</span>
+                )}
+                {currentSchemaInfo.url && (
+                  <a
+                    href={currentSchemaInfo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-blue-500 dark:hover:text-blue-400"
+                  >
+                    View Schema
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
           <div 
-            className="w-full border rounded p-4 overflow-auto max-h-[20rem]"
+            className="w-full border rounded p-4 overflow-auto max-h-[20rem] border-[var(--color-separator)] dark:border-[var(--color-dark-separator)]"
             dangerouslySetInnerHTML={{ __html: highlightedXml }}
           />
         </div>

@@ -15,7 +15,7 @@ const classes = {
 };
 
 export function ButtonSection() {
-  const { validateInput, clearInput, clearResults, reset, isValidating } =
+  const { validateInput, reset, isValidating } =
     useValidatorStore();
 
   const handleValidate = () => {

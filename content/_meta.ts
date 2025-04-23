@@ -1,10 +1,10 @@
 export default {
   // Top nav
-  _validator: {
-    type: "page",
-    title: "Validate your XML",
-    href: "http://localhost:3000/validator",
-  },
+  //_validator: {
+  //  type: "page",
+  //  title: "Validate your XML",
+  //  href: "https://developers.fingrid.fi/validator",
+  //},
 
   // Side naw
   index: "Developer portal",
