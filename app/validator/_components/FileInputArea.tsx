@@ -6,6 +6,7 @@ import { highlightCode } from "@/_utils/syntaxHighlighter";
 import { SuccessIcon, UploadIcon } from "@/_components/Icons";
 import { useFileUpload } from "../_hooks/useFileUpload";
 import { SchemaInfo } from "@/types";
+import { WarningIcon } from "./WarningIcon";
 
 // Styles object
 const classes = {
@@ -147,7 +148,10 @@ const FileContent = ({
         {schemaInfo && (
           <div className={componentClasses.fileContent.schemaInfo}>
             {schemaInfo.urn && (
-              <span className={componentClasses.fileContent.schemaUrn}>URN: {schemaInfo.urn}</span>
+              <span className={componentClasses.fileContent.schemaUrn}>
+                URN: {schemaInfo.urn}
+                {schemaInfo.urn && !schemaInfo.url && <WarningIcon />}
+              </span>
             )}
             {schemaInfo.url && (
               <a
