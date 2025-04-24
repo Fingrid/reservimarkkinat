@@ -13,10 +13,7 @@ export const fetchSchema = async (
   schema: string,
   baseUrl: string,
 ): Promise<XMLBufferItem> => {
-  const origin =
-    typeof window !== "undefined" && window.location.origin
-      ? window.location.origin
-      : "http://localhost:3000"; // Default for server-side or build time
+  const origin = window?.location.origin ?? "";
   const url = new URL(schema, origin + baseUrl).toString();
   try {
     const response = await fetch(url);

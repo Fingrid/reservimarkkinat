@@ -27,13 +27,14 @@ export function InputTabs() {
         Attach as file
       </button>
       <button
+        disabled
         className={cn(
           classes.base,
           activeTab === "text" ? classes.active : classes.inactive,
         )}
         onClick={() => setActiveTab("text")}
       >
-        Input as text
+        <i>Input as text (WIP)</i>
       </button>
     </div>
   );

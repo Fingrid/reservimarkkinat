@@ -1,15 +1,14 @@
 "use client";
 
-import { create } from 'zustand';
-import { immer } from 'zustand/middleware/immer';
+import { create } from "zustand";
+import { immer } from "zustand/middleware/immer";
 import { useXmlSchemaStore } from "./xmlSchemaStore";
 import { xmlRegisterInputProvider } from "libxml2-wasm";
-import { StoreBackedInputProvider } from "../_utils/xml/StoreBackedInputProvider"; // Corrected path
-import { allSchemaConfigs } from "../_config/schemas.config"; // Corrected path
-import { validateXml } from "../_utils/xml/xmlValidator"; // Corrected path
-import { extractXMLNamespace } from '../_utils/xml/utils'; // Added missing import
-import { ValidationResult, SchemaInfo } from '@/types';
-
+import { StoreBackedInputProvider } from "../_utils/xml/StoreBackedInputProvider";
+import { allSchemaConfigs } from "../_config/schemas.config";
+import { validateXml } from "../_utils/xml/xmlValidator";
+import { extractXMLNamespace } from "../_utils/xml/utils";
+import { ValidationResult, SchemaInfo } from "@/types";
 
 export type ValidatorState = {
   // Input state
@@ -32,10 +31,8 @@ export type ValidatorState = {
   setFileContent: (content: string) => void;
   initializeXmlTools: () => Promise<void>;
   validateInput: () => Promise<void>;
-  clearInput: () => void;
-  clearResults: () => void;
   reset: () => void;
-}
+};
 
 // --- Initial State ---
 const initialState = {
@@ -59,7 +56,6 @@ export const useValidatorStore = create<ValidatorState>()(
         return { urn: null, url: null };
       }
       const urn = extractXMLNamespace(content);
-      // Attempt to get schema info only if tools are initialized
       const schemaItem = get().isXmlToolsInitialized
         ? useXmlSchemaStore.getState().getSchemaByUrn(urn)
         : undefined;
@@ -120,45 +116,57 @@ export const useValidatorStore = create<ValidatorState>()(
         }
       },
 
-      setFileContent: (content) => {
-        // Trigger initialization if needed, but don't wait
-        void get().initializeXmlTools(); // Use void for fire-and-forget
+      setFileContent: async (content) => {
+        await get().initializeXmlTools();
 
         set((state) => {
           state.fileContent = content;
           state.currentSchemaInfo = _updateSchemaInfo(content);
-          // If file tab is active, ensure textInput is cleared or synced if desired
         });
       },
 
       initializeXmlTools: async () => {
-        // Guard against multiple initializations or running while schema store is loading
-        if (get().isXmlToolsInitialized || useXmlSchemaStore.getState().isLoading) {
+        if (
+          // Initialization Guard
+          get().isXmlToolsInitialized ||
+          useXmlSchemaStore.getState().isLoading
+        ) {
           return;
         }
-        set((state) => { state.error = null; });
+        set((state) => {
+          state.error = null;
+        });
 
         try {
           // Ensure schema store is initialized first
-          await useXmlSchemaStore.getState().initializeSchemas(allSchemaConfigs);
+          await useXmlSchemaStore
+            .getState()
+            .initializeSchemas(allSchemaConfigs);
           const schemaStoreError = useXmlSchemaStore.getState().error;
           if (schemaStoreError) {
-            throw new Error(`Schema initialization failed: ${schemaStoreError}`);
+            throw new Error(
+              `Schema initialization failed: ${schemaStoreError}`,
+            );
           }
           if (!useXmlSchemaStore.getState().isInitialized) {
-              throw new Error("Schema store failed to initialize but did not report an error.");
+            throw new Error(
+              "Schema store failed to initialize but did not report an error.",
+            );
           }
 
           // Register the input provider *after* schemas are loaded
-          xmlRegisterInputProvider(new StoreBackedInputProvider(useXmlSchemaStore.getState()));
+          xmlRegisterInputProvider(
+            new StoreBackedInputProvider(useXmlSchemaStore.getState()),
+          );
 
           set((state) => {
             state.isXmlToolsInitialized = true;
             // Update currentSchemaInfo based on current content now that schemas are ready
-            const content = state.activeTab === 'text' ? state.textInput : state.fileContent;
+            const content =
+              state.activeTab === "text" ? state.textInput : state.fileContent;
             // Only update if URL was missing or content exists
             if (content && !state.currentSchemaInfo?.url) {
-                state.currentSchemaInfo = _updateSchemaInfo(content);
+              state.currentSchemaInfo = _updateSchemaInfo(content);
             }
           });
         } catch (error) {
@@ -174,35 +182,24 @@ export const useValidatorStore = create<ValidatorState>()(
         set((state) => {
           state.isValidating = true;
           state.validationResults = null;
-          state.error = null; // Clear previous errors before new validation
+          state.error = null;
         });
 
-        // Ensure tools are initialized
         if (!get().isXmlToolsInitialized) {
           await get().initializeXmlTools();
-          // Check again after attempting initialization
           if (!get().isXmlToolsInitialized || get().error) {
             set((state) => {
               state.isValidating = false;
-              // Keep the initialization error if it exists
-              state.error = state.error ?? "XML validation environment could not be initialized.";
+
+              state.error =
+                state.error ??
+                "XML validation environment could not be initialized.";
             });
             return;
           }
         }
 
-        // Double-check schema store state (might be redundant but safe)
-        const schemaStoreState = useXmlSchemaStore.getState();
-        if (!schemaStoreState.isInitialized) {
-          set((state) => {
-            state.isValidating = false;
-            state.error = schemaStoreState.error ?? "XML Schemas are not loaded.";
-            state.validationResults = null;
-          });
-          return;
-        }
-
-        const { activeTab, textInput, fileContent } = get(); // Get fresh state
+        const { activeTab, textInput, fileContent } = get();
         const xmlContent = activeTab === "text" ? textInput : fileContent;
 
         if (!xmlContent) {
@@ -218,15 +215,16 @@ export const useValidatorStore = create<ValidatorState>()(
           set((state) => {
             state.validationResults = result;
             state.isValidating = false;
-            state.error = null; // Clear general error on successful validation call
-            // Update schema info only if validation provided it and it was missing
+            state.error = null; 
+
             if (result.schema && !state.currentSchemaInfo?.url) {
-              state.currentSchemaInfo = { urn: result.schema.urn, url: result.schema.url };
+              state.currentSchemaInfo = {
+                urn: result.schema.urn,
+                url: result.schema.url,
+              };
             }
           });
         } catch (error) {
-          // This catch block might be less likely to be hit if validateXml handles its errors,
-          // but it's good practice to have it.
           console.error("Validation failed unexpectedly:", error);
           const errorMessage = `Validation failed: ${error instanceof Error ? error.message : "Unknown error"}`;
           set((state) => {
@@ -240,30 +238,11 @@ export const useValidatorStore = create<ValidatorState>()(
         }
       },
 
-      clearInput: () => {
-        set((state) => {
-          state.textInput = "";
-          state.fileInput = null;
-          state.fileContent = "";
-          state.currentSchemaInfo = null;
-          // Optionally clear results when input is cleared
-          // state.validationResults = null;
-          // state.error = null;
-        });
-      },
-
-      clearResults: () => {
-        set((state) => {
-          state.validationResults = null;
-          state.error = null; // Clear general errors too
-        });
-      },
-
       reset: () => {
         set((state) => {
           Object.assign(state, initialState); // Reset to initial state
         });
       },
     };
-  })
+  }),
 );
