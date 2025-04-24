@@ -12,42 +12,42 @@
 
 @font-face {
   font-family: "Lab Grotesque Web";
-  src: url("../app/fonts/LabGrotesqueWeb-Bold.woff");
+  src: url("../app/_fonts/LabGrotesqueWeb-Bold.woff");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Lab Grotesque Web";
-  src: url("../app/fonts/LabGrotesqueWeb-Regular.woff");
+  src: url("../app/_fonts/LabGrotesqueWeb-Regular.woff");
   font-weight: 400 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Lab Grotesque Web";
-  src: url("../app/fonts/LabGrotesqueWeb-Light.woff");
+  src: url("../app/_fonts/LabGrotesqueWeb-Light.woff");
   font-weight: 100 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Lab Grotesque Web";
-  src: url("../app/fonts/LabGrotesqueWeb-BoldItalic.woff");
+  src: url("../app/_fonts/LabGrotesqueWeb-BoldItalic.woff");
   font-weight: bold;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Lab Grotesque Web";
-  src: url("../app/fonts/LabGrotesqueWeb-Italic.woff");
+  src: url("../app/_fonts/LabGrotesqueWeb-Italic.woff");
   font-weight: 400 600;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Lab Grotesque Web";
-  src: url("../app/fonts/LabGrotesqueWeb-LightItalic.woff");
+  src: url("../app/_fonts/LabGrotesqueWeb-LightItalic.woff");
   font-weight: 100 300;
   font-style: italic;
 }
@@ -64,8 +64,9 @@
   --color-separator: #d5dde3;
 
   --color-primary-action: #d5121e;
-  --color-primary-hover: ##6d838f;
+  --color-primary-hover: #3e5660;
   --color-secondary-action: #3e5660;
+  --color-secondary-hover: #6d838f;
 
   --color-disabled: #b3b3b3;
 
@@ -204,6 +205,20 @@
       @apply bg-[var(--color-background-level-1)];
       @apply dark:bg-[var(--color-dark-background-level-1)];
       border: 0;
+    }
+
+    a[target="_blank"] {
+      @apply text-[var(--color-primary-action)];
+      @apply dark:text-[var(--color-dark-primary-action)];
+
+      text-decoration: underline;
+
+      &:hover {
+        @apply text-[var(--color-primary-hover)];
+        @apply dark:text-[var(--color-dark-primary-hover)];
+
+        text-decoration: none;
+      }
     }
   }
 
@@ -574,6 +589,47 @@
       border-radius: 0;
       border-width: 1px;
       background-color: transparent;
+    }
+  }
+
+  .shiki {
+    code {
+      counter-reset: step;
+      counter-increment: step 0;
+
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.5rem;
+    }
+
+    code span.line {
+      &:before {
+        @apply text-[var(--color-primary-hover)];
+        @apply dark:text-[var(--color-dark-primary-hover)];
+
+        content: counter(step);
+        counter-increment: step;
+        width: 2rem;
+        margin-right: 1.5rem;
+        display: inline-block;
+        text-align: right;
+      }
+
+      &.dark-error-line {
+        @apply bg-[var(--color-dark-error-background)];
+
+        &:before {
+          @apply text-[var(--color-dark-error-text)];    
+        }
+      }
+      &.error-line {
+        @apply bg-[var(--color-error-background)];
+
+        &:before {
+          @apply text-[var(--color-error-text)];  
+        }
+      }
     }
   }
 }

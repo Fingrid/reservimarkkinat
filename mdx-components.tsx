@@ -1,6 +1,6 @@
 import { useMDXComponents as getThemeComponents } from "nextra-theme-docs";
-import { ScalarUI } from "@/mdx-components/ScalarUI";
-import { Callout } from "@/mdx-components/Callout";
+import { ScalarUI } from "@/_mdx-components/ScalarUI";
+import { Callout } from "@/_mdx-components/Callout";
 import { withGitHubAlert } from "nextra/components";
 import type { MDXComponents } from "nextra/mdx-components";
 import type { ComponentProps, FC } from "react";

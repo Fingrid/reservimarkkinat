@@ -30,7 +30,6 @@ export default async function Page(props: PageProps) {
   const result = (await importPage(params.mdxPath)) as PageImport;
   const { default: MDXContent, toc, metadata } = result;
 
-  console.log(metadata);
   return (
     <Wrapper toc={toc} metadata={metadata}>
       <MDXContent {...props} params={params} />

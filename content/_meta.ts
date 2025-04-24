@@ -1,4 +1,12 @@
 export default {
+  // Top nav
+  //_validator: {
+  //  type: "page",
+  //  title: "Validate your XML",
+  //  href: "https://developers.fingrid.fi/validator",
+  //},
+
+  // Side naw
   index: "Developer portal",
   "0###": { type: "separator", title: "General" },
   market_platforms: "Market platforms",

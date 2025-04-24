@@ -4,7 +4,7 @@ import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import type { FC, ReactNode } from "react";
 import { Footer } from "@/_components/footer";
-import { labGrotesqueWeb } from "@/fonts";
+import { labGrotesqueWeb } from "@/_fonts/fonts";
 import { FingridLogo } from "@/_components/FingridLogo";
 import "./globals.css";
 
