@@ -1,5 +1,6 @@
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
+import globals from "globals";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -11,6 +12,10 @@ import pluginNext from "@next/eslint-plugin-next";
 
 export default [
   {
+    globals: {
+      ...globals.browser,
+      ...globals.node,
+    },
     ignores: [".next/**/*", ".obsidian/**/*", "node_modules/**/*", "out/**/*"],
   },
   ...tseslint.config(
