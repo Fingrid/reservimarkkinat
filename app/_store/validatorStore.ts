@@ -9,6 +9,7 @@ import { allSchemaConfigs } from "../_config/schemas.config";
 import { validateXml } from "../_utils/xml/xmlValidator";
 import { extractXMLNamespace } from "../_utils/xml/utils";
 import { ValidationResult, SchemaInfo } from "@/types";
+import { isFeatureEnabled } from "@/_config/featureflags";
 
 // Define all possible validator states for better type safety
 export type ValidatorStateStatus = 
@@ -286,10 +287,10 @@ export const useValidatorStore = create<ValidatorState>()(
           }
           
           // Check if the backend validation feature flag is enabled
-          const isBackendValidationEnabled = process.env.ENABLE_BACKEND_VALIDATION === "true";
+          const { FeatureFlags } = await import("../_config/featureflags");
           
           // If backend validation is not enabled, stop after XML validation
-          if (!isBackendValidationEnabled) {
+          if (!FeatureFlags.backendValidation) {
             set((state) => {
               state.validationResults = result;
               state.status = "validation-complete";

@@ -3,32 +3,15 @@ import { type NextConfig } from "next";
 
 const EXPORT_STANDALONE = process?.env?.EXPORT_STANDALONE === "true";
 
-const AvailableFeatureFlags = [
-  'ENABLE_BACKEND_VALIDATION',
-] as const;
-
-type FeatureFlags = {[s in (typeof AvailableFeatureFlags)[number]]: string | undefined};
-
-const featureFlags = Object.fromEntries(
-  AvailableFeatureFlags.map((flag) => {
-    const value = process?.env?.[flag];
-    if (value === undefined) {
-      return [flag, "false"];
-    }
-    if (value === "true" || value === "false") {
-      return [flag, value];
-    }
-    throw new Error(`Invalid value for ${flag}: ${value}`);
-  })
-) as FeatureFlags;
-
-type FeatureFlaggedNextConfig = 
-  NextConfig & {
-    env: FeatureFlags;
-  }
-
-const nextConfig: FeatureFlaggedNextConfig = {
-  env: featureFlags,
+type KepoNextConfig = NextConfig & {
+  env: {
+    ENABLED_FEATURES: string | undefined;
+  };
+}
+const nextConfig: KepoNextConfig = {
+  env: {
+    ENABLED_FEATURES: process?.env?.ENABLED_FEATURES,
+  },
   ...EXPORT_STANDALONE ? {
     output: "standalone",
   } : {
