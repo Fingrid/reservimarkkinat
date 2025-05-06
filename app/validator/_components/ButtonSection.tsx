@@ -21,7 +21,7 @@ export function ButtonSection() {
   const { 
     validateInput, 
     reset, 
-    isValidating, 
+    status, 
     fileContent, 
     currentSchemaInfo 
   } = useValidatorStore();
@@ -34,17 +34,26 @@ export function ButtonSection() {
     reset();
   };
 
-  // Determine if validation should be disabled
-  const isSchemaNotFound = currentSchemaInfo?.urn && !currentSchemaInfo?.url;
-  const isNoFileContent = !fileContent;
-  const isValidationDisabled = isValidating || isNoFileContent || isSchemaNotFound;
+  // Determine if validation is in progress (either client-side or server-side)
+  const isValidating = status === "validating" || status === "server-validating";
+  
+  // Determine if validation should be disabled based on the current state
+  const isValidationDisabled = status !== "content-ready" || isValidating;
 
   // Create tooltip message based on the disabled reason
   let disabledTooltip = "";
-  if (isNoFileContent) {
+  if (!fileContent) {
     disabledTooltip = "Upload a file to validate";
-  } else if (isSchemaNotFound) {
+  } else if (status === "content-error") {
     disabledTooltip = "Schema definition not found for this XML";
+  } else if (status === "not_initialized" || status === "initialization-failed") {
+    disabledTooltip = "XML validation environment is not ready";
+  } else if (status === "validating") {
+    disabledTooltip = "XML validation in progress";
+  } else if (status === "server-validating") {
+    disabledTooltip = "Business rules validation in progress";
+  } else if (status !== "content-ready") {
+    disabledTooltip = "Content is not ready for validation";
   }
 
   return (

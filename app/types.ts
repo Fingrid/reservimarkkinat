@@ -12,6 +12,14 @@ export type ValidationResult = {
     line: number;
     message: string;
   }>;
+  // New fields for business rule validation
+  businessValidation?: {
+    isValid: boolean;
+    details?: Array<{
+      code?: string;
+      message: string;
+    }>;
+  };
 };
 
 export interface SchemaInfo {

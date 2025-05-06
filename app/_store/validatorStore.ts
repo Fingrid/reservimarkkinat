@@ -10,6 +10,18 @@ import { validateXml } from "../_utils/xml/xmlValidator";
 import { extractXMLNamespace } from "../_utils/xml/utils";
 import { ValidationResult, SchemaInfo } from "@/types";
 
+// Define all possible validator states for better type safety
+export type ValidatorStateStatus = 
+  | "not_initialized" 
+  | "initialized" 
+  | "content-ready" 
+  | "content-error" 
+  | "validating" 
+  | "validation-complete"
+  | "server-validating"      // New state for server-side validation in progress
+  | "server-validation-complete" // New state for server-side validation complete
+  | "initialization-failed";
+
 export type ValidatorState = {
   // Input state
   activeTab: "file" | "text";
@@ -19,10 +31,10 @@ export type ValidatorState = {
   currentSchemaInfo: SchemaInfo | null;
 
   // Validation state
-  isValidating: boolean;
+  status: ValidatorStateStatus;
   validationResults: ValidationResult | null;
   error: string | null;
-  isXmlToolsInitialized: boolean;
+  isXmlToolsInitialized: boolean; // Keep for internal usage
 
   // Actions
   setActiveTab: (tab: "file" | "text") => void;
@@ -41,7 +53,7 @@ const initialState = {
   fileInput: null,
   fileContent: "",
   currentSchemaInfo: null,
-  isValidating: false,
+  status: "not_initialized" as ValidatorStateStatus,
   validationResults: null,
   error: null,
   isXmlToolsInitialized: false,
@@ -65,6 +77,17 @@ export const useValidatorStore = create<ValidatorState>()(
       };
     };
 
+    // Helper to update status based on content and schema
+    const _updateContentStatus = (content: string | null, schema: SchemaInfo | null) => {
+      if (!content) {
+        return "initialized";
+      }
+      if (schema?.urn && !schema?.url) {
+        return "content-error";
+      }
+      return "content-ready";
+    };
+
     return {
       ...initialState,
 
@@ -84,8 +107,15 @@ export const useValidatorStore = create<ValidatorState>()(
           state.textInput = text;
           state.validationResults = null;
           state.error = null;
-          state.currentSchemaInfo = _updateSchemaInfo(text);
+          
+          const schemaInfo = _updateSchemaInfo(text);
+          state.currentSchemaInfo = schemaInfo;
           state.fileContent = text; // Keep fileContent consistent if text is source
+          
+          // Only update status if we're already initialized
+          if (state.status !== "not_initialized" && state.status !== "initialization-failed") {
+            state.status = _updateContentStatus(text, schemaInfo);
+          }
         });
       },
 
@@ -96,7 +126,13 @@ export const useValidatorStore = create<ValidatorState>()(
           state.validationResults = null;
           state.error = null;
           state.currentSchemaInfo = null;
+          
+          // If we're clearing the file, revert to initialized state
+          if (!file && state.status !== "not_initialized" && state.status !== "initialization-failed") {
+            state.status = "initialized";
+          }
         });
+        
         // If a file is selected, read its content immediately
         if (file) {
           const reader = new FileReader();
@@ -110,6 +146,9 @@ export const useValidatorStore = create<ValidatorState>()(
               state.error = "Failed to read file.";
               state.fileContent = "";
               state.currentSchemaInfo = null;
+              if (state.status !== "not_initialized" && state.status !== "initialization-failed") {
+                state.status = "initialized";
+              }
             });
           };
           reader.readAsText(file);
@@ -121,7 +160,13 @@ export const useValidatorStore = create<ValidatorState>()(
 
         set((state) => {
           state.fileContent = content;
-          state.currentSchemaInfo = _updateSchemaInfo(content);
+          const schemaInfo = _updateSchemaInfo(content);
+          state.currentSchemaInfo = schemaInfo;
+          
+          // Update status based on content and schema availability
+          if (state.isXmlToolsInitialized) {
+            state.status = _updateContentStatus(content, schemaInfo);
+          }
         });
       },
 
@@ -133,8 +178,13 @@ export const useValidatorStore = create<ValidatorState>()(
         ) {
           return;
         }
+        
         set((state) => {
           state.error = null;
+          // Only change status if we're not already in a more advanced state
+          if (state.status === "not_initialized") {
+            state.status = "not_initialized"; // Keep the same state during initialization
+          }
         });
 
         try {
@@ -161,12 +211,18 @@ export const useValidatorStore = create<ValidatorState>()(
 
           set((state) => {
             state.isXmlToolsInitialized = true;
+            
             // Update currentSchemaInfo based on current content now that schemas are ready
             const content =
               state.activeTab === "text" ? state.textInput : state.fileContent;
+              
             // Only update if URL was missing or content exists
-            if (content && !state.currentSchemaInfo?.url) {
-              state.currentSchemaInfo = _updateSchemaInfo(content);
+            if (content) {
+              const schemaInfo = _updateSchemaInfo(content);
+              state.currentSchemaInfo = schemaInfo;
+              state.status = _updateContentStatus(content, schemaInfo);
+            } else {
+              state.status = "initialized";
             }
           });
         } catch (error) {
@@ -174,13 +230,14 @@ export const useValidatorStore = create<ValidatorState>()(
           set((state) => {
             state.error = `Failed to initialize XML tools: ${error instanceof Error ? error.message : String(error)}`;
             state.isXmlToolsInitialized = false;
+            state.status = "initialization-failed";
           });
         }
       },
 
       validateInput: async () => {
         set((state) => {
-          state.isValidating = true;
+          state.status = "validating";
           state.validationResults = null;
           state.error = null;
         });
@@ -189,11 +246,8 @@ export const useValidatorStore = create<ValidatorState>()(
           await get().initializeXmlTools();
           if (!get().isXmlToolsInitialized || get().error) {
             set((state) => {
-              state.isValidating = false;
-
-              state.error =
-                state.error ??
-                "XML validation environment could not be initialized.";
+              state.status = "initialization-failed";
+              state.error = state.error ?? "XML validation environment could not be initialized.";
             });
             return;
           }
@@ -204,26 +258,96 @@ export const useValidatorStore = create<ValidatorState>()(
 
         if (!xmlContent) {
           set((state) => {
-            state.isValidating = false;
+            state.status = "initialized";
             state.error = "No XML content to validate.";
           });
           return;
         }
 
         try {
+          // First phase: XML schema validation
           const result = await validateXml(xmlContent);
+          
+          // If XML validation failed, stop here
+          if (!result.isValid) {
+            set((state) => {
+              state.validationResults = result;
+              state.status = "validation-complete";
+              state.error = null;
+
+              if (result.schema && !state.currentSchemaInfo?.url) {
+                state.currentSchemaInfo = {
+                  urn: result.schema.urn,
+                  url: result.schema.url,
+                };
+              }
+            });
+            return;
+          }
+          
+          // Check if the backend validation feature flag is enabled
+          const isBackendValidationEnabled = process.env.ENABLE_BACKEND_VALIDATION === "true";
+          
+          // If backend validation is not enabled, stop after XML validation
+          if (!isBackendValidationEnabled) {
+            set((state) => {
+              state.validationResults = result;
+              state.status = "validation-complete";
+              state.error = null;
+
+              if (result.schema && !state.currentSchemaInfo?.url) {
+                state.currentSchemaInfo = {
+                  urn: result.schema.urn,
+                  url: result.schema.url,
+                };
+              }
+            });
+            return;
+          }
+          
+          // Proceed with backend business validation
           set((state) => {
             state.validationResults = result;
-            state.isValidating = false;
-            state.error = null; 
-
-            if (result.schema && !state.currentSchemaInfo?.url) {
-              state.currentSchemaInfo = {
-                urn: result.schema.urn,
-                url: result.schema.url,
-              };
-            }
+            state.status = "server-validating";
           });
+          
+          // Import the validator client only when needed
+          const { validatorClient } = await import("../_utils/xml/validatorClient");
+          
+          try {
+            // Second phase: Business rule validation on the server
+            const businessResult = await validatorClient.validateBusinessRules(xmlContent);
+            
+            // Merge the results
+            const mergedResult: ValidationResult = {
+              ...result,
+              ...businessResult,
+            };
+            
+            set((state) => {
+              state.validationResults = mergedResult;
+              state.status = "server-validation-complete";
+              state.error = null;
+            });
+          } catch (serverError) {
+            console.error("Business validation failed:", serverError);
+            const errorMessage = `Business validation failed: ${serverError instanceof Error ? serverError.message : "Unknown error"}`;
+            
+            // Set server validation error but preserve the valid XML validation result
+            set((state) => {
+              if (state.validationResults) {
+                state.validationResults = {
+                  ...state.validationResults,
+                  businessValidation: {
+                    isValid: false,
+                    details: [{ message: errorMessage }]
+                  }
+                };
+              }
+              state.status = "server-validation-complete";
+              state.error = errorMessage;
+            });
+          }
         } catch (error) {
           console.error("Validation failed unexpectedly:", error);
           const errorMessage = `Validation failed: ${error instanceof Error ? error.message : "Unknown error"}`;
@@ -233,14 +357,23 @@ export const useValidatorStore = create<ValidatorState>()(
               details: [{ line: 0, message: errorMessage }],
             };
             state.error = errorMessage;
-            state.isValidating = false;
+            state.status = "validation-complete";
           });
         }
       },
 
       reset: () => {
+        const currentState = get();
+        const newStatus = currentState.isXmlToolsInitialized ? "initialized" : "not_initialized";
+        
         set((state) => {
-          Object.assign(state, initialState); // Reset to initial state
+          // Reset most of the state
+          Object.assign(state, {
+            ...initialState,
+            // Keep the initialization status
+            isXmlToolsInitialized: currentState.isXmlToolsInitialized,
+            status: newStatus,
+          });
         });
       },
     };

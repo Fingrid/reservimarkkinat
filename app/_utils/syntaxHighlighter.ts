@@ -7,16 +7,18 @@ const themes = [
   { type: 'light', theme: 'github-light-default' },
   { type: 'dark', theme: 'github-dark-default' }
 ]
+
+const highlighter = await createHighlighter({
+  themes: themes.map(theme => theme.theme),
+  langs: ['xml']
+})
+
 /**
  * Utility for syntax highlighting code using Shiki
  */
 export async function highlightCode(code: string, errorLines: number[]): Promise<string> {
   try {
     
-    const highlighter = await createHighlighter({
-        themes: themes.map(theme => theme.theme),
-        langs: ['xml']
-    })
 
     // Return HTML string with light/dark theme variants
     const highLightedCode = themes.map(theme => {
