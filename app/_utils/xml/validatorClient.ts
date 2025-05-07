@@ -3,47 +3,52 @@
 import { ValidationResult } from "@/types";
 
 /**
- * Simulates a business-level validation call to the backend
- * In the future, this will be replaced with actual API calls
+ * Client for interacting with the XML validation backend
  */
 export const validatorClient = {
   /**
    * Validates XML content against business rules on the server
-   * Currently just simulates a delay and returns success
    */
-  validateBusinessRules: async (xmlContent: string): Promise<ValidationResult> => {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 5000));
-    
-    // For demo purposes, randomly return success or an error
-    const isSuccessful = Math.random() > 0.5;
-    
-    if (isSuccessful) {
+  validateBusinessRules: async (
+    xmlContent: string,
+  ): Promise<ValidationResult> => {
+    try {
+      const response = await fetch('/api/validate-xml', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/xml',
+        },
+        body: xmlContent,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      
+      // Transform API response to ValidationResult format if needed
       return {
-        isValid: true,
+        isValid: true, // XML is already validated at this point
         businessValidation: {
-          isValid: true,
-          details: []
-        }
+          isValid: result.isValid !== false, // Use API's isValid or default to true
+          details: result.details || result.errors || [], // Handle different error formats
+        },
       };
-    } else {
-      // Return a sample business validation error
+    } catch (error) {
+      console.error('Business validation request failed:', error);
       return {
         isValid: true, // XML is still valid
         businessValidation: {
           isValid: false,
           details: [
             {
-              code: "B01",
-              message: "Bid price exceeds allowed limits for the specified market period"
+              code: 'ERR',
+              message: `Failed to validate with backend: ${error instanceof Error ? error.message : String(error)}`,
             },
-            {
-              code: "B04",
-              message: "Invalid conditional link: Referenced bid does not exist"
-            }
-          ]
-        }
+          ],
+        },
       };
     }
-  }
+  },
 };

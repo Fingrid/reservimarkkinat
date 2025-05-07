@@ -1,7 +1,4 @@
-import {
-  XmlDocument,
-  XmlElement,
-} from "libxml2-wasm";
+import { XmlDocument, XmlElement } from "libxml2-wasm";
 
 export const extractXMLNamespace = (xmlContent: string): string | null => {
   let doc: XmlDocument | null = null;

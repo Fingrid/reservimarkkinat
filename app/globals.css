@@ -620,14 +620,14 @@
         @apply bg-[var(--color-dark-error-background)];
 
         &:before {
-          @apply text-[var(--color-dark-error-text)];    
+          @apply text-[var(--color-dark-error-text)];
         }
       }
       &.error-line {
         @apply bg-[var(--color-error-background)];
 
         &:before {
-          @apply text-[var(--color-error-text)];  
+          @apply text-[var(--color-error-text)];
         }
       }
     }

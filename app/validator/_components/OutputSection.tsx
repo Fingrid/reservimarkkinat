@@ -82,14 +82,19 @@ const BusinessValidationSuccess = () => (
   </div>
 );
 
-const BusinessValidationError = ({ errors }: { errors?: BusinessValidationError[] }) => (
+const BusinessValidationError = ({
+  errors,
+}: {
+  errors?: BusinessValidationError[];
+}) => (
   <div className={classes.result.warning}>
     <p>⚠️ XML is valid but business rules validation failed</p>
     {errors && errors.length > 0 && (
       <ul className={classes.errors.list}>
         {errors.map((error, index) => (
           <li key={index} className={classes.errors.item}>
-            {error.code ? `[${error.code}] ` : ''}{error.message}
+            {error.code ? `[${error.code}] ` : ""}
+            {error.message}
           </li>
         ))}
       </ul>
@@ -101,8 +106,12 @@ export function OutputSection() {
   const { validationResults, status, error } = useValidatorStore();
 
   // Don't show anything before validation has been attempted
-  if (status === "not_initialized" || status === "initialized" || 
-      status === "content-ready" || status === "content-error") {
+  if (
+    status === "not_initialized" ||
+    status === "initialized" ||
+    status === "content-ready" ||
+    status === "content-error"
+  ) {
     return null;
   }
 
@@ -110,10 +119,10 @@ export function OutputSection() {
     <div id="output-section" className={classes.container}>
       <div className={classes.wrapper}>
         <SectionHeader />
-        
+
         {/* XML Schema validation status */}
         {status === "validating" && <ValidationLoading />}
-        
+
         {/* Business rule validation status */}
         {status === "server-validating" && (
           <>
@@ -121,16 +130,15 @@ export function OutputSection() {
             <ServerValidationLoading />
           </>
         )}
-        
+
         {/* XML schema validation complete but no business validation */}
-        {status === "validation-complete" && (
-          validationResults?.isValid ? (
+        {status === "validation-complete" &&
+          (validationResults?.isValid ? (
             <ValidationSuccess />
           ) : (
             <ValidationError errors={validationResults?.details} />
-          )
-        )}
-        
+          ))}
+
         {/* Business validation complete */}
         {status === "server-validation-complete" && (
           <>
@@ -140,18 +148,20 @@ export function OutputSection() {
             ) : (
               <ValidationError errors={validationResults?.details} />
             )}
-            
+
             {/* Then show business validation results if XML was valid */}
-            {validationResults?.isValid && validationResults?.businessValidation && (
-              validationResults.businessValidation.isValid ? (
+            {validationResults?.isValid &&
+              validationResults?.businessValidation &&
+              (validationResults.businessValidation.isValid ? (
                 <BusinessValidationSuccess />
               ) : (
-                <BusinessValidationError errors={validationResults.businessValidation.details} />
-              )
-            )}
+                <BusinessValidationError
+                  errors={validationResults.businessValidation.details}
+                />
+              ))}
           </>
         )}
-        
+
         {/* Initialization errors */}
         {status === "initialization-failed" && (
           <div className={classes.result.error}>

@@ -1,6 +1,5 @@
 export type ExtractFCType<T> = T extends React.FC<infer U> ? U : never;
 
-
 // Validator
 export type ValidationResult = {
   isValid: boolean;
@@ -26,6 +25,3 @@ export interface SchemaInfo {
   urn: string | null;
   url: string | null;
 }
-
-
-

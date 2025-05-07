@@ -1,11 +1,13 @@
 "use client";
 
-export type XMLBufferItem = { urn?: string; buffer: Uint8Array; fileUrl: string };
+export type XMLBufferItem = {
+  urn?: string;
+  buffer: Uint8Array;
+  fileUrl: string;
+};
 
 export const extractUrn = (xml: string): string | undefined => {
-  const match = xml.match(
-    /<xs:schema[^>]+targetNamespace="([^"]+)"/,
-  );
+  const match = xml.match(/<xs:schema[^>]+targetNamespace="([^"]+)"/);
   return match ? match[1] : undefined;
 };
 

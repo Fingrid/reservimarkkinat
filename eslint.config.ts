@@ -12,11 +12,12 @@ import pluginNext from "@next/eslint-plugin-next";
 
 export default [
   {
-    globals: {
-      ...globals.browser,
-      ...globals.node,
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
     },
-    ignores: [".next/**/*", ".obsidian/**/*", "node_modules/**/*", "out/**/*"],
   },
   ...tseslint.config(
     {
@@ -32,5 +33,8 @@ export default [
     eslint.configs.recommended,
     tseslint.configs.strict,
     eslintConfigPrettier,
+    {
+      ignores: [".next/**/*", ".obsidian/**/*", "node_modules/**/*", "out/**/*"],
+    }
   ),
 ];

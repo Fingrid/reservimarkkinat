@@ -194,7 +194,7 @@ export const cimSchemas: SchemaConfig = {
     "iec62325-451-n-weatherconfigurationdocument_v1_1.xsd",
     "iec62325-451-n-weatherdocument_v1_0.xsd",
     "iec62325-451-n-weatherdocument_v1_1.xsd",
-    "iec62325-451-n-weatherprognosisdocument_v1_0.xsd"
+    "iec62325-451-n-weatherprognosisdocument_v1_0.xsd",
   ],
 };
 
