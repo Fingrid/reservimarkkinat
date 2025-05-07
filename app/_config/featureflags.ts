@@ -1,8 +1,10 @@
+import { FeatureFlags as RuntimeFeatureFlags } from "../_store/featureFlagsStore";
+
 export type FeatureFlag = "backend_validation";
 
 /**
- * Parses the consolidated ENABLED_FEATURES environment variable
- * Format: comma-separated list of features, e.g. "backend_validation,advanced_filtering"
+ * For server components, it will parse the environment variable directly.
+ * For client components, defer to the runtime feature flags from the store.
  */
 const parseEnabledFeatures = (): Set<string> => {
   const enabledFeatures = process.env.ENABLED_FEATURES || "";
@@ -15,12 +17,20 @@ const parseEnabledFeatures = (): Set<string> => {
 };
 
 const enabledFeatures = parseEnabledFeatures();
-export const isFeatureEnabled = (feature: FeatureFlag): boolean =>
-  enabledFeatures.has(feature);
 
-/**
- * Helper object to access all feature flags directly
- */
+export const isFeatureEnabled = (feature: FeatureFlag): boolean => {
+  if (typeof window !== "undefined") {
+    return RuntimeFeatureFlags.backendValidation;
+  }
+  
+  return enabledFeatures.has(feature);
+};
+
 export const FeatureFlags = {
-  backendValidation: isFeatureEnabled("backend_validation"),
+  get backendValidation() {
+    if (typeof window !== "undefined") {
+      return RuntimeFeatureFlags.backendValidation;
+    }
+    return isFeatureEnabled("backend_validation");
+  },
 };

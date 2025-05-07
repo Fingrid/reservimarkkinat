@@ -7,3 +7,13 @@ export const apiEndpoints = {
     description: "Validates XML files against a schema.",
   },
 };
+
+export const enabledFeatures = (): Set<string> => {
+  const enabledFeatures = process.env.ENABLED_FEATURES || "";
+  return new Set(
+    enabledFeatures
+      .split(",")
+      .map((f) => f.trim())
+      .filter(Boolean),
+  );
+};
