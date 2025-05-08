@@ -13,6 +13,7 @@ Thumbs.db
 .idea/
 .eslintcache
 .env
+.env.*
 
 tsup.config.bundled*
 tsconfig.tsbuildinfo
