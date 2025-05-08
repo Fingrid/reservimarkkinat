@@ -3,43 +3,39 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
-export type FeatureFlagsState = {
+export type ConfigState = {
   // State
   source: string | null;
   featureFlags: Set<string>;
-  validatorEndpoint: string | null;
+  config: Record<string, unknown>;
   isLoading: boolean;
   error: string | null;
   isInitialized: boolean;
 
   // Actions
-  fetchFeatureFlags: () => Promise<void>;
+  fetchConfig: () => Promise<void>;
   isFeatureEnabled: (feature: string) => boolean;
+  getConfigValue: <T>(key: string, defaultValue?: T) => T | undefined;
 };
 
 const initialState = {
   source: null,
   featureFlags: new Set<string>(),
-  validatorEndpoint: null,
+  config: {},
   isLoading: false,
   error: null,
   isInitialized: false,
 };
 
-/**
- * Zustand store for feature flags
- * Fetches feature flags from the API endpoint and provides a way to check if a feature is enabled
- */
-export const useFeatureFlagsStore = create<FeatureFlagsState>()(
+const configAPIEndpoint = "/api/config";
+
+export const useConfigStore = create<ConfigState>()(
   immer((set, get) => ({
     ...initialState,
 
     // Actions
-    fetchFeatureFlags: async () => {
-      // Prevent multiple fetches in parallel
+    fetchConfig: async () => {
       if (get().isLoading) return;
-
-      // Don't refetch if already initialized unless there was an error
       if (get().isInitialized && !get().error) return;
 
       set((state) => {
@@ -48,14 +44,13 @@ export const useFeatureFlagsStore = create<FeatureFlagsState>()(
       });
 
       try {
-        const response = await fetch("/api/feature-flags");
+        const response = await fetch(configAPIEndpoint);
         if (!response.ok) {
-          throw new Error(`Failed to fetch feature flags: ${response.statusText}`);
+          throw new Error(`Failed to fetch configuration: ${response.statusText}`);
         }
 
         const data = await response.json();
         
-        // Parse the comma-separated feature flags
         const enabledFeatures = new Set<string>(
           (data.feature_flags || "")
             .split(",")
@@ -66,12 +61,12 @@ export const useFeatureFlagsStore = create<FeatureFlagsState>()(
         set((state) => {
           state.source = data.source;
           state.featureFlags = enabledFeatures;
-          state.validatorEndpoint = data.validatorEndpoint;
+          state.config = data.config || {};
           state.isLoading = false;
           state.isInitialized = true;
         });
       } catch (error) {
-        console.error("Failed to fetch feature flags:", error);
+        console.error("Failed to fetch configuration:", error);
         set((state) => {
           state.error = error instanceof Error ? error.message : String(error);
           state.isLoading = false;
@@ -82,17 +77,24 @@ export const useFeatureFlagsStore = create<FeatureFlagsState>()(
     isFeatureEnabled: (feature) => {
       return get().featureFlags.has(feature);
     },
+
+    getConfigValue: <T>(key: string, defaultValue?: T): T | undefined => {
+      const config = get().config;
+      return key in config ? config[key] as (T | undefined) : defaultValue;
+    },
   }))
 );
 
-/**
- * Helper object to access all feature flags directly
- * Use this when you need to access feature flags in a component without
- * having to call the store's isFeatureEnabled method
- */
-export const FeatureFlags = {
+export const Config = {
   get backendValidation() {
-    return useFeatureFlagsStore.getState().isFeatureEnabled("backend_validation");
+    return useConfigStore.getState().isFeatureEnabled("backend_validation");
   },
-  // Add more feature flags here as needed
+
+  get apiBaseUrl() {
+    return useConfigStore.getState().getConfigValue<string>("api_base_url", "");
+  },
+
+  get appName() {
+    return useConfigStore.getState().getConfigValue<string>("app_name", "Fingrid Developer Portal");
+  },
 };

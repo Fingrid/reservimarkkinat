@@ -6,7 +6,7 @@ import type { FC, ReactNode } from "react";
 import { Footer } from "@/_components/footer";
 import { labGrotesqueWeb } from "@/_fonts/fonts";
 import { FingridLogo } from "@/_components/FingridLogo";
-import { FeatureFlagsInitializer } from "./_components/FeatureFlagsInitializer";
+import { ConfigInitializer } from "./_components/ConfigInitializer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -33,8 +33,8 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
         ></script>
       </Head>
       <body>
-        {/* Initialize feature flags */}
-        <FeatureFlagsInitializer />
+        {/* Initialize configuration including feature flags */}
+        <ConfigInitializer />
         <Layout
           navbar={
             <Navbar

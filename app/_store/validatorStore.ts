@@ -9,8 +9,9 @@ import { allSchemaConfigs } from "../_config/schemas.config";
 import { validateXml } from "../_utils/xml/xmlValidator";
 import { extractXMLNamespace } from "../_utils/xml/utils";
 import { ValidationResult, SchemaInfo } from "@/types";
+import { Config } from "./configStore";
 
-// Define all possible validator states for better type safety
+// Possible states
 export type ValidatorStateStatus =
   | "not_initialized"
   | "initialized"
@@ -18,8 +19,8 @@ export type ValidatorStateStatus =
   | "content-error"
   | "validating"
   | "validation-complete"
-  | "server-validating" // New state for server-side validation in progress
-  | "server-validation-complete" // New state for server-side validation complete
+  | "server-validating"
+  | "server-validation-complete"
   | "initialization-failed";
 
 export type ValidatorState = {
@@ -34,7 +35,7 @@ export type ValidatorState = {
   status: ValidatorStateStatus;
   validationResults: ValidationResult | null;
   error: string | null;
-  isXmlToolsInitialized: boolean; // Keep for internal usage
+  isXmlToolsInitialized: boolean;
 
   // Actions
   setActiveTab: (tab: "file" | "text") => void;
@@ -300,11 +301,8 @@ export const useValidatorStore = create<ValidatorState>()(
             return;
           }
 
-          // Check if the backend validation feature flag is enabled
-          const { FeatureFlags } = await import("../_config/featureflags");
-
           // If backend validation is not enabled, stop after XML validation
-          if (!FeatureFlags.backendValidation) {
+          if (!Config.backendValidation) {
             set((state) => {
               state.validationResults = result;
               state.status = "validation-complete";
