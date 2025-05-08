@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   // Get feature flags from env variables
   const features = enabledFeatures();
-  
+
   // Combine with other configuration
   const config = {
     api_base_url: process.env.API_BASE_URL || "",
@@ -15,6 +15,6 @@ export async function GET() {
   return NextResponse.json({
     source: "environment",
     feature_flags: Array.from(features).join(","),
-    config
+    config,
   });
 }

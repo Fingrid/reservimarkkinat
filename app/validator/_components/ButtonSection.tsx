@@ -18,8 +18,7 @@ const classes = {
 };
 
 export function ButtonSection() {
-  const { validateInput, reset, status, fileContent } =
-    useValidatorStore();
+  const { validateInput, reset, status, fileContent } = useValidatorStore();
 
   const handleValidate = () => {
     validateInput();

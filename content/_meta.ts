@@ -1,10 +1,26 @@
 export default {
   // Top nav
+  wiki: {
+    type: "page",
+    title: "Wiki",
+    href: "/",
+  },
+
+  utilities: {
+    type: "menu",
+    title: "Utilities",
+    items: {
+      rmtt: {
+        title: "Reservemarket Test Tool",
+        href: "/validator",
+      },
+    },
+  },
+
   validator: {
     type: "page",
     display: "hidden",
-    title: "Validate your XML",
-    href: "https://developers.fingrid.fi/validator",
+    title: "Reservemarket Test Tool",
   },
 
   // Side naw

@@ -46,16 +46,18 @@ export const useConfigStore = create<ConfigState>()(
       try {
         const response = await fetch(configAPIEndpoint);
         if (!response.ok) {
-          throw new Error(`Failed to fetch configuration: ${response.statusText}`);
+          throw new Error(
+            `Failed to fetch configuration: ${response.statusText}`,
+          );
         }
 
         const data = await response.json();
-        
+
         const enabledFeatures = new Set<string>(
           (data.feature_flags || "")
             .split(",")
             .map((f: string) => f.trim())
-            .filter(Boolean)
+            .filter(Boolean),
         );
 
         set((state) => {
@@ -65,8 +67,6 @@ export const useConfigStore = create<ConfigState>()(
           state.isLoading = false;
           state.isInitialized = true;
         });
-
-        console.log("Configuration loaded");
       } catch (error) {
         console.error("Failed to fetch configuration:", error);
         set((state) => {
@@ -82,9 +82,9 @@ export const useConfigStore = create<ConfigState>()(
 
     getConfigValue: <T>(key: string, defaultValue?: T): T | undefined => {
       const config = get().config;
-      return key in config ? config[key] as (T | undefined) : defaultValue;
+      return key in config ? (config[key] as T | undefined) : defaultValue;
     },
-  }))
+  })),
 );
 
 export const Config = {
@@ -97,6 +97,8 @@ export const Config = {
   },
 
   get appName() {
-    return useConfigStore.getState().getConfigValue<string>("app_name", "Fingrid Developer Portal");
+    return useConfigStore
+      .getState()
+      .getConfigValue<string>("app_name", "Fingrid Developer Portal");
   },
 };

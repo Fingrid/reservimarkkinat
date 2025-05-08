@@ -6,7 +6,7 @@ import { highlightCode } from "@/_utils/syntaxHighlighter";
 import { SuccessIcon, UploadIcon } from "@/_components/Icons";
 import { useFileUpload } from "../_hooks/useFileUpload";
 import { SchemaInfo } from "@/types";
-import { WarningIcon } from "./WarningIcon";
+import { WarningIcon } from "@/_components/Icons";
 
 // Styles object
 const classes = {

@@ -12,6 +12,12 @@ export type SchemaConfig = {
   filenames: string[];
 };
 
+// Manifest structure from API
+type SchemaManifest = {
+  common: string[];
+  cim: string[];
+};
+
 // Define the structure for a cached schema item
 export type XMLBufferItem = {
   urn: string | null;
@@ -31,7 +37,8 @@ export type XmlSchemaState = SchemaStoreProvider & {
   isInitialized: boolean;
   isLoading: boolean;
   error: string | null;
-  initializeSchemas: (configs: SchemaConfig[]) => Promise<void>;
+  isAuthError: boolean;
+  initializeSchemas: () => Promise<void>;
 };
 
 // --- Initial State ---
@@ -43,6 +50,7 @@ const initialState: Omit<
   isInitialized: false,
   isLoading: false,
   error: null,
+  isAuthError: false,
 };
 
 // --- Store Creator ---
@@ -51,70 +59,142 @@ export const useXmlSchemaStore = create<XmlSchemaState>()(
     ...initialState,
 
     // --- Actions ---
-    initializeSchemas: async (configs) => {
+    initializeSchemas: async () => {
       if (get().isInitialized || get().isLoading) {
         return;
       }
+
       set((state) => {
         state.isLoading = true;
         state.error = null;
+        state.isAuthError = false;
         state.schemas.clear(); // Clear existing schemas before loading new ones
       });
 
       try {
-        // Create an array of promises, each resolving to [filename, XMLBufferItem] or null on error
-        const schemaFetchPromises = configs.flatMap((config) =>
-          config.filenames.map(
-            async (filename): Promise<[string, XMLBufferItem] | null> => {
-              const cleanLocation = config.location.endsWith("/")
-                ? config.location
-                : `${config.location}/`;
-              const cleanFilename = filename.startsWith("/")
-                ? filename.substring(1)
-                : filename;
-              const fileUrl = `${cleanLocation}${cleanFilename}`;
+        // Fetch manifest from API
+        const manifestResponse = await fetch("/api/schemas");
 
-              try {
-                const res = await fetch(fileUrl);
-                if (!res.ok) {
-                  throw new Error(
-                    `Failed to fetch ${fileUrl}: ${res.statusText}`,
-                  );
-                }
-                const buffer = Buffer.from(await res.arrayBuffer());
-                const content = buffer.toString("utf-8");
-                const urn = extractUrnFromXsd(content);
-                return [filename, { urn, fileUrl, buffer }];
-              } catch (err) {
-                console.error(`Error processing schema ${fileUrl}:`, err);
+        if (manifestResponse.status === 401) {
+          set((state) => {
+            state.error = "Authentication required to access schema files";
+            state.isAuthError = true;
+            state.isLoading = false;
+            state.isInitialized = false;
+          });
+          return;
+        }
+
+        if (!manifestResponse.ok) {
+          throw new Error(
+            `Failed to fetch schema manifest: ${manifestResponse.statusText}`,
+          );
+        }
+
+        const manifest: SchemaManifest = await manifestResponse.json();
+
+        // Get all unique filenames from the manifest
+        const allFilenames = [
+          ...new Set([...manifest.common, ...manifest.cim]),
+        ];
+
+        // Create an array of promises, each resolving to [filename, XMLBufferItem] or null on error
+        const schemaFetchPromises = allFilenames.map(
+          async (filename): Promise<[string, XMLBufferItem] | null> => {
+            const apiUrl = `/api/schemas/${filename}`;
+
+            try {
+              const res = await fetch(apiUrl);
+
+              if (res.status === 401) {
+                throw new Error(
+                  "Authentication required to access schema files",
+                );
               }
 
-              return null;
-            },
-          ),
+              if (!res.ok) {
+                throw new Error(
+                  `Failed to fetch schema ${filename}: ${res.statusText}`,
+                );
+              }
+
+              const content = await res.text();
+              const buffer = Buffer.from(content);
+              const urn = extractUrnFromXsd(content);
+
+              // Determine category to construct a proper fileUrl
+              let category = "";
+              if (manifest.common.includes(filename)) {
+                category = "common";
+              } else if (manifest.cim.includes(filename)) {
+                category = "cim";
+              }
+
+              // Construct a fileUrl that's compatible with the existing code
+              const fileUrl = `/schemas/${category}/${filename}`;
+
+              return [filename, { urn, fileUrl, buffer }];
+            } catch (err) {
+              console.error(`Error processing schema ${filename}:`, err);
+
+              // If this is an auth error, we should propagate it
+              if (
+                err instanceof Error &&
+                err.message.includes("Authentication required")
+              ) {
+                throw err;
+              }
+            }
+
+            return null;
+          },
         );
-        const results = await Promise.all(schemaFetchPromises);
 
-        // Filter out null results (errors) and create the map
-        const loadedSchemas = new Map<string, XMLBufferItem>(
-          results.filter(
-            (result): result is [string, XMLBufferItem] => result !== null,
-          ),
-        );
+        try {
+          const results = await Promise.all(schemaFetchPromises);
 
-        set((state) => {
-          state.schemas = loadedSchemas;
-          state.isInitialized = true;
-          state.isLoading = false;
-        });
+          // Filter out null results (errors) and create the map
+          const loadedSchemas = new Map<string, XMLBufferItem>(
+            results.filter(
+              (result): result is [string, XMLBufferItem] => result !== null,
+            ),
+          );
 
-        console.log("XML schemas initialized successfully");
+          set((state) => {
+            state.schemas = loadedSchemas;
+            state.isInitialized = true;
+            state.isLoading = false;
+          });
+        } catch (error) {
+          // Check if this is an auth error
+          if (
+            error instanceof Error &&
+            error.message.includes("Authentication required")
+          ) {
+            set((state) => {
+              state.error = "Authentication required to access schema files";
+              state.isAuthError = true;
+              state.isLoading = false;
+              state.isInitialized = false;
+            });
+            return;
+          }
+          throw error;
+        }
       } catch (error) {
         console.error("Failed to initialize XML schemas:", error);
         set((state) => {
           state.error = error instanceof Error ? error.message : String(error);
           state.isLoading = false;
           state.isInitialized = false; // Ensure state reflects initialization failure
+
+          // Check if this is an auth error
+          if (
+            error instanceof Error &&
+            error.message.includes("Authentication required")
+          ) {
+            state.isAuthError = true;
+          }
         });
       }
     },

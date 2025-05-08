@@ -1,5 +1,6 @@
-import cn from "clsx";
-import { InputTabsSection, ButtonSection, OutputSection } from "./_components";
+import { SessionProvider } from "next-auth/react";
+import { auth } from "auth";
+import { Validator } from "./_components/Validator";
 
 const classes = {
   container:
@@ -12,25 +13,23 @@ const classes = {
 };
 
 export default async function Page() {
+  const session = await auth();
+
+  if (session?.user) {
+    session.user = {
+      name: session.user.name,
+      email: session.user.email,
+      image: session.user.image,
+    };
+  }
+
   return (
-    <div className={cn(classes.container)}>
-      <div className={cn(classes.wrapper)}>
-        <div className={cn(classes.headerSection)}>
-          <h1 className={cn(classes.title)}>Reservemarket Test Tool</h1>
-          <p className={cn(classes.description)}>
-            Validate messages and errors by adding code to XML-validator.
-            Validator will show error messages as results.
-          </p>
-        </div>
-
-        <InputTabsSection />
-        <ButtonSection />
-        <OutputSection />
-
-        <div id="bottom-border" className={cn(classes.bottomBorder)}>
-          &nbsp;
+    <SessionProvider session={session}>
+      <div className={classes.container}>
+        <div className={classes.wrapper}>
+          <Validator />
         </div>
       </div>
-    </div>
+    </SessionProvider>
   );
 }

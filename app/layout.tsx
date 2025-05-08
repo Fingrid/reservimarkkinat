@@ -3,11 +3,12 @@ import { Layout, Navbar } from "nextra-theme-docs";
 import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import type { FC, ReactNode } from "react";
-import { Footer } from "@/_components/footer";
+import { Footer } from "@/_components/Footer";
 import { labGrotesqueWeb } from "@/_fonts/fonts";
 import { FingridLogo } from "@/_components/FingridLogo";
 import { ConfigInitializer } from "./_components/ConfigInitializer";
 import "./globals.css";
+import UserButton from "./_components/UserButton";
 
 export const metadata: Metadata = {
   title: {
@@ -47,7 +48,9 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
                 </div>
               }
               logoLink={"https://www.fingrid.fi/"}
-            />
+            >
+              <UserButton />
+            </Navbar>
           }
           sidebar={{ autoCollapse: false, defaultMenuCollapseLevel: 1 }}
           pageMap={await getPageMap()}

@@ -34,7 +34,12 @@ export default [
     tseslint.configs.strict,
     eslintConfigPrettier,
     {
-      ignores: [".next/**/*", ".obsidian/**/*", "node_modules/**/*", "out/**/*"],
-    }
+      ignores: [
+        ".next/**/*",
+        ".obsidian/**/*",
+        "node_modules/**/*",
+        "out/**/*",
+      ],
+    },
   ),
 ];

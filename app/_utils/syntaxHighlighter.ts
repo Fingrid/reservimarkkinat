@@ -1,16 +1,30 @@
 "use client";
 
-import { createHighlighter } from "shiki";
+import {
+  BundledLanguage,
+  BundledTheme,
+  createHighlighter,
+  HighlighterGeneric,
+} from "shiki";
 
 const themes = [
   { type: "light", theme: "github-light-default" },
   { type: "dark", theme: "github-dark-default" },
 ];
 
-const highlighter = await createHighlighter({
-  themes: themes.map((theme) => theme.theme),
-  langs: ["xml"],
-});
+let _highlighter: HighlighterGeneric<BundledLanguage, BundledTheme> | null =
+  null;
+
+const getHighlighter = async () => {
+  if (!_highlighter) {
+    _highlighter = await createHighlighter({
+      themes: themes.map((theme) => theme.theme),
+      langs: ["xml"],
+    });
+  }
+
+  return _highlighter;
+};
 
 /**
  * Utility for syntax highlighting code using Shiki
@@ -20,7 +34,8 @@ export async function highlightCode(
   errorLines: number[],
 ): Promise<string> {
   try {
-    // Return HTML string with light/dark theme variants
+    const highlighter = await getHighlighter();
+
     const highLightedCode = themes.map((theme) => {
       return highlighter.codeToHtml(code, {
         theme: theme.theme,

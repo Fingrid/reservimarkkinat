@@ -11,7 +11,7 @@ const nextConfig: KepoNextConfig = {
   output: "standalone",
   env: {
     ENABLED_FEATURES: process?.env?.ENABLED_FEATURES,
-  }
+  },
 };
 
 const withNextra = nextra({

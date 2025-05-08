@@ -1,16 +1,9 @@
-import { SchemaConfig } from "@/_store/xmlSchemaStore"; // Assuming SchemaConfig type is exported from the store
-
-export const commonSchemas: SchemaConfig = {
-  location: "/schemas/common/",
-  filenames: [
+{
+  "common": [
     "urn-entsoe-eu-local-extension-types.xsd",
-    "urn-entsoe-eu-wgedi-codelists.xsd",
+    "urn-entsoe-eu-wgedi-codelists.xsd"
   ],
-};
-
-export const cimSchemas: SchemaConfig = {
-  location: "/schemas/CIM_2024-02-09/",
-  filenames: [
+  "cim": [
     "iec62325-451-1-acknowledgement_v7_0.xsd",
     "iec62325-451-1-acknowledgement_v8_0.xsd",
     "iec62325-451-1-acknowledgement_v8_1.xsd",
@@ -194,8 +187,6 @@ export const cimSchemas: SchemaConfig = {
     "iec62325-451-n-weatherconfigurationdocument_v1_1.xsd",
     "iec62325-451-n-weatherdocument_v1_0.xsd",
     "iec62325-451-n-weatherdocument_v1_1.xsd",
-    "iec62325-451-n-weatherprognosisdocument_v1_0.xsd",
-  ],
-};
-
-export const allSchemaConfigs = [commonSchemas, cimSchemas];
+    "iec62325-451-n-weatherprognosisdocument_v1_0.xsd"
+  ]
+}

@@ -5,11 +5,11 @@ import { immer } from "zustand/middleware/immer";
 import { useXmlSchemaStore } from "./xmlSchemaStore";
 import { xmlRegisterInputProvider } from "libxml2-wasm";
 import { StoreBackedInputProvider } from "../_utils/xml/StoreBackedInputProvider";
-import { allSchemaConfigs } from "../_config/schemas.config";
 import { validateXml } from "../_utils/xml/xmlValidator";
 import { extractXMLNamespace } from "../_utils/xml/utils";
 import { ValidationResult, SchemaInfo } from "@/types";
 import { Config } from "./configStore";
+import { getSession } from "next-auth/react";
 
 // Possible states
 export type ValidatorStateStatus =
@@ -202,9 +202,7 @@ export const useValidatorStore = create<ValidatorState>()(
 
         try {
           // Ensure schema store is initialized first
-          await useXmlSchemaStore
-            .getState()
-            .initializeSchemas(allSchemaConfigs);
+          await useXmlSchemaStore.getState().initializeSchemas();
           const schemaStoreError = useXmlSchemaStore.getState().error;
           if (schemaStoreError) {
             throw new Error(
@@ -300,8 +298,14 @@ export const useValidatorStore = create<ValidatorState>()(
             return;
           }
 
-          // If backend validation is not enabled, stop after XML validation
-          if (!Config.backendValidation) {
+          // Check authentication status and backend validation setting
+          const session = await getSession();
+          const isAuthenticated = !!session?.user;
+
+          // Skip backend validation if:
+          // 1. Backend validation is disabled OR
+          // 2. User is not authenticated
+          if (!Config.backendValidation || !isAuthenticated) {
             set((state) => {
               state.validationResults = result;
               state.status = "validation-complete";
@@ -317,7 +321,7 @@ export const useValidatorStore = create<ValidatorState>()(
             return;
           }
 
-          // Proceed with backend business validation
+          // Proceed with backend business validation only for authenticated users
           set((state) => {
             state.validationResults = result;
             state.status = "server-validating";

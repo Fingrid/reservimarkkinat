@@ -31,6 +31,7 @@ const classes: Record<CalloutType, string> = {
 type CalloutProps = {
   type?: CalloutType;
   emoji?: string | ReactElement;
+  className?: string;
   children: ReactNode;
 };
 
@@ -38,6 +39,7 @@ export const Callout: FC<CalloutProps> = ({
   children,
   type = "default",
   emoji = TypeToEmoji[type],
+  className,
 }) => {
   return (
     <div
@@ -46,6 +48,7 @@ export const Callout: FC<CalloutProps> = ({
         "nextra-callout x:overflow-x-auto x:mt-6 x:flex x:rounded-lg x:border x:py-2 x:pe-4",
         "x:contrast-more:border-current!",
         classes[type],
+        className,
       )}
     >
       <div
