@@ -87,8 +87,9 @@ export const useXmlSchemaStore = create<XmlSchemaState>()(
                 return [filename, { urn, fileUrl, buffer }];
               } catch (err) {
                 console.error(`Error processing schema ${fileUrl}:`, err);
-                return null; // Resolve with null on error for this specific schema
               }
+
+              return null;
             },
           ),
         );
@@ -106,6 +107,8 @@ export const useXmlSchemaStore = create<XmlSchemaState>()(
           state.isInitialized = true;
           state.isLoading = false;
         });
+
+        console.log("XML schemas initialized successfully");
       } catch (error) {
         console.error("Failed to initialize XML schemas:", error);
         set((state) => {

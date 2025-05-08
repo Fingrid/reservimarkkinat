@@ -104,8 +104,7 @@ export const useValidatorStore = create<ValidatorState>()(
       },
 
       setTextInput: (text) => {
-        // Trigger initialization if needed, but don't wait
-        void get().initializeXmlTools(); // Use void for fire-and-forget
+        void get().initializeXmlTools(); // fire-and-forget
 
         set((state) => {
           state.textInput = text;

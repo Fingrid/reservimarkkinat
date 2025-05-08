@@ -65,6 +65,8 @@ export const useConfigStore = create<ConfigState>()(
           state.isLoading = false;
           state.isInitialized = true;
         });
+
+        console.log("Configuration loaded");
       } catch (error) {
         console.error("Failed to fetch configuration:", error);
         set((state) => {
