@@ -122,18 +122,7 @@ export const useXmlSchemaStore = create<XmlSchemaState>()(
               const buffer = Buffer.from(content);
               const urn = extractUrnFromXsd(content);
 
-              // Determine category to construct a proper fileUrl
-              let category = "";
-              if (manifest.common.includes(filename)) {
-                category = "common";
-              } else if (manifest.cim.includes(filename)) {
-                category = "cim";
-              }
-
-              // Construct a fileUrl that's compatible with the existing code
-              const fileUrl = `/schemas/${category}/${filename}`;
-
-              return [filename, { urn, fileUrl, buffer }];
+              return [filename, { urn, fileUrl: apiUrl, buffer }];
             } catch (err) {
               console.error(`Error processing schema ${filename}:`, err);
 

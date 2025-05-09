@@ -1,14 +1,13 @@
+import type { FC, ReactNode } from "react";
 import type { Metadata } from "next";
-import { Layout, Navbar } from "nextra-theme-docs";
+import { Layout } from "nextra-theme-docs";
 import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
-import type { FC, ReactNode } from "react";
 import { Footer } from "@/_components/Footer";
 import { labGrotesqueWeb } from "@/_fonts/fonts";
-import { FingridLogo } from "@/_components/FingridLogo";
 import { ConfigInitializer } from "./_components/ConfigInitializer";
 import "./globals.css";
-import UserButton from "./_components/UserButton";
+import { NavBar } from "./_components/NavBar";
 
 export const metadata: Metadata = {
   title: {
@@ -34,24 +33,9 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
         ></script>
       </Head>
       <body>
-        {/* Initialize configuration including feature flags */}
         <ConfigInitializer />
         <Layout
-          navbar={
-            <Navbar
-              logo={
-                <div className="fingrid_logo flex align-center items-center">
-                  <FingridLogo width={"100%"} />
-                  <p className="pl-3 ml-3 border-l-[1px] border-l-[var(--color-separator)] dark:border-l-[var(--color-dark-separator)]">
-                    Developer&nbsp;Portal
-                  </p>
-                </div>
-              }
-              logoLink={"https://www.fingrid.fi/"}
-            >
-              <UserButton />
-            </Navbar>
-          }
+          navbar={<NavBar />}
           sidebar={{ autoCollapse: false, defaultMenuCollapseLevel: 1 }}
           pageMap={await getPageMap()}
           nextThemes={{ defaultTheme: "light" }}

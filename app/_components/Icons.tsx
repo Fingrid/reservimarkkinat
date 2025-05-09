@@ -59,7 +59,7 @@ export const UploadIcon = () => (
 
 export const AvatarPlaceHolderIcon = () => (
   <svg
-    className="absolute w-12 h-12 text-gray-400 -left-1"
+    className="w-8 h-8 text-[var(--color-secondary-action)] dark:text-[var(--color-dark-secondary-action)] p-1"
     fill="currentColor"
     viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg"

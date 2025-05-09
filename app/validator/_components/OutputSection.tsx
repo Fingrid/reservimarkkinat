@@ -3,7 +3,6 @@
 import React from "react";
 import { useValidatorStore } from "@/_store/validatorStore";
 import { useXmlSchemaStore } from "@/_store/xmlSchemaStore";
-import Link from "next/link";
 
 interface ValidationError {
   line: number;
@@ -123,80 +122,56 @@ export function OutputSection() {
       <div className={classes.wrapper}>
         <SectionHeader />
 
-        {/* Authentication error */}
-        {isAuthError && (
-          <div className={classes.result.error}>
-            <p>❌ Authentication required</p>
-            <p>
-              You need to be authenticated to use the schema validation
-              functionality.
-            </p>
-            <p className="mt-2">
-              <Link
-                href="/api/auth/signin"
-                className="text-blue-600 hover:underline"
-              >
-                Sign in to continue
-              </Link>
-            </p>
-          </div>
+        {/* XML Schema validation status */}
+        {status === "validating" && <ValidationLoading />}
+
+        {/* Business rule validation status */}
+        {status === "server-validating" && (
+          <>
+            <ValidationSuccess />
+            <ServerValidationLoading />
+          </>
         )}
 
-        {/* Only show validation results if there's no auth error */}
-        {!isAuthError && (
+        {/* XML schema validation complete but no business validation */}
+        {status === "validation-complete" &&
+          (validationResults?.isValid ? (
+            <>
+              <ValidationSuccess />
+            </>
+          ) : (
+            <ValidationError errors={validationResults?.details} />
+          ))}
+
+        {/* Business validation complete */}
+        {status === "server-validation-complete" && (
           <>
-            {/* XML Schema validation status */}
-            {status === "validating" && <ValidationLoading />}
-
-            {/* Business rule validation status */}
-            {status === "server-validating" && (
-              <>
-                <ValidationSuccess />
-                <ServerValidationLoading />
-              </>
+            {/* Always show XML validation result first */}
+            {validationResults?.isValid ? (
+              <ValidationSuccess />
+            ) : (
+              <ValidationError errors={validationResults?.details} />
             )}
 
-            {/* XML schema validation complete but no business validation */}
-            {status === "validation-complete" &&
-              (validationResults?.isValid ? (
-                <>
-                  <ValidationSuccess />
-                </>
+            {/* Then show business validation results if XML was valid */}
+            {validationResults?.isValid &&
+              validationResults?.businessValidation &&
+              (validationResults.businessValidation.isValid ? (
+                <BusinessValidationSuccess />
               ) : (
-                <ValidationError errors={validationResults?.details} />
+                <BusinessValidationError
+                  errors={validationResults.businessValidation.details}
+                />
               ))}
-
-            {/* Business validation complete */}
-            {status === "server-validation-complete" && (
-              <>
-                {/* Always show XML validation result first */}
-                {validationResults?.isValid ? (
-                  <ValidationSuccess />
-                ) : (
-                  <ValidationError errors={validationResults?.details} />
-                )}
-
-                {/* Then show business validation results if XML was valid */}
-                {validationResults?.isValid &&
-                  validationResults?.businessValidation &&
-                  (validationResults.businessValidation.isValid ? (
-                    <BusinessValidationSuccess />
-                  ) : (
-                    <BusinessValidationError
-                      errors={validationResults.businessValidation.details}
-                    />
-                  ))}
-              </>
-            )}
-
-            {/* Initialization errors */}
-            {status === "initialization-failed" && !isAuthError && (
-              <div className={classes.result.error}>
-                <p>❌ Initialization failed</p>
-                {error && <p>{error}</p>}
-              </div>
-            )}
           </>
+        )}
+
+        {/* Initialization errors */}
+        {status === "initialization-failed" && !isAuthError && (
+          <div className={classes.result.error}>
+            <p>❌ Initialization failed</p>
+            {error && <p>{error}</p>}
+          </div>
         )}
       </div>
     </div>

@@ -1,18 +1,21 @@
-import { auth, signIn, signOut } from "auth";
+"use client";
+
 import { Avatar } from "./Avatar";
 import { User } from "next-auth";
+import { actionSignOut, actionSignIn } from "./userbuttonactions";
+import { useEffect, useState } from "react";
+import { getSession } from "next-auth/react";
+
+const buttonClassNames = "flex items-center border-[var(--color-separator)] dark:border-[var(--color-dark-separator)] pl-1 pr-1";
 
 const SignIn = () => {
   return (
     <form
-      action={async () => {
-        "use server";
-        await signIn();
-      }}
+    action={() => actionSignIn() }
     >
-      <button>
-        <span className="p-3">Sign in</span>
-        <Avatar initials="?" />
+      <button className={ buttonClassNames }>
+        <div className="p-2">Log in</div>
+        <Avatar initials="" />
       </button>
     </form>
   );
@@ -29,22 +32,31 @@ const SignOut = ({ user }: { user?: User }) => {
 
   return (
     <form
-      action={async () => {
-        "use server";
-        await signOut();
-      }}
+      action={() => actionSignOut() }
     >
-      <button>
+      <button className={ buttonClassNames }>
+        <div className="pr-2">{user?.name}</div>
         <Avatar initials={initials} />
       </button>
     </form>
   );
 };
 
-export default async function UserButton() {
-  const session = await auth();
+export const UserButton = () => {
+  const [ user, setUser ] = useState<User | null>(null);
 
-  if (!session?.user) return <SignIn />;
+  useEffect(() => {
+    const fetchUser = async () => {
+      const session = await getSession();
+      if (session) {
+        setUser(session?.user ?? null);
+      } else {
+        setUser(null);
+      }
+    }
+    fetchUser();
+  }, []);
 
-  return <SignOut user={session.user} />;
+  if (!user) return <SignIn />;
+  return <SignOut user={user} />;
 }

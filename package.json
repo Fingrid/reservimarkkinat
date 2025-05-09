@@ -10,7 +10,7 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "format": "prettier --write .",
-    "build:generate_index": "pagefind --site .next/server/app --output-path out/_pagefind",
+    "build:generate_index": "pagefind --site .next/server/app --output-path public/_pagefind",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",

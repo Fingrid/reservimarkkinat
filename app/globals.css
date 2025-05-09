@@ -256,7 +256,7 @@
       line-height: 1.5rem;
     }
 
-    a,
+    div:not(:has(.fingrid_logo)) > a,
     button {
       @apply text-[var(--color-text)];
       @apply dark:text-[var(--color-dark-text)];
@@ -265,15 +265,10 @@
       font-style: normal;
       font-weight: 500;
       line-height: 1.5rem;
-    }
 
-    a,
-    button {
       &:hover {
         @apply text-[var(--color-primary-hover)];
         @apply dark:text-[var(--color-dark-primary-hover)];
-
-        text-decoration: underline;
       }
     }
 

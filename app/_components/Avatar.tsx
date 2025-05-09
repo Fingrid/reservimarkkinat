@@ -3,7 +3,7 @@ import { AvatarPlaceHolderIcon } from "./Icons";
 export const Avatar = ({ initials }: { initials?: string }) => {
   if (!initials) {
     return (
-      <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+      <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
         <AvatarPlaceHolderIcon />
       </div>
     );
