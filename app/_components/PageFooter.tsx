@@ -2,7 +2,7 @@
 import React from "react";
 import {
   Facebook,
-  Footer as FingridFooter,
+  Footer,
   Instagram,
   Linkedin,
   Rss,
@@ -117,9 +117,9 @@ const footerContent = {
   ],
 };
 
-export const Footer: FC = () => {
+export const PageFooter: FC = () => {
   return (
-    <FingridFooter
+    <Footer
       className={labGrotesqueWeb.className}
       bottomLinks={footerContent.bottomLinks.map((link) => (
         <a key={link.text} href={link.href}>

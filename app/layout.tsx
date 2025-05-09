@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Layout } from "nextra-theme-docs";
 import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
-import { Footer } from "@/_components/Footer";
+import { PageFooter } from "@/_components/PageFooter";
 import { labGrotesqueWeb } from "@/_fonts/fonts";
 import { ConfigInitializer } from "./_components/ConfigInitializer";
 import "./globals.css";
@@ -39,7 +39,7 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
           sidebar={{ autoCollapse: false, defaultMenuCollapseLevel: 1 }}
           pageMap={await getPageMap()}
           nextThemes={{ defaultTheme: "light" }}
-          footer={<Footer />}
+          footer={<PageFooter />}
           editLink={null}
           feedback={{ content: null }}
           toc={{
