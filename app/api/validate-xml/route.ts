@@ -1,7 +1,6 @@
 import { apiEndpoints } from "@/_config/app.config";
-import { NextRequest } from "next/server";
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   if (!apiEndpoints.validator.endpoint) {
     return new Response("Validator endpoint is not configured", {
       status: 404,
@@ -12,12 +11,22 @@ export async function POST(request: NextRequest) {
   const response = await fetch(new Request(apiEndpoints.validator.endpoint, {
     method: apiEndpoints.validator.method,
     headers: {
-      "Content-Type": "application/xml",
-      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Accept": "application/json",
     },
-    body: request.body,
-    duplex: true 
+    body: JSON.stringify(await request.json())
   } as RequestInit));
+
+  if(!response.ok) {
+    console.error("Error response from validator:", response.statusText);
+    
+    const body = await response.text();
+    console.error("Error body from validator:", body);
+    return new Response(body, {
+      status: response.status,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 
   const data = await response.json();
 
