@@ -9,14 +9,15 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  const response = await fetch(apiEndpoints.validator.endpoint, {
+  const response = await fetch(new Request(apiEndpoints.validator.endpoint, {
     method: apiEndpoints.validator.method,
     headers: {
       "Content-Type": "application/xml",
       Accept: "application/json",
     },
     body: request.body,
-  });
+    duplex: true 
+  } as RequestInit));
 
   const data = await response.json();
 
