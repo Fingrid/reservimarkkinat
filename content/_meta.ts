@@ -1,6 +1,6 @@
 export default {
   // Top nav
-  validator: {
+  test_tool: {
     type: "page",
     title: "Reservemarket Test Tool",
     href: "https://developers.fingrid.fi/validator",
