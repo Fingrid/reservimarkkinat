@@ -2,8 +2,7 @@ export default {
   // Top nav
   validator: {
     type: "page",
-    display: "hidden",
-    title: "Validate your XML",
+    title: "Reservemarket Test Tool",
     href: "https://developers.fingrid.fi/validator",
   },
   
