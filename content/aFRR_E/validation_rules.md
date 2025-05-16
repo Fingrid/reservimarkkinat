@@ -32,8 +32,3 @@ If you wish to change either of these bid attributes, you must first cancel the 
 * Messages are never partially accepted, only fully accepted or fully rejected
 * The acknowledgement message contains the erroneuous timeseries and a reason text indicating the error
 * Document level error code is A01 for accepted message, A02 for fully rejected message.
-
-List of error texts can be found on the Document structure page. 
-
-
-
