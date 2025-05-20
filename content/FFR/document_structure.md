@@ -40,7 +40,7 @@ each bid. When submitting FFR-FCR combination bids, the FCR bids will use the st
 | quantity_Measurement_Unit.name | Always MAW (Megawatt) |
 | currency_Unit.name | Always EUR |
 | price_Measurement_Unit.name | Always MAW (Megawatt) |
-| Divisible | A01 (Divisible) | 
+| Divisible | A02 (Indivisible) | 
 | exclusiveBidsIdentification | Optional. UUID identifier used when linking FFR and FCR bids together. |
 | registeredResource.mRID | For FFR: <br> One of the following options, depending on the asset - **Kulutus** (consumption) / **Tuotanto** (Production) / **Aggregoitu** (Aggregated) | 
 | flowDirection.direction | Always A01 (Up) | 
