@@ -16,7 +16,7 @@ Bids are submitted to the mFRR Energy Market as *ReserveBid_MarketDocument*. Cur
 | mRID | Unique identification of the document in UUID form |
 | revisionNumber | Always 1 |
 | Type | A24 (BidDocument) |
-| process.processType | AZ14 (Fast Frequency Reserve) |
+| process.processType | Z14 (Fast Frequency Reserve) |
 | sender_MarketParticipant.mRID | Identification of the sender party |
 | sender_MarketParticipant.marketRole.type | One of A46 (BSP) or A45 (Service Provider/Data Provider) | 
 | receiver_MarketParticipant.mRID  | The TSO's EIC identification <br> Fingrid = **10X1001A1001A264** | 
