@@ -70,7 +70,7 @@
 
   --color-disabled: #b3b3b3;
 
-  --color-breadcrumb: #7d8699;
+  --color-breadcrumb: #3e5660;
 
   /* Callout colors */
   --color-info-background: #f2f2f2;
@@ -103,7 +103,7 @@
 
   --color-dark-disabled: #4d4d4d;
 
-  --color-dark-breadcrumb-path-item: #7d8699;
+  --color-dark-breadcrumb-path-item: #fff;
 
   --color-dark-info-background: #333333;
   --color-dark-info-text: #ffffff;
@@ -270,10 +270,16 @@
       @apply text-[var(--color-text)];
       @apply dark:text-[var(--color-dark-text)];
 
+      a {
+        @apply border-l-2 pl-1.5 border-l-transparent;
+      }
+
       &:has(.x\:text-primary-600) {
         a {
           @apply text-[var(--color-primary-action)];
           @apply dark:text-[var(--color-dark-primary-action)];
+          @apply border-l-[var(--color-primary-action)];
+          @apply dark:border-l-[var(--color-dark-primary-action)];
         }
       }
     }
@@ -287,6 +293,16 @@
     @apply dark:border-l-[var(--color-dark-separator)];
 
     @apply border-l-[1px];
+
+    a {
+      @apply text-[var(--color-primary-action)];
+      @apply dark:text-[var(--color-dark-text)];
+
+      &:hover {
+        @apply text-[var(--color-primary-hover)];
+        @apply dark:text-[var(--color-dark-primary-hover)];
+      }
+    }
   }
 
   article div:last-child a {
@@ -303,7 +319,8 @@
 
     span:last-child {
       font-weight: 700;
-      color: var(--color-text);
+      @apply text-[var(--color-text)];
+      @apply dark:text-[var(--color-dark-text)];
     }
 
     svg {
