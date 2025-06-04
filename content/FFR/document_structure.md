@@ -53,7 +53,7 @@ each bid. When submitting FFR-FCR combination bids, the FCR bids will use the st
 | energy_Price.amount | Offered price in euros | 
 ### Example message
 ## Reserve Allocation Result Document
-The Reserve Allocation Result document is a report sent to the BSP after the MTU containing information of the price and volume of activations during the MTU. No reference to the actual bids is included in the document. The message is only sent if the receiving BSP has submitted bids that day. The FFR allocation document does not contain information of FCR parts of combination bids.
+The Reserve Allocation Result document is a report sent to the BSP after the MTU containing information of the price and volume of activations during the MTU. No reference to the actual bids is included in the document; Per-bid results are sent in a separate document. The message is only sent if the receiving BSP has submitted bids that day. The FFR allocation document does not contain information of FCR parts of combination bids.
 ### Table of document attributes
 | Attribute | Description |
 |-----------|-------------|
@@ -61,15 +61,15 @@ The Reserve Allocation Result document is a report sent to the BSP after the MTU
 | revisionNumber | Always 1 |
 | Type | A38 (Reserve Allocation Result) |
 | process.processType | Z14 (Fast Frequency Reserve) |
-| sender_MarketParticipant.mRID | Identification of the sender party |
-| sender_MarketParticipant.marketRole.type | One of A46 (BSP) or A45 (Service Provider/Data Provider) | 
-| receiver_MarketParticipant.mRID  | The TSO's EIC identification <br> Fingrid = **10X1001A1001A264** | 
-| receiver_MarketParticipant.marketRole.type | A04 (System Operator) | 
+| sender_MarketParticipant.mRID  | The TSO's EIC identification <br> Fingrid = **10X1001A1001A264** | 
+| sender_MarketParticipant.marketRole.type | A04 (System Operator) | 
+| receiver_MarketParticipant.mRID | Identification of the sender party |
+| receiver_MarketParticipant.marketRole.type | One of A46 (BSP) or A39 (Service Provider/Data Provider) | 
 | createdDateTime  | Date and time of document creation in UTC+0 <br> Format: YYYY-MM-DDTHH:MM:SSZ | 
 | reserveBid_Period.timeInterval | Time period covered in the document <br> Format: YYYY-MM-DDTHH:MMZ <br> start and end time | 
 | domain.mRID | EIC identification of the control area <br> For Finland **10YFI-1--------U** | 
 | **Allocation Time Series** |
-| Time Series Identification | Unique identification of the document in UUID form |
+| Time Series Identification | Unique identification of the time series in UUID form |
 | Bid Document Identification | NA |
 | Bid Document Version | Always 1 | 
 | Reserve Bid Identification | NA |
@@ -91,7 +91,38 @@ The Reserve Allocation Result document is a report sent to the BSP after the MTU
 | Pos | Relative position within a reserve bid interval |
 | Quantity | Accepted quantity in megawatts | 
 | Price | Hour's marginal price | 
-### Example message
+### Table of per-bid document attributes
+The per-bid document has a similar structure to normal reserve allocation result documents, the only differences being in the Allocation Time Series.
+| Attribute | Description |
+|-----------|-------------|
+| **Allocation Time Series** |
+| Time Series Identification | Unique identification of the time series in UUID form |
+| Bid Document Identification | **Original Bid ID** |
+| Bid Document Version | Always 1 | 
+| Reserve Bid Identification | NA |
+| Tendering Party | The TSO's EIC identification <br> Fingrid = **10X1001A1001A264** | 
+| Auction Identification | FFR_CAPACITY_MARKET | 
+| businessType | Z85 - FFR |
+| acquiring Area | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
+| connecting Area | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
+| Contract Type | A01 - Daily |
+| Contract Identification | NA |
+| Measure Unit Quantity | Always MAW (Megawatt) |
+| Currency | Always EUR |
+| Measure Unit Quantity | Always MAW (Megawatt) |
+| Direction | A01 - Up |
+| **Reason** |
+| **code** | **One of A73 (Bid accepted), A72 (Bid partially accepted), or B09 (Bid not accepted)** |
+| **Period** |
+| Time Interval | Time period covered in the document, one complete spot day <br> Format: YYYY-MM-DDTHH:MMZ <br> start and end time | 
+| Resolution | PT60M or PT1H | 
+| **Interval** |
+| **Position** | **1** |
+| Quantity | Accepted quantity in megawatts | 
+| Price | Hour's marginal price | 
+| **Secondary Quantity** | **Original volume of the bid** | 
+| **Secondary Price** | **Original price of the bid** | 
+### Example messages
 ## Acknowledgement Document
 For every message detailed in this page, an acknowledgement document should be generated and sent back by the receiving party to indicate that the message has been successfully received. The document can be either positive (code A01) or negative (A02).
 ### Table of document attributes
