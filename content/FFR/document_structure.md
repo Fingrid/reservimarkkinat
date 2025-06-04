@@ -93,4 +93,25 @@ The Reserve Allocation Result document is a report sent to the BSP after the MTU
 | Price | Hour's marginal price | 
 ### Example message
 ## Acknowledgement Document
+For every message detailed in this page, an acknowledgement document should be generated and sent back by the receiving party to indicate that the message has been successfully received. The document can be either positive (code A01) or negative (A02).
+### Table of document attributes
+| Attribute | Description |
+|-----------|-------------|
+| mRID | Unique identification of the bid in UUID form |
+| createdDateTime  | Time of document creation in UTC+0, format: YYYY-MM-DDTHH:MM:SSZ | 
+| sender_MarketParticipant.mRID | Identification of the sender party |
+| sender_MarketParticipant.marketRole.type | One of A46 (BSP), A27 (Resource Provider), A34 (Reserve Allocator) or A04 (TSO) | 
+| receiver_MarketParticipant.mRID | Identification of the receiving party |
+| receiver_MarketParticipant.marketRole.type | One of A46 (BSP), A27 (Resource Provider), or A04 (TSO) | 
+| received_MarketDocument.mRID | Unique identification of the received document in UUID form |
+| received_MarketDocument.revisionNumber | Revision number of the received document |
+| received_MarketDocument.Type | Type of received document |
+| received_MarketDocument.process.processType | Process type of received document |
+| received_MarketDocument.createdDateTime  | Time of received document creation in UTC+0, format: YYYY-MM-DDTHH:MM:SSZ | 
+| **Document level Reason: one or more instances per document** |
+| code | One of A01 (Accepted) or A02 (Rejected) | 
+| text | Free text field, may be populated with an error message | 
+| **Bid level Reason: zero or more instances per erroneous bid time series** |
+| code | 999 - Error not specifically identified. Other error codes may be used. | 
+| text | Free text field, may be populated with an error message for a bid causing the acknowledgement document to be negative. | 
 ### Example messages
