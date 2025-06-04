@@ -34,7 +34,7 @@ each bid. When submitting FFR-FCR combination bids, the FCR bids will use the st
 |-----------|-------------|
 | mRID | Unique identification of the bid in UUID form |
 | auction.mRID | FFR |
-| businessType | Z85 - FFR  |
+| businessType | Z85 - FFR |
 | acquiring_Domain.mRID | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
 | connecting_Domain.mRID | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
 | quantity_Measurement_Unit.name | Always MAW (Megawatt) |
@@ -53,6 +53,44 @@ each bid. When submitting FFR-FCR combination bids, the FCR bids will use the st
 | energy_Price.amount | Offered price in euros | 
 ### Example message
 ## Reserve Allocation Result Document
+The Reserve Allocation Result document is a report sent to the BSP after the MTU containing information of the price and volume of activations during the MTU. No reference to the actual bids is included in the document. The message is only sent if the receiving BSP has submitted bids that day. The FFR allocation document does not contain information of FCR parts of combination bids.
+### Table of document attributes
+| Attribute | Description |
+|-----------|-------------|
+| mRID | Unique identification of the document in UUID form |
+| revisionNumber | Always 1 |
+| Type | A38 (Reserve Allocation Result) |
+| process.processType | Z14 (Fast Frequency Reserve) |
+| sender_MarketParticipant.mRID | Identification of the sender party |
+| sender_MarketParticipant.marketRole.type | One of A46 (BSP) or A45 (Service Provider/Data Provider) | 
+| receiver_MarketParticipant.mRID  | The TSO's EIC identification <br> Fingrid = **10X1001A1001A264** | 
+| receiver_MarketParticipant.marketRole.type | A04 (System Operator) | 
+| createdDateTime  | Date and time of document creation in UTC+0 <br> Format: YYYY-MM-DDTHH:MM:SSZ | 
+| reserveBid_Period.timeInterval | Time period covered in the document <br> Format: YYYY-MM-DDTHH:MMZ <br> start and end time | 
+| domain.mRID | EIC identification of the control area <br> For Finland **10YFI-1--------U** | 
+| **Allocation Time Series** |
+| Time Series Identification | Unique identification of the document in UUID form |
+| Bid Document Identification | NA |
+| Bid Document Version | Always 1 | 
+| Reserve Bid Identification | NA |
+| Tendering Party | The TSO's EIC identification <br> Fingrid = **10X1001A1001A264** | 
+| Auction Identification | FFR | 
+| businessType | Z85 - FFR |
+| acquiring Area | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
+| connecting Area | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
+| Contract Type | A01 - Daily |
+| Contract Identification | NA |
+| Measure Unit Quantity | Always MAW (Megawatt) |
+| Currency | Always EUR |
+| Measure Unit Quantity | Always MAW (Megawatt) |
+| Direction | A01 - Up |
+| **Period** |
+| Time Interval | Time period covered in the document, one complete spot day <br> Format: YYYY-MM-DDTHH:MMZ <br> start and end time | 
+| Resolution | PT60M or PT1H | 
+| **Interval** |
+| Pos | Relative position within a reserve bid interval |
+| Quantity | Accepted quantity in megawatts | 
+| Price | Hour's marginal price | 
 ### Example message
 ## Acknowledgement Document
 ### Example messages
