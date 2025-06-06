@@ -564,6 +564,9 @@
       }
 
       a {
+        @apply text-[var(--color-text)];
+        @apply dark:text-[var(--color-dark-text)];
+        
         &:hover {
           @apply text-[var(--color-info-hover)];
           @apply dark:text-[var(--color-info-tip-hover)];
@@ -583,6 +586,9 @@
       }
 
       a {
+        @apply text-[var(--color-text)];
+        @apply dark:text-[var(--color-dark-text)];
+        
         &:hover {
           @apply text-[var(--color-tip-hover)];
           @apply dark:text-[var(--color-dark-tip-hover)];
@@ -602,6 +608,9 @@
       }
 
       a {
+        @apply text-[var(--color-text)];
+        @apply dark:text-[var(--color-dark-text)];
+        
         &:hover {
           @apply text-[var(--color-warning-hover)];
           @apply dark:text-[var(--color-dark-warning-hover)];
@@ -621,6 +630,9 @@
       }
 
       a {
+        @apply text-[var(--color-text)];
+        @apply dark:text-[var(--color-dark-text)];
+        
         &:hover {
           @apply text-[var(--color-important-hover)];
           @apply dark:text-[var(--color-dark-important-hover)];
@@ -640,6 +652,9 @@
       }
 
       a {
+        @apply text-[var(--color-text)];
+        @apply dark:text-[var(--color-dark-text)];
+        
         &:hover {
           @apply text-[var(--color-error-hover)];
           @apply dark:text-[var(--color-dark-error-hover)];
