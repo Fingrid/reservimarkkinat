@@ -75,18 +75,23 @@
   /* Callout colors */
   --color-info-background: #f2f2f2;
   --color-info-text: #4d4d4d;
+  --color-info-hover: #3e5660;
 
   --color-tip-background: #e8f8fc;
   --color-tip-text: #0a4a5c;
+  --color-tip-hover: #3e5660;
 
   --color-important-background: #e8f8fc;
   --color-important-text: #0a4a5c;
+  --color-important-hover: #3e5660;
 
   --color-warning-background: #fef5e6;
   --color-warning-text: #634003;
+  --color-warning-hover: #3e5660;
 
   --color-error-background: #ffebe5;
   --color-error-text: #992400;
+  --color-error-hover: #3e5660;
 
   /* Dark mode vars */
   --color-dark-text: #ffffff;
@@ -107,18 +112,23 @@
 
   --color-dark-info-background: #333333;
   --color-dark-info-text: #ffffff;
+  --color-dark-info-hover: #7d8699;
 
   --color-dark-tip-background: #0a4a5c;
   --color-dark-tip-text: #ffffff;
+  --color-dark-tip-hover: #7d8699;
 
   --color-dark-important-background: #0a4a5c;
   --color-dark-important-text: #ffffff;
+  --color-dark-important-hover: #7d8699;
 
   --color-dark-warning-background: #956004;
   --color-dark-warning-text: #ffffff;
+  --color-dark-warning-hover: #7d8699;
 
   --color-dark-error-background: #661800;
   --color-dark-error-text: #ffffff;
+  --color-dark-error-hover: #7d8699;
 
   --color-dark-footer-top: #28292e;
   --color-dark-footer-bottom: #05252e;
@@ -205,6 +215,16 @@
       @apply bg-[var(--color-background-level-1)];
       @apply dark:bg-[var(--color-dark-background-level-1)];
       border: 0;
+    }
+
+    a {
+       &:hover {
+        @apply text-[var(--color-primary-hover)];
+        @apply dark:text-[var(--color-dark-primary-hover)];
+
+        opacity: 1;
+        text-decoration: none;
+      }
     }
 
     a[target="_blank"] {
@@ -542,6 +562,13 @@
         @apply fill-[var(--color-info-text)];
         @apply dark:fill-[var(--color-dark-info-text)];
       }
+
+      a {
+        &:hover {
+          @apply text-[var(--color-info-hover)];
+          @apply dark:text-[var(--color-info-tip-hover)];
+        }
+      }
     }
 
     &.tip {
@@ -553,6 +580,13 @@
       svg {
         @apply fill-[var(--color-tip-text)];
         @apply dark:fill-[var(--color-dark-tip-text)];
+      }
+
+      a {
+        &:hover {
+          @apply text-[var(--color-tip-hover)];
+          @apply dark:text-[var(--color-dark-tip-hover)];
+        }
       }
     }
 
@@ -566,6 +600,13 @@
         @apply fill-[var(--color-warning-text)];
         @apply dark:fill-[var(--color-dark-warning-text)];
       }
+
+      a {
+        &:hover {
+          @apply text-[var(--color-warning-hover)];
+          @apply dark:text-[var(--color-dark-warning-hover)];
+        }
+      }
     }
 
     &.important {
@@ -578,6 +619,13 @@
         @apply fill-[var(--color-important-text)];
         @apply dark:fill-[var(--color-dark-important-text)];
       }
+
+      a {
+        &:hover {
+          @apply text-[var(--color-important-hover)];
+          @apply dark:text-[var(--color-dark-important-hover)];
+        }
+      }
     }
 
     &.error {
@@ -589,6 +637,13 @@
       svg {
         @apply fill-[var(--color-error-text)];
         @apply dark:fill-[var(--color-dark-error-text)];
+      }
+
+      a {
+        &:hover {
+          @apply text-[var(--color-error-hover)];
+          @apply dark:text-[var(--color-dark-error-hover)];
+        }
       }
     }
 
