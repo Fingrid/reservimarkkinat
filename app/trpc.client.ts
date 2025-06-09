@@ -1,11 +1,11 @@
-import { getUntypedClient, createTRPCClient, httpBatchLink } from "@trpc/client";
+import { getUntypedClient, createTRPCClient, httpLink } from "@trpc/client";
 
 const env = process.env;
 const VALIDATOR_ENDPOINT = env.VALIDATOR_ENDPOINT || "http://localhost:8787/trpc";
 
 const anyTypeClient = createTRPCClient({
   links: [
-    httpBatchLink({
+    httpLink({
       url: VALIDATOR_ENDPOINT
     })
   ]

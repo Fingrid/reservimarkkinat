@@ -14,6 +14,8 @@ export const GET = auth(async (request: NextRequest) => {
   try {
     const response = (await validatorClient.query('listXMLSchemas') as SchemaList);
 
+    console.log("Fetched schemas:", response);
+
     return NextResponse.json({ schemas: response.schemas }, { status: 200 });
   } catch (error) {
     console.error("Fetching schema list failed:", error);
