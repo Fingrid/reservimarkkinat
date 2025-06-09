@@ -1,8 +1,14 @@
-import { getUntypedClient, createTRPCClient, loggerLink, httpBatchLink } from "@trpc/client";
+import { 
+  getUntypedClient, 
+  createTRPCClient, 
+  loggerLink,
+  httpBatchLink, 
+} from "@trpc/client";
+import superjson from 'superjson';
+
 
 const env = process.env;
 const VALIDATOR_ENDPOINT = env.VALIDATOR_ENDPOINT || "http://localhost:8787/trpc";
-//const DEBUG_ENABLED = env.DEBUG_ENABLED === "true";
 
 const anyTypeClient = createTRPCClient({
   links: [
@@ -12,8 +18,8 @@ const anyTypeClient = createTRPCClient({
       }
     ),
     httpBatchLink({
-      maxItems: 5,
-      url: VALIDATOR_ENDPOINT
+        url: VALIDATOR_ENDPOINT,
+        transformer: superjson
     })
   ]
 })
