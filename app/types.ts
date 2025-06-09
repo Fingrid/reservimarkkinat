@@ -25,3 +25,5 @@ export interface SchemaInfo {
   urn: string | null;
   url: string | null;
 }
+
+export type SchemaList = { schemas: { urn: string | null; filename: string }[] };

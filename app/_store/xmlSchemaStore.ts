@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { enableMapSet } from "immer";
-import { extractUrnFromXsd } from "@/_utils/xml/utils";
+import { type SchemaList } from "@/types";
 
 enableMapSet(); // Enable the MapSet plugin for Immer
 
@@ -10,12 +10,6 @@ enableMapSet(); // Enable the MapSet plugin for Immer
 export type SchemaConfig = {
   location: string;
   filenames: string[];
-};
-
-// Manifest structure from API
-type SchemaManifest = {
-  common: string[];
-  cim: string[];
 };
 
 // Define the structure for a cached schema item
@@ -91,16 +85,12 @@ export const useXmlSchemaStore = create<XmlSchemaState>()(
           );
         }
 
-        const manifest: SchemaManifest = await manifestResponse.json();
-
-        // Get all unique filenames from the manifest
-        const allFilenames = [
-          ...new Set([...manifest.common, ...manifest.cim]),
-        ];
+        const schemaList: SchemaList = await manifestResponse.json();
+        console.log("Fetched schema list:", schemaList);
 
         // Create an array of promises, each resolving to [filename, XMLBufferItem] or null on error
-        const schemaFetchPromises = allFilenames.map(
-          async (filename): Promise<[string, XMLBufferItem] | null> => {
+        const schemaFetchPromises = schemaList.schemas.map(
+          async ({ filename, urn }): Promise<[string, XMLBufferItem] | null> => {
             const apiUrl = `/api/schemas/${filename}`;
 
             try {
@@ -120,7 +110,6 @@ export const useXmlSchemaStore = create<XmlSchemaState>()(
 
               const content = await res.text();
               const buffer = Buffer.from(content);
-              const urn = extractUrnFromXsd(content);
 
               return [filename, { urn, fileUrl: apiUrl, buffer }];
             } catch (err) {
