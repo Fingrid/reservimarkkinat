@@ -11,11 +11,11 @@ import {
 } from "@fingrid/design-system-components";
 
 const TypeToEmoji = {
-  default: <TipsAndUpdates height="20" className="x:mt-1" />,
-  error: <ErrorOutline height="20" className="x:mt-1" />,
-  info: <Info height="20" className="x:mt-1" />,
-  important: <Info height="20" className="x:mt-1" />,
-  warning: <WarningAmber height="20" className="x:mt-1" />,
+  default: <TipsAndUpdates aria-hidden="true" height="20" className="x:mt-1" />,
+  error: <ErrorOutline aria-hidden="true" height="20" className="x:mt-1" />,
+  info: <Info aria-hidden="true" height="20" className="x:mt-1" />,
+  important: <Info aria-hidden="true" height="20" className="x:mt-1" />,
+  warning: <WarningAmber aria-hidden="true" height="20" className="x:mt-1" />,
 };
 
 type CalloutType = keyof typeof TypeToEmoji;
