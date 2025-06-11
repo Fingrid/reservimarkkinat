@@ -37,7 +37,7 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
             <Navbar
               logo={
                 <div className="fingrid_logo flex align-center items-center">
-                  <a href="https://www.fingrid.fi/"><FingridLogo width={"100%"} /></a>
+                  <a href="https://www.fingrid.fi/" title="Fingrid.fi Homepage"><FingridLogo width={"100%"} /></a>
                   <p className="pl-3 ml-3 border-l-[1px] border-l-[var(--color-separator)] dark:border-l-[var(--color-dark-separator)]">
                     <a className="font-bold" href="https://developers.fingrid.fi/">Developer&nbsp;Portal</a>
                   </p>
