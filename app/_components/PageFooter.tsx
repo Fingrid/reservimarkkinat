@@ -148,11 +148,13 @@ export const PageFooter: FC = () => {
               key="footer_other_links"
               style={{ alignItems: "flex-start", display: "flex", gap: "16px" }}
             >
-              <a key="some_fb" href="https://www.facebook.com/fingridfi"
+              <a key="some_fb" 
+                href="https://www.facebook.com/fingridfi"
                 aria-label="Fingrid on Facebook">
-                <Facebook height={40} width={40} />
+                <Facebook height={40} width={40} aria-label="Fingrid on Facebook" />
               </a>
-              <a key="some_twitter" href="https://twitter.com/fingrid_oyj"
+              <a key="some_twitter" 
+                href="https://twitter.com/fingrid_oyj"
                 aria-label="Fingrid on Twitter">
                 <Twitter height={40} width={40} />
               </a>
