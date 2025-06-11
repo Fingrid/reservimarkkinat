@@ -18,29 +18,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: enable corepack and set yarn version to latest stable
+      - name: enable corepack and set pnpm version to latest stable
         run: |
           corepack enable
-          yarn set version stable
+          pnpm set version stable
       - uses: actions/setup-node@v4
         with:
+          cache: 'npm'
+          always-auth: true
           node-version: 22
-          cache: yarn
-      - name: Setup .yarnrc.yml
-        run: |
-          yarn config set npmScopes.fingrid.npmRegistryServer "https://pkgs.dev.azure.com/fingrid/Ohjelmistokehitys/_packaging/fingrid-npm/npm/registry/"
-          yarn config set npmScopes.fingrid.npmAlwaysAuth true
-          yarn config set npmScopes.fingrid.npmAuthToken $NPM_AUTH_TOKEN
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.ADO_PAT }}
+          registry-url: https://pkgs.dev.azure.com/fingrid/Ohjelmistokehitys/_packaging/fingrid-npm/npm/registry/
+          scope: "@fingrid"
       - name: Setup Pages
         uses: actions/configure-pages@v5
         #with: // Still fails - this time due to type error
         #  static_site_generator: next
       - name: Build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.ADO_PAT }}
         run: |
-          yarn install --immutable
-          yarn build
+          pnpm install --frozen-lockfile
+          pnpm build
           touch ./out/.nojekyll # Prevent Jekyll from processing the site
       - name: Upload Pages
         uses: actions/upload-pages-artifact@v3

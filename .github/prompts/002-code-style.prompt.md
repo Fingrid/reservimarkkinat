@@ -55,7 +55,7 @@ actions:
       6. Quality standards:
          - Follow ESLint rules without exceptions
          - Use Prettier for formatting
-         - Run `yarn lint` before commits
+         - Run `pnpm lint` before commits
          - Vitest is used to test the application
 
 examples:
