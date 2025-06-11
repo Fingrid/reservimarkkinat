@@ -24,7 +24,7 @@ jobs:
           pnpm set version stable
       - uses: actions/setup-node@v4
         with:
-          cache: 'npm'
+          cache: 'pnpm'
           always-auth: true
           node-version: 22
           registry-url: https://pkgs.dev.azure.com/fingrid/Ohjelmistokehitys/_packaging/fingrid-npm/npm/registry/
