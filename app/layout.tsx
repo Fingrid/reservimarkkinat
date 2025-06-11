@@ -3,7 +3,7 @@ import { Layout, Navbar } from "nextra-theme-docs";
 import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import type { FC, ReactNode } from "react";
-import { Footer } from "@/_components/footer";
+import { PageFooter } from "@/_components/PageFooter";
 import { labGrotesqueWeb } from "@/_fonts/fonts";
 import { FingridLogo } from "@/_components/FingridLogo";
 import "./globals.css";
@@ -48,7 +48,7 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
           sidebar={{ autoCollapse: false, defaultMenuCollapseLevel: 1 }}
           pageMap={await getPageMap()}
           nextThemes={{ defaultTheme: "light" }}
-          footer={<Footer />}
+          footer={<PageFooter />}
           editLink={null}
           feedback={{ content: null }}
           toc={{

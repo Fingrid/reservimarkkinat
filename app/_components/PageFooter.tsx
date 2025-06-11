@@ -151,20 +151,20 @@ export const PageFooter: FC = () => {
               <a key="some_fb" 
                 href="https://www.facebook.com/fingridfi"
                 title="Fingrid on Facebook"
-                aria-label="Fingrid on Facebook">
+                aria-label="Visit the Fingrid on Facebook">
                 <Facebook height={40} width={40} aria-label="Fingrid on Facebook" />
               </a>
               <a key="some_twitter" 
                 href="https://twitter.com/fingrid_oyj"
                 title="Fingrid on Twitter"
-                aria-label="Fingrid on Twitter">
+                aria-label="Visit the Fingrid on Twitter">
                 <Twitter height={40} width={40} />
               </a>
               <a
                 key="some_instagram"
                 href="https://www.instagram.com/fingridoyj"
                 title="Fingrid on Instagram"
-                aria-label="Fingrid on Instagram"
+                aria-label="Visit the Fingrid on Instagram"
               >
                 <Instagram height={40} width={40} />
               </a>
@@ -172,13 +172,13 @@ export const PageFooter: FC = () => {
                 key="some_linkedin"
                 href="https://www.linkedin.com/company/42235"
                 title="Fingrid on LinkedIn"
-                aria-label="Fingrid on LinkedIn"
+                aria-label="Visit the Fingrid on LinkedIn"
               >
                 <Linkedin height={40} width={40} />
               </a>
               <a key="rss_feed" href="https://www.fingrid.fi/api/rss/news"
                 title="Fingrid RSS Feed"
-                aria-label="Fingrid RSS Feed">
+                aria-label="Follow the Fingrid RSS Feed">
                 <Rss height={40} width={40} />
               </a>
             </div>,
