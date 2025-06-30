@@ -52,6 +52,53 @@ each bid. When submitting FFR-FCR combination bids, the FCR bids will use the st
 | quantity.quantity | Offered quantity in megawatts | 
 | energy_Price.amount | Offered price in euros | 
 ### Example message
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<ReserveBid_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-7:reservebiddocument:7:1" ArchiveFilePath="E:\VAKSIMessageArchive\202506\44X-00000000248K\IN\20250629\A24_Z14_44X-00000000248K__10X1001A1001A264__7fd5112e-927b-483b-8f56-8057a2a1dadb.XML"> <!--ReserveBidDocument schema version 7.1-->
+	<mRID>7fd5112e-927b-483b-8f56-8057a2a16666</mRID>
+	<revisionNumber>1</revisionNumber>
+	<type>A24</type> <!--ReserveBidDocument-->
+	<process.processType>Z14</process.processType> <!--FFR-->
+	<sender_MarketParticipant.mRID codingScheme="A01">-------------</sender_MarketParticipant.mRID> <!--Sender's ID-->
+	<sender_MarketParticipant.marketRole.type>A46</sender_MarketParticipant.marketRole.type> <!--Type BSP-->
+	<receiver_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</receiver_MarketParticipant.mRID> <!--Fingrid'S ID-->
+	<receiver_MarketParticipant.marketRole.type>A04</receiver_MarketParticipant.marketRole.type> <!--Type TSO-->
+	<createdDateTime>2025-06-29T14:30:57Z</createdDateTime> <!--Time and date in UTC+0-->
+	<reserveBid_Period.timeInterval> <!--Time period of the document, all bids must fall within this period-->
+		<start>2025-06-30T01:00Z</start>
+		<end>2025-06-30T02:00Z</end>
+	</reserveBid_Period.timeInterval> 
+	<domain.mRID codingScheme="A01">10YFI-1--------U</domain.mRID> <!--Finland's domain code-->
+	<subject_MarketParticipant.mRID codingScheme="A01">-------------</subject_MarketParticipant.mRID> <!--Subject i.e. responsible BSP's ID--> 
+	<subject_MarketParticipant.marketRole.type>A46</subject_MarketParticipant.marketRole.type> <!--Type BSP-->
+	<Bid_TimeSeries>
+		<mRID>3490160eaf394fdda4ec7a20a40b2666</mRID> <!--Unique UUID for new bids, existing UUID for bid updates-->
+		<auction.mRID>FFR</auction.mRID>
+		<businessType>Z85</businessType> <!--FFR-->
+		<acquiring_Domain.mRID codingScheme="A01">10YFI-1--------U</acquiring_Domain.mRID> <!--Finland's domain code-->
+		<connecting_Domain.mRID codingScheme="A01">10YFI-1--------U</connecting_Domain.mRID> <!--Finland's domain code-->
+		<quantity_Measure_Unit.name>MAW</quantity_Measure_Unit.name> 
+		<currency_Unit.name>EUR</currency_Unit.name>
+		<price_Measure_Unit.name>MAW</price_Measure_Unit.name>
+		<divisible>A02</divisible> <!--Indivisible bid (Mandatory for FFR)-->
+		<exclusiveBidsIdentification>1175020fbcd54756b8d1a2b4e566654c</exclusiveBidsIdentification> <!--Used if part of an FFR-FCR combination bid. FCR part not listed in this example.-->
+		<registeredResource.mRID codingScheme="NFI">Aggregoitu</registeredResource.mRID>
+		<flowDirection.direction>A01</flowDirection.direction> <!--Upwards direction (Mandatory for FFR)-->
+		<Period>
+			<timeInterval> <!--Time period of the bid-->
+				<start>2025-06-30T01:00Z</start>
+				<end>2025-06-30T02:00Z</end>
+			</timeInterval>
+			<resolution>PT60M</resolution>
+			<Point>
+				<position>1</position>
+				<quantity.quantity>1.0</quantity.quantity>
+				<price.amount>23.49</price.amount>
+			</Point>
+		</Period>
+	</Bid_TimeSeries>
+</ReserveBid_MarketDocument>
+```
 ## Reserve Allocation Result Document
 The Reserve Allocation Result document is a report sent to the BSP after the MTU containing information of the price and volume of activations during the MTU. No reference to the actual bids is included in the document; Per-bid results are sent in a separate document. The message is only sent if the receiving BSP has submitted bids that day. The FFR allocation document does not contain information of FCR parts of combination bids.
 ### Table of document attributes
