@@ -146,3 +146,37 @@ For every message detailed in this page, an acknowledgement document should be g
 | code | 999 - Error not specifically identified. Other error codes may be used. | 
 | text | Free text field, may be populated with an error message for a bid causing the acknowledgement document to be negative. | 
 ### Example messages
+These are two examples of an acknowledgement for bid documents: One positive and one negative.
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Acknowledgement_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-1:acknowledgementdocument:8:1"> <!--Schema version 8.1-->
+  <mRID>efbeef04-46d8-4bc6-b544-8e8df6553ab7</mRID>
+  <createdDateTime>2025-04-08T12:31:39Z</createdDateTime> <!--Time and date in UTC+0-->
+  <sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!--Fingrid's ID-->
+  <sender_MarketParticipant.marketRole.type>A34</sender_MarketParticipant.marketRole.type> <!--Type Reserve Allocator-->
+  <receiver_MarketParticipant.mRID codingScheme="A01">----------------</receiver_MarketParticipant.mRID> <!--Receiver's ID-->
+  <received_MarketDocument.mRID>7a963d8f-7547-41e5-9bbc-52976f877383</received_MarketDocument.mRID> <!--ID of the document being acknowledged-->
+  <received_MarketDocument.revisionNumber>1</received_MarketDocument.revisionNumber>
+  <received_MarketDocument.createdDateTime>2025-04-08T12:31:34Z</received_MarketDocument.createdDateTime> 
+  <Reason>
+    <code>A01</code> <!--Positive ACK-->
+  </Reason>
+</Acknowledgement_MarketDocument>
+```
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Acknowledgement_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-1:acknowledgementdocument:8:1" <!--Schema version 8.1-->
+	<mRID>94fbd3a4-8b59-483c-b9e8-f03b366abb2a</mRID>
+	<createdDateTime>2025-04-03T16:15:13Z</createdDateTime> <!--Time and date in UTC+0-->
+	<sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!--Fingrid's ID-->
+	<sender_MarketParticipant.marketRole.type>A34</sender_MarketParticipant.marketRole.type> <!--Type Reserve Allocator-->
+	<receiver_MarketParticipant.mRID codingScheme="A01">----------------</receiver_MarketParticipant.mRID> <!--Receiver's ID-->
+	<received_MarketDocument.mRID>1aeddd9a-c522-49a2-be20-3822d7d972be</received_MarketDocument.mRID> <!--ID of the document being acknowledged-->
+	<received_MarketDocument.revisionNumber>1</received_MarketDocument.revisionNumber>
+	<received_MarketDocument.createdDateTime>2025-04-03T16:13:39Z</received_MarketDocument.createdDateTime>
+	<Reason>
+		<code>A02</code> <!--Negative ACK-->
+		<text>Message was received after deadline, GateClosure.</text> <!--Explanation-->
+	</Reason>
+</Acknowledgement_MarketDocument>
+```
