@@ -428,7 +428,7 @@ These are two examples of an acknowledgement for bid documents: One positive and
 ```
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Acknowledgement_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-1:acknowledgementdocument:8:1" ArchiveFilePath="D:\VAKSI\Sanomat\EntsoeSanomia\Archive\Cim15mFRRBidAckOut\AcknowledgementDocument_44X-00000000010G_638792937139662546.xml"> <!--Schema version 8.1-->
+<Acknowledgement_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-1:acknowledgementdocument:8:1" <!--Schema version 8.1-->
 	<mRID>94fbd3a4-8b59-483c-b9e8-f03b366abb2a</mRID>
 	<createdDateTime>2025-04-03T16:15:13Z</createdDateTime> <!--Time and date in UTC+0-->
 	<sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!--Fingrid's ID-->
