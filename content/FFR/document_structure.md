@@ -171,6 +171,9 @@ The per-bid document has a similar structure to normal reserve allocation result
 | Bid Price | Original price of the bid | 
 ### Example messages
 These are example messages for both types of Reserve Allocation Result documents.
+> [!NOTE]
+> 
+> The different Reserve Allocation Result documents are currently using different schema versions and xml formats.
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ReserveAllocationResultDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:entsoe.eu:wgedi:errp:reserveallocationresultdocument:5:0"> <!--ReserveAllocationResultDocument schema version 5.0-->
