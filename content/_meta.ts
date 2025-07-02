@@ -32,9 +32,5 @@ export default {
     title: "Frequency containment reserves (FCR products)",
     display: "hidden",
   },
-  FFR: {
-    type: "page",
-    title: "Fast Frequency Reserve (FFR)",
-    display: "hidden",
-  },
+  FFR: "Fast Frequency Reserve (FFR)",
 };
