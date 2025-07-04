@@ -112,11 +112,11 @@ The Reserve Allocation Result document is a report sent to the BSP after the MTU
 | mRID | Unique identification of the document in UUID form |
 | revisionNumber | Always 1 |
 | Type | A38 (Reserve Allocation Result) |
-| process.processType | Z14 (Fast Frequency Reserve) |
+| process.processType | A28 (Primary reserve process) |
 | sender_MarketParticipant.mRID  | The TSO's EIC identification <br> Fingrid = **10X1001A1001A264** | 
-| sender_MarketParticipant.marketRole.type | A04 (System Operator) | 
+| sender_MarketParticipant.marketRole.type | A11 (Market Operator) | 
 | receiver_MarketParticipant.mRID | Identification of the sender party |
-| receiver_MarketParticipant.marketRole.type | One of A46 (BSP) or A39 (Service Provider/Data Provider) | 
+| receiver_MarketParticipant.marketRole.type | A12 (BSP) | 
 | createdDateTime  | Date and time of document creation in UTC+0 <br> Format: YYYY-MM-DDTHH:MM:SSZ | 
 | reserveBid_Period.timeInterval | Time period covered in the document <br> Format: YYYY-MM-DDTHH:MMZ <br> start and end time | 
 | domain.mRID | EIC identification of the control area <br> For Finland **10YFI-1--------U** | 
@@ -126,8 +126,8 @@ The Reserve Allocation Result document is a report sent to the BSP after the MTU
 | Bid Document Version | Always 1 | 
 | Reserve Bid Identification | NA |
 | Tendering Party | The TSO's EIC identification <br> Fingrid = **10X1001A1001A264** | 
-| Auction Identification | FFR | 
-| businessType | Z85 - FFR |
+| Auction Identification | FCR | 
+| businessType | Z03 for FCR-N, Z06 for FCR-D |
 | acquiring Area | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
 | connecting Area | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
 | Contract Type | A01 - Daily |
@@ -135,7 +135,7 @@ The Reserve Allocation Result document is a report sent to the BSP after the MTU
 | Measure Unit Quantity | Always MAW (Megawatt) |
 | Currency | Always EUR |
 | Measure Unit Quantity | Always MAW (Megawatt) |
-| Direction | A01 - Up |
+| Direction | For FCR-N: A03 - Up and down<br>For FCR-D A01 - Up or A02 - Down |
 | **Period** |
 | Time Interval | Time period covered in the document, one complete spot day <br> Format: YYYY-MM-DDTHH:MMZ <br> start and end time | 
 | Resolution | PT60M or PT1H | 
@@ -153,8 +153,8 @@ The per-bid document has a similar structure to normal reserve allocation result
 | Bid Document Version | Always 1 | 
 | Reserve Bid Identification | NA |
 | Tendering Party | The TSO's EIC identification <br> Fingrid = **10X1001A1001A264** | 
-| Auction Identification | FFR_CAPACITY_MARKET | 
-| businessType | Z85 - FFR |
+| Auction Identification | FCR_CAPACITY_MARKET | 
+| businessType | C26 for FCR-N, C27 for FCR-D |
 | acquiring Area | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
 | connecting Area | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
 | Contract Type | A01 - Daily |
@@ -162,7 +162,7 @@ The per-bid document has a similar structure to normal reserve allocation result
 | Measure Unit Quantity | Always MAW (Megawatt) |
 | Currency | Always EUR |
 | Measure Unit Quantity | Always MAW (Megawatt) |
-| Direction | A01 - Up |
+| Direction | If businessType = C26: A03 - Up and down<br>If businessType = C27 A01 - Up or A02 - Down |
 | **Reason** |
 | **code** | **One of A73 (Bid accepted), A72 (Bid partially accepted), or B09 (Bid not accepted)** |
 | **Period** |
