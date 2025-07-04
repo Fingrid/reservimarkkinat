@@ -12,5 +12,14 @@ Additionally to the FCR hourly market, Fingrid procures FCR reserves from the ye
 ## Planned Resource Document
 BSPs can submit Planned Resource Documents to the FCR yearly market for the next day, for which the TSO is obligated to enumerate the BSP up to the contracted amount.
 ### Validation rules
+* Recommended maximum time interval of the Planned Resource Schedule document is 30 days.
+* Reserve plans for the next day must be submitted by 18:00 EE(S)T
+* Revision number is always 1
+* Reserve plan volume can have one decimal.
+* Decimal separator must be a period.
+* Document identification must be in UUID format
+* EIC code shall be used as sender identification code and subject party code.
+* Time stamps must be in ISO 8601 UTC format
+* It is not allowed to submit reserve plans that exceed the yearly market contracted amount
 ### Table of document attributes
 ### Example message
