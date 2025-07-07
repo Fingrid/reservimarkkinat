@@ -47,21 +47,29 @@ If you wish to change either of these bid attributes, you must first cancel the 
 * Document level error code is A01 for accepted message, A02 for fully rejected message.
 
 The table below contains a list of error texts included in the acknowledgement document in case the validation of a bid document fails:
-
 | Description | Level of validation| Error text |
 |-----------|-------|-------|
-|Reserve Bid Document|||
-||||
-||||
-||||
-||||
-|Bid Time Series|||
-||||
-||||
-||||
-|Bid Time Series Interval|||
-||||
-||||
-||||
-||||
-
+|**Reserve Bid Document**|||
+|Document Identification is mandatory|Message|Message reference missing.|
+|Document Identification must be unique|Message|Message reference must be unique.|
+|Message must be received within a given time|Message|Message was received after deadline.|
+|Message can only include bids for next 30 days|Message|Message contains data for more than next 30 days.|
+|Sender Identification must be connected to the Subject Party|Message|Sender is not connected to the Subject Party. |
+|**Bid Time Series**|||
+|Message can only contain FCR bids|Message|Message can only contain FCR bids.|
+|Measure Unit Quantity required |Bid|Quantity unit required.|
+|Quantity unit must be MAW|Bid|Quantity unit must be MAW.|
+|Measure Unit Price required|Bid|Currency required.|
+|Currency must be EUR|Bid|Currency must be EUR.|
+|Reserve object code required|Bid|Reserve object code required.|
+|**Bid Time Series Interval**|||
+|Position is required to be 1|Bid|The time interval of the bid can be only one hour|
+|Quantity can contain only one decimal|Bid|Quantity contains too many decimals; position 
+<pos1>|
+|Quantity is required|Bid|Quantity required; position <pos>|
+|Quantity must be 0 or larger|Bid|Quantities must be 0 or larger; position <pos>|
+|Quantity must be maximum 5 MW for FCR-N and 10 MW for FCR-D|Bid|Maximum quantity 5 MW for FCR-N and 10 MW for FCR-D.|
+|Price is required|Bid|Price required; position <pos>|
+|Bid price must be 0 or larger|Bid|Price is lower than the lower limit; position <pos>.|
+|Reserve object is invalid|Bid|Reserve object must valid and connected to the subject party.|
+|Linked bid identification is invalid|Bid|Linked bid identification must be 1-10. Only FCR-N bids can have linked bid identification.|
