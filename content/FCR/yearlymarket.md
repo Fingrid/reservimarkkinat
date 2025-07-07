@@ -35,17 +35,17 @@ BSPs can submit Planned Resource Documents to the FCR yearly market for the next
 | createdDateTime  | Date and time of document creation in UTC+0 <br> Format: YYYY-MM-DDTHH:MM:SSZ | 
 | reserveBid_Period.timeInterval | Time period covered in the bid document <br> Format: YYYY-MM-DDTHH:MMZ <br> start and end time | 
 | domain.mRID | EIC identification of the control area <br> For Finland **10YFI-1--------U** | 
-| subject_MarketParticipant.mRID  | EIC Identification of the party responsible for the bid | 
+| subject_MarketParticipant.mRID  | EIC Identification of the party responsible for the plan | 
 | subject_MarketParticipant.marketRole.type | A46 (Balancing Service Provider) | 
 |**Planned Resource Time Series**|
 | mRID | Unique identification of the bid in UUID form |
 | businessType | C26 - Frequency Containment Reserve Normal (FCR-N) or <br> C27 - Frequency Containment Reserve Disturbance (FCR-D) |
 | flowDirection.direction | A01 – Up (FCR-D up) <br> A02 - Down (FCR-D down) <br> A03 – UP and DOWN (FCR-N) | 
+| product | 8716867000016 – Active Power |
 | connecting_Domain.mRID | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
-| quantity_Measurement_Unit.name | Always MAW (Megawatt) |
-| currency_Unit.name | Always EUR |
-| price_Measurement_Unit.name | Always MAW (Megawatt) |
+| resourceProvider_MarketParticipant.mRID  | EIC Identification of the party responsible for the plan | 
 | marketAgreement.type | A04 (Yearly) |
+| measurement_Unit.name | Always MAW (Megawatt) |
 | standard_MarketProduct.marketProductType | Only for FCR-D: <br> Z02 - dynamic FCR-D <br> Z03 - static FCR-D | 
 | **Series_Period: Exactly one per BidTimeSeries** |
 | timeInterval | The time interval of the provided schedule. <br> Must be in UTC+0. Format: YYYY-MM-DDTHH:MMZ, start and end time | 
@@ -54,3 +54,137 @@ BSPs can submit Planned Resource Documents to the FCR yearly market for the next
 | Position | Running number, typically from 1 to 24 | 
 | quantity.quantity | Offered quantity in megawatts | 
 ### Example message
+The example message is for a FCR-N planned resource document. 
+```xml
+<PlannedResourceSchedule_MarketDocument xmlns="urn:iec62325.351:tc57wg16:451-7:plannedresourcescheduledocument:6:3"> <!--PlannedResourceScheduleDocument schema version 6.3-->
+	<mRID>96587f14-7082-4aad-9aa5-8cdc57355420</mRID>
+	<revisionNumber>1</revisionNumber>
+	<type>A26</type> <!--CapacityDocument-->
+	<process.processType>A28</process.processType> <!--Primary Reserve Process-->
+	<sender_MarketParticipant.mRID codingScheme="A01">---------------</sender_MarketParticipant.mRID> <!--Sender's ID-->
+	<sender_MarketParticipant.marketRole.type>A46</sender_MarketParticipant.marketRole.type> <!--Type BSP-->
+	<receiver_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</receiver_MarketParticipant.mRID> <!--Fingrid's ID-->
+	<receiver_MarketParticipant.marketRole.type>A04</receiver_MarketParticipant.marketRole.type> <!--Type TSO-->
+	<createdDateTime>2024-11-14T10:52:10Z</createdDateTime> <!--Timestamp in UTC+0-->
+	<schedule_Period.timeInterval> <!--Start and beginning of the plan, a full CET day-->
+		<start>2024-11-16T23:00Z</start>
+		<end>2024-11-17T23:00Z</end>
+	</schedule_Period.timeInterval>
+	<domain.mRID codingScheme="A01">10YFI-1--------U</domain.mRID> <!--Finland's domain code-->
+	<subject_MarketParticipant.mRID codingScheme="A01">----------------</subject_MarketParticipant.mRID> <!--Sender's ID-->
+	<subject_MarketParticipant.marketRole.type>A46</subject_MarketParticipant.marketRole.type> <!--Type BSP-->
+	<PlannedResource_TimeSeries>
+		<mRID>b3b928d2-f3f1-4442-b46b-480b247a214cb</mRID>
+		<businessType>C26</businessType> <!--FCR-N-->
+		<flowDirection.direction>A03</flowDirection.direction> <!--Up and down for FCR-N-->
+		<product>8716867000016</product> <!--Active Power-->
+		<connecting_Domain.mRID codingScheme="A01">10YFI-1--------U</connecting_Domain.mRID> <!--Finland's domain code-->
+		<resourceProvider_MarketParticipant.mRID codingScheme="A01">----------------</resourceProvider_MarketParticipant.mRID> <!--BSP's ID-->
+		<marketAgreement.type>A04</marketAgreement.type> <!--Annual agreement-->
+		<measurement_Unit.name>MAW</measurement_Unit.name>
+		<Series_Period>
+			<timeInterval>
+				<start>2024-11-16T23:00Z</start> <!--Same time interval as the whole document, a whole CET day-->
+				<end>2024-11-17T23:00Z</end>
+			</timeInterval>
+			<resolution>PT60M</resolution>
+			<Point> <!--Provided capacity for each hour of the day-->
+				<position>1</position>
+				<quantity>10</quantity>
+			</Point>
+			<Point>
+				<position>2</position>
+				<quantity>11</quantity>
+			</Point>
+			<Point>
+				<position>3</position>
+				<quantity>12</quantity>
+			</Point>
+			<Point>
+				<position>4</position>
+				<quantity>13</quantity>
+			</Point>
+			<Point>
+				<position>5</position>
+				<quantity>14</quantity>
+			</Point>
+			<Point>
+				<position>6</position>
+				<quantity>15</quantity>
+			</Point>
+			<Point>
+				<position>7</position>
+				<quantity>16</quantity>
+			</Point>
+			<Point>
+				<position>8</position>
+				<quantity>17</quantity>
+			</Point>
+			<Point>
+				<position>9</position>
+				<quantity>18</quantity>
+			</Point>
+			<Point>
+				<position>10</position>
+				<quantity>19</quantity>
+			</Point>
+			<Point>
+				<position>11</position>
+				<quantity>20</quantity>
+			</Point>
+			<Point>
+				<position>12</position>
+				<quantity>21</quantity>
+			</Point>
+			<Point>
+				<position>13</position>
+				<quantity>22</quantity>
+			</Point>
+			<Point>
+				<position>14</position>
+				<quantity>23</quantity>
+			</Point>
+			<Point>
+				<position>15</position>
+				<quantity>24</quantity>
+			</Point>
+			<Point>
+				<position>16</position>
+				<quantity>25</quantity>
+			</Point>
+			<Point>
+				<position>17</position>
+				<quantity>26</quantity>
+			</Point>
+			<Point>
+				<position>18</position>
+				<quantity>27</quantity>
+			</Point>
+			<Point>
+				<position>19</position>
+				<quantity>28</quantity>
+			</Point>
+			<Point>
+				<position>20</position>
+				<quantity>29</quantity>
+			</Point>
+			<Point>
+				<position>21</position>
+				<quantity>30</quantity>
+			</Point>
+			<Point>
+				<position>22</position>
+				<quantity>31</quantity>
+			</Point>
+			<Point>
+				<position>23</position>
+				<quantity>32</quantity>
+			</Point>
+			<Point>
+				<position>24</position>
+				<quantity>33</quantity>
+			</Point>
+		</Series_Period>
+	</PlannedResource_TimeSeries>
+</PlannedResourceSchedule_MarketDocument>
+```
