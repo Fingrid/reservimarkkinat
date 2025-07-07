@@ -21,6 +21,38 @@ BSPs can submit Planned Resource Documents to the FCR yearly market for the next
 * EIC code shall be used as sender identification code and subject party code.
 * Time stamps must be in ISO 8601 UTC format
 * It is not allowed to submit reserve plans that exceed the yearly market contracted amount
+
+The table below contains a list of error texts included in the acknowledgement document in case the validation of a planned resource document fails:
+| Description | Level of validation| Error text |
+|-----------|-------|-------|
+|**Schedule Market Document**|||
+|Document Identification is mandatory|Message|Message reference missing.|
+|Document Identification must be in UUID format|Message|Message reference must be in correct format.|
+|Document type must be filled out correctly|Message|DocumentType missing.<br>DocumentType for FCR Reserve Plans must be A26|
+|Process type must be filled out correctly|Message|ProcessType not valid|
+|Message must be received within a given time|Message|Message was received after deadline. Gate closure for FCR Reserve plans is D-1 18:00 EET|
+|Sender Identification must be connected to the Subject Party|Message|Sender is not connected to the Subject Party. |
+|Message must contain correct ReceiverIdentification|Message|ReceiverIdentification missing.<br>ReceiverIdentification is wrong|
+|Message must contain correct subject party|Message|Subject party missing<br>Subject party not found.|
+|Time stamp of the document must be in correct format|Message|createdDatetime format is incorrect<br>Decimals are not allowed in createdDatetime|
+|Time interval of the document must be in correct format|Message|SchedulePeriodTimeInterval not in correct format|
+|**Time Series**|||
+|TimeSeries Identification is mandatory<br>TimeSeries Identification must be in UUID format|Time series|TimeSeriesIdentification missing<br>TimeSeriesIdentification must be in correct format|
+|Business type must be correct|Time series|Business type missing<br>Message can only contain FCR-N or FCR-D reserve plans|
+|Flow direction must be correctly specified|Time series|Direction required<br>Flow direction must be A03 for FCR-N (C26)<br>Flow direction must be A01 or A02 fir FCR-D (C27)|
+|Product definition must be Active Power|Time series|Product definition is wrong.|
+|Connecting domain must be Finland|Time series|Connecting domain must be 10YFI-1--------U|
+|Measurement unit must be MAW|Time series|Quantity unit must be MAW.|
+|marketAgreement type must be specified
+correctly|Time series|Market agreement type required<br>MarketAgreementType must be A04|
+|Time interval of the series must be in correct format|Time series|Period TimeInterval not in correct format|
+|TimeSeries interval must be included in Document time interval|Time series|Period is not in header timeinterval|
+|Bid Periods are not allowed to overlap|Time series|Periods are overlapping|
+|Resolution not specified correctly|Time series|Resolution must be PT60M or PT1H|
+|Point position within a period must begin with 1|Time series|Point position within a period must begin with 1<br>Point position ‘x’ is missing from period<br>Position ‘x’ is not valid for period<br>Points must be in order by position number|
+|Quantity is required|Time series|Quantity required|
+|Quantity must be within accepted limits|Time series|Quantity must equal or lower than the contracted quantity|
+|Quantity can have 1 decimal|Time series|Quantity can contain maximum 1 decimal|
 ### Table of document attributes
 | Attribute | Description |
 |-----------|-------------|
