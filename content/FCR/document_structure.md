@@ -1,13 +1,13 @@
 # Document structure
 
-On this page you can find information about the structure and attributes of various documents related to the FCR hourly market. The most important message types related to the FCR hourly market are the bid document, reserve allocation result document, and the acknowledgement document. FCR yearly market is described separately [here](./yearlymarket.md).
+On this page you can find information about the structure and attributes of various documents related to the FCR hourly market. The most important message types related to the FCR hourly market are the bid document, reserve allocation result document, and the acknowledgement document. FCR yearly market uses its own Planned Schedule document, the structure of which is described separately [here](./yearlymarket.md).
 
 ## General document rules
 * Dates and times should be in UTC, with the format YYYY-MM-DDThh:mm:ssZ. The last ‘Z’ stands for Zero and indicates UTC+0. The time period the document covers, however, should be in the same day in CET/CEST. This means the day is from 23:00 to 23:00 during winter time, and 22:00 to 22:00 during summer time.
 * When changing from winter time to summer time, the document covers 23 hours (from 23:00 to 22:00). When changing from summer time to winter time, the document covers 25 hours (from 22:00 to 23:00).
 * Each document must have a unique identifier in UUID format.
 
-* ## Bid Document
+## Bid Document
 Bids are submitted to the mFRR Energy Market as *ReserveBid_MarketDocument*. Currently version 7.4 of the document is used. The document contains one or multiple Bid Time Series along with other document-wide information.
 
 ### Table of document attributes
