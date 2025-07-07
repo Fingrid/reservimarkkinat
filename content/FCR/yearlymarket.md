@@ -22,4 +22,35 @@ BSPs can submit Planned Resource Documents to the FCR yearly market for the next
 * Time stamps must be in ISO 8601 UTC format
 * It is not allowed to submit reserve plans that exceed the yearly market contracted amount
 ### Table of document attributes
+| Attribute | Description |
+|-----------|-------------|
+| mRID | Unique identification of the document in UUID form |
+| revisionNumber | Always 1 |
+| Type | A26 (CapacityDocument) |
+| process.processType | A28 (Primary Reserve Process) |
+| sender_MarketParticipant.mRID | Identification of the sender party |
+| sender_MarketParticipant.marketRole.type | One of A46 (BSP) or A39 (Service Provider/Data Provider) | 
+| receiver_MarketParticipant.mRID  | The TSO's EIC identification <br> Fingrid = **10X1001A1001A264** | 
+| receiver_MarketParticipant.marketRole.type | A04 (System Operator) | 
+| createdDateTime  | Date and time of document creation in UTC+0 <br> Format: YYYY-MM-DDTHH:MM:SSZ | 
+| reserveBid_Period.timeInterval | Time period covered in the bid document <br> Format: YYYY-MM-DDTHH:MMZ <br> start and end time | 
+| domain.mRID | EIC identification of the control area <br> For Finland **10YFI-1--------U** | 
+| subject_MarketParticipant.mRID  | EIC Identification of the party responsible for the bid | 
+| subject_MarketParticipant.marketRole.type | A46 (Balancing Service Provider) | 
+|**Planned Resource Time Series**|
+| mRID | Unique identification of the bid in UUID form |
+| businessType | C26 - Frequency Containment Reserve Normal (FCR-N) or <br> C27 - Frequency Containment Reserve Disturbance (FCR-D) |
+| flowDirection.direction | A01 – Up (FCR-D up) <br> A02 - Down (FCR-D down) <br> A03 – UP and DOWN (FCR-N) | 
+| connecting_Domain.mRID | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
+| quantity_Measurement_Unit.name | Always MAW (Megawatt) |
+| currency_Unit.name | Always EUR |
+| price_Measurement_Unit.name | Always MAW (Megawatt) |
+| marketAgreement.type | A04 (Yearly) |
+| standard_MarketProduct.marketProductType | Only for FCR-D: <br> Z02 - dynamic FCR-D <br> Z03 - static FCR-D | 
+| **Series_Period: Exactly one per BidTimeSeries** |
+| timeInterval | The time interval of the provided schedule. <br> Must be in UTC+0. Format: YYYY-MM-DDTHH:MMZ, start and end time | 
+| Resolution | PT60M or PT1H | 
+| **Point** |
+| Position | Running number, typically from 1 to 24 | 
+| quantity.quantity | Offered quantity in megawatts | 
 ### Example message
