@@ -27,10 +27,6 @@ export default {
     display: "hidden",
   },
   aFRR_E: "Automatic frequency restoration reserve energy markets (aFRR)",
-  FCR: {
-    type: "page",
-    title: "Frequency containment reserves (FCR products)",
-    display: "hidden",
-  },
+  FCR: "Frequency containment reserves (FCR products)",
   FFR: "Fast Frequency Reserve (FFR)",
 };
