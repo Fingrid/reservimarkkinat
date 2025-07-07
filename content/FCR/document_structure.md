@@ -186,11 +186,11 @@ These are example messages for both types of Reserve Allocation Result documents
   <DocumentIdentification v="3984c3680a4a4858b88d9f9f9d928444" />
   <DocumentVersion v="1" />
   <DocumentType v="A38" /> <!--ReserveAllocationResultDocument-->
-  <ProcessType v="Z14" /> <!--FFR-->
+  <ProcessType v="A28" /> <!--Primary reserve process-->
   <SenderIdentification v="10X1001A1001A264" codingScheme="A01" /> <!--Fingrid'S ID-->
-  <SenderRole v="A04" /> <!--Type TSO-->
+  <SenderRole v="A11" /> <!--Type Market Operator-->
   <ReceiverIdentification v="--------------" codingScheme="A01" /> <!--Receiver'S ID-->
-  <ReceiverRole v="A46" /> <!--Type BSP-->
+  <ReceiverRole v="A12" /> <!--Type BSP-->
   <CreationDateTime v="2025-06-29T15:06:16Z" /> <!--Time and date in UTC+0-->
   <ReserveBidTimeInterval v="2025-06-29T22:00Z/2025-06-30T22:00Z" /> <!--Time period of the document, always a full CE(S)T day-->
   <Domain v="10YFI-1--------U" codingScheme="A01" /> <!--Finland's domain code-->
@@ -199,9 +199,9 @@ These are example messages for both types of Reserve Allocation Result documents
     <ReserveBidDocumentIdentification v="NA" />
     <ReserveBidDocumentVersion v="1" />
     <ReserveBidIdentification v="NA" />
-    <TenderingParty v="10X1001A1001A264" codingScheme="A01" /> <!--Fingrid'S ID-->
-    <AuctionIdentification v="FFR" />
-    <BusinessType v="Z85" /> <!--FFR-->
+    <TenderingParty v="10X1001A1001A264" codingScheme="A01" /> <!--Fingrid's ID-->
+    <AuctionIdentification v="FCR" />
+    <BusinessType v="Z03" /> <!--FCR-N-->
     <AcquiringArea v="10YFI-1--------U" codingScheme="A01" /> <!--Finland's domain code-->
     <ConnectingArea v="10YFI-1--------U" codingScheme="A01" /> <!--Finland's domain code-->
     <ContractType v="A01" /> <!--Daily-->
@@ -209,129 +209,129 @@ These are example messages for both types of Reserve Allocation Result documents
     <MeasureUnitQuantity v="MAW" />
     <Currency v="EUR" />
     <MeasureUnitPrice v="MAW" />
-    <Direction v="A01" /> <!--Upwards-->
+    <Direction v="A03" /> <!--Up and down-->
     <Period>
       <TimeInterval v="2025-06-29T22:00Z/2025-06-30T22:00Z" /> <!--Time period of the document, always a full CE(S)T day-->
       <Resolution v="PT1H" />
       <Interval> <!--Accepted amounts for each hour of the day, no bid information included-->
         <Pos v="1" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="2" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="3" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="4" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="5" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="6" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="7" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="8" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="9" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="10" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="11" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="12" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="13" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="14" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="15" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="16" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="17" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="18" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="19" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="20" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="21" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="22" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="23" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
       <Interval>
         <Pos v="24" />
-        <Qty v="0.0" />
-        <Price v="0" />
+        <Qty v="5.0" />
+        <Price v="12" />
       </Interval>
     </Period>
   </AllocationTimeSeries>
@@ -343,11 +343,11 @@ These are example messages for both types of Reserve Allocation Result documents
   <mRID>1a25ff0c413345718edf7d5d7578e555</mRID>
   <revisionNumber>1</revisionNumber>
   <type>A38</type> <!--ReserveAllocationResultDocument-->
-  <process.processType>Z14</process.processType> <!--FFR-->
+  <process.processType>A28</process.processType> <!--Primary reserve process-->
   <sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!--Fingrid's ID-->
-  <sender_MarketParticipant.marketRole.type>A04</sender_MarketParticipant.marketRole.type> <!--Type TSO-->
+  <sender_MarketParticipant.marketRole.type>A11</sender_MarketParticipant.marketRole.type> <!--Type Market Operator-->
   <receiver_MarketParticipant.mRID codingScheme="A01">44X-00000000266I</receiver_MarketParticipant.mRID> <!--Receiver's ID-->
-  <receiver_MarketParticipant.marketRole.type>A46</receiver_MarketParticipant.marketRole.type> <!--Type BSP-->
+  <receiver_MarketParticipant.marketRole.type>A12</receiver_MarketParticipant.marketRole.type> <!--Type BSP-->
   <createdDateTime>2025-06-29T15:06:22Z</createdDateTime> <!--Time and date in UTC+0-->
   <reserveBid_Period.timeInterval>
     <start>2025-06-29T22:00Z</start> <!--Time period of the document, applies to the bids within-->
@@ -358,15 +358,15 @@ These are example messages for both types of Reserve Allocation Result documents
     <mRID>d1eaeef63763420ab6b124e58728bcde</mRID>
     <bid_Original_MarketDocument.bid_BidTimeSeries.mRID>21a07993-4864-42ca-e0ab-08ddb7212cbd</bid_Original_MarketDocument.bid_BidTimeSeries.mRID> <!--ID of the original bid document-->
     <bid_Original_MarketDocument.tendering_MarketParticipant.mRID codingScheme="A01">--------------</bid_Original_MarketDocument.tendering_MarketParticipant.mRID> <!--ID of the party sending the original bid-->
-    <auction.mRID>FFR_CAPACITY_MARKET</auction.mRID>
-    <businessType>Z85</businessType> <!--FFR-->
+    <auction.mRID>FCR_CAPACITY_MARKET</auction.mRID>
+    <businessType>C26</businessType> <!--FCR-N-->
     <acquiring_Domain.mRID codingScheme="A01">10YFI-1--------U</acquiring_Domain.mRID> <!--Finland's domain code-->
     <connecting_Domain.mRID codingScheme="A01">10YFI-1--------U</connecting_Domain.mRID> <!--Finland's domain code-->
     <marketAgreement.type>A01</marketAgreement.type> <!--Daily-->
     <quantity_Measurement_Unit.name>MAW</quantity_Measurement_Unit.name>
     <currency_Unit.name>EUR</currency_Unit.name>
     <price_Measurement_Unit.name>MAW</price_Measurement_Unit.name> 
-    <flowDirection.direction>A01</flowDirection.direction> <!--Upwards-->
+    <flowDirection.direction>A03</flowDirection.direction> <!--Up and down-->
     <Period>
       <timeInterval>
         <start>2025-06-30T01:00Z</start>
