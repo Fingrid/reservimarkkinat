@@ -8,7 +8,7 @@ On this page you can find information about the structure and attributes of vari
 * Each document must have a unique identifier in UUID format.
 
 ## Bid Document
-Bids are submitted to the mFRR Energy Market as *ReserveBid_MarketDocument*. Currently version 7.4 of the document is used. The document contains one or multiple Bid Time Series along with other document-wide information.
+Bids are submitted to the FCR Hourly Market as *ReserveBid_MarketDocument*. Currently version 7.4 of the schema is used. The document contains one or multiple Bid Time Series along with other document-wide information.
 
 ### Table of document attributes
 | Attribute | Description |
@@ -27,7 +27,7 @@ Bids are submitted to the mFRR Energy Market as *ReserveBid_MarketDocument*. Cur
 | subject_MarketParticipant.mRID  | EIC Identification of the party responsible for the bid | 
 | subject_MarketParticipant.marketRole.type | A46 (Balancing Service Provider) | 
 ### Bid Time Series
-The bid time series contains attributes related to individual bids. A Bid document may contain multiple Bid Time Series. For multiple bids or periods in a message, create a timeseries for each bid. When submitting FFR-FCR combination bids, the FFR bids will use the structure of FFR Bid Time Series, described in the [FFR Document Structure page](../FFR/document_structure.md).
+The bid time series contains attributes related to individual bids. A Bid document may contain multiple Bid Time Series. For multiple bids or periods in a message, create a timeseries for each bid. It is also possible to submit FCR bids as combination bids alongside FFR bids as part of FFR bid documents. When submitting FFR-FCR combination bids, the FFR bids will use the structure of FFR Bid Time Series, described in the [FFR Document Structure page](../FFR/document_structure.md).
 
 ### Table of Bid Time Series attributes
 | Attribute | Description |
@@ -60,7 +60,7 @@ The bid time series contains attributes related to individual bids. A Bid docume
 The example message contains an FCR-N bid.
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<ReserveBid_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-7:reservebiddocument:7:1" ArchiveFilePath="E:\VAKSIMessageArchive\202506\44X-00000000248K\IN\20250629\A24_Z14_44X-00000000248K__10X1001A1001A264__7fd5112e-927b-483b-8f56-8057a2a1dadb.XML"> <!--ReserveBidDocument schema version 7.1-->
+<ReserveBid_MarketDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:iec62325.351:tc57wg16:451-7:reservebiddocument:7:4" <!--ReserveBidDocument schema version 7.4-->
 	<mRID>7fd5112e-927b-483b-8f56-8057a2a16666</mRID>
 	<revisionNumber>1</revisionNumber>
 	<type>A24</type> <!--ReserveBidDocument-->
@@ -83,9 +83,9 @@ The example message contains an FCR-N bid.
 		<businessType>C26</businessType> <!--FCR-N-->
 		<acquiring_Domain.mRID codingScheme="A01">10YFI-1--------U</acquiring_Domain.mRID> <!--Finland's domain code-->
 		<connecting_Domain.mRID codingScheme="A01">10YFI-1--------U</connecting_Domain.mRID> <!--Finland's domain code-->
-		<quantity_Measure_Unit.name>MAW</quantity_Measure_Unit.name> 
+		<quantity_Measurement_Unit.name>MAW</quantity_Measure_Unit.name> 
 		<currency_Unit.name>EUR</currency_Unit.name>
-		<price_Measure_Unit.name>MAW</price_Measure_Unit.name>
+		<price_Measurement_Unit.name>MAW</price_Measure_Unit.name>
 		<divisible>A01</divisible> <!--Divisible bid (Mandatory for FCR)-->
 		<exclusiveBidsIdentification>1175020fbcd54756b8d1a2b4e566654c</exclusiveBidsIdentification> <!--Used if part of an FFR-FCR combination bid. FFR part not listed in this example.-->
 		<flowDirection.direction>A03</flowDirection.direction> <!--Up and down direction, mandatory for FCR-N-->
