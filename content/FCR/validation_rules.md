@@ -64,8 +64,7 @@ The table below contains a list of error texts included in the acknowledgement d
 |Reserve object code required|Bid|Reserve object code required.|
 |**Bid Time Series Interval**|||
 |Position is required to be 1|Bid|The time interval of the bid can be only one hour|
-|Quantity can contain only one decimal|Bid|Quantity contains too many decimals; position 
-<pos1>|
+|Quantity can contain only one decimal|Bid|Quantity contains too many decimals; position <pos1>|
 |Quantity is required|Bid|Quantity required; position <pos>|
 |Quantity must be 0 or larger|Bid|Quantities must be 0 or larger; position <pos>|
 |Quantity must be maximum 5 MW for FCR-N and 10 MW for FCR-D|Bid|Maximum quantity 5 MW for FCR-N and 10 MW for FCR-D.|
