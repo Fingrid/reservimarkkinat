@@ -8,7 +8,7 @@ On this page you can find information about the structure and attributes of vari
 * Each document must have a unique identifier in UUID format.
 
 * ## Bid Document
-Bids are submitted to the mFRR Energy Market as *ReserveBid_MarketDocument*. Currently version 7.4 of the document is used. The document contains one or multiple Bid Time Series along with other document-wide information.
+Bids are submitted to the FFR Market as *ReserveBid_MarketDocument*. Currently version 7.1 of the document schema is used. The document contains one or multiple Bid Time Series along with other document-wide information.
 
 ### Table of document attributes
 | Attribute | Description |
@@ -37,9 +37,9 @@ each bid. When submitting FFR-FCR combination bids, the FCR bids will use the st
 | businessType | Z85 - FFR |
 | acquiring_Domain.mRID | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
 | connecting_Domain.mRID | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
-| quantity_Measurement_Unit.name | Always MAW (Megawatt) |
+| quantity_Measure_Unit.name | Always MAW (Megawatt) |
 | currency_Unit.name | Always EUR |
-| price_Measurement_Unit.name | Always MAW (Megawatt) |
+| price_Measure_Unit.name | Always MAW (Megawatt) |
 | Divisible | A02 (Indivisible) | 
 | exclusiveBidsIdentification | Optional. UUID identifier used when linking FFR and FCR bids together. |
 | registeredResource.mRID | For FFR: <br> One of the following options, depending on the asset - **Kulutus** (consumption) / **Tuotanto** (Production) / **Aggregoitu** (Aggregated) | 
