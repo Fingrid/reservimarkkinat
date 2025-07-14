@@ -51,15 +51,27 @@ The table below displays the EDX message types used for communication between BS
 | FG --> BSP | FFR result message (per bid) | FI-FFR-ACCEPTED-BIDS-CIM  | FI-FFR |
 
 ### mFRR & aFRR capacity market
-mFRR & aFRR capacity markets are running on the Nordic MMS -platform and BSPs submit bids directly to the Nordic platform. The messagetypes are descireb below. More information can be found in the nordic implementation guide for mFRR/aFRR capacity market here: https://nordicbalancingmodel.net/implementation-guides/
+mFRR & aFRR capacity markets are running on the Nordic MMS -platform and Balance Service Providers submit bids directly to the Nordic platform. The messagetypes are described below. More information can be found in the [nordic implementation guides](https://nordicbalancingmodel.net/implementation-guides/) for mFRR/aFRR capacity market.
 
 | Direction | Message  | MessageType | EDX Service |
 |----------|----------|----------|----------|
-| BSP --> FG | aFRR energy bid | FI-AFRR-BID-CIM | FI-AFRR |
-| BSP --> FG | Acknowledgement for aFRR energy bid unavailability message | FI-AFRR-BIDAVAILABILITY-CIM-ACK | FI-AFRR |
-| FG --> BSP | Acknowledgement for aFRR energy bid | FI-AFRR-BID-CIM-ACK | FI-AFRR |
-| FG --> BSP | aFRR energy bid unavailability message | FI-AFRR-BIDAVAILABILITY-CIM | FI-AFRR |
+| BSP --> NMMS | aFRR/mFRR capacity bid | MO-MCC-BIDS | NO-MFRRCAP or AFRRCAP |
+| NMMS --> BSP | Ack for aFRR/mFRR capacity bid | MO-MCC-BIDS-ACK | NO-MFRRCAP or AFRRCAP |
+| NMMS --> BSP | Publishing of reserve requirement | MO-MCC-RESERVE-REQUIREMENTS-V7-4 | NO-MFRRCAP or AFRRCAP |
+| NMMS --> BSP | Publishing of accepted bids | MO-MCC-ACCEPTED-BIDS-BSP-V6-4 | NO-MFRRCAP or AFRRCAP |
+| NMMS --> BSP | Publishing of market results | MO-MCC-MARKET-RESULTS-V4-5 | NO-MFRRCAP or AFRRCAP |
 
+
+**If there is a fallback situation on the mFRR or aFRR capacity market and the NMMS market platform is unavailable**, bids will be submitted to VAKSI system. aFRR capacity bids can only be submitted through the user interface. For mFRR capacity bids, following Message Types can be used: 
+
+### mFRR capacity market (VAKSI FALLBACK)
+
+| Direction | Message  | MessageType | EDX Service |
+|----------|----------|----------|----------|
+| BSP --> FG | mFRR capacity bid | FI-MFRRCAP-BID-CIM | FI-MFRRCAP |
+| BSP --> FG | Acknowledgement for mFRR capacity market result message | FI-MFRRCAP-ACCEPTED-BIDS-CIM-ACK | FI-MFRRCAP |
+| FG --> BSP | Acknowledgement for mFRR capacity market bid | FI-MFRRCAP-BID-CIM-ACK | FI-MFRRCAP |
+| FG --> BSP | Result message for mFRR capacity market | FI-MFRRCAP-ACCEPTED-BIDS-CIM | FI-MFRRCAP |
 
 
 
