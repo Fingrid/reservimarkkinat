@@ -1,6 +1,6 @@
 ## Message Types
 
-The table below displays the EDX message types used for communication between BSPs and Fingrid. 
+The table below displays the EDX message types used for communication between BSPs and Fingrid. More information on the structure of these messages can be found in their respective market's section.
 
 ### mFRR energy market
 
