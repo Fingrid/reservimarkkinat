@@ -53,7 +53,7 @@ The bid time series contains attributes related to individual bids. A Bid docume
 | energy_Price.amount | Offered price in euros | 
 | minimum_Quantity.quantity | Minimum offered quantity in megawatts if activated. Cannot be used for indivisible bids. If bid is divisible, the value can be 0 for fully divisible bids but must not exceed the bid's maximum quantity. | 
 | **Linked_BidTimeSeries (associated with BidTimeSeries) - no more than three instances referring to each of MTU-1 and MTU-2, respectively** |
-| mRID | Unique identification of a bid in QH-1 or QH-2 |
+| mRID | Unique identification of a bid or inclusive bid group in QH-1 or QH-2 <br>To form a conditional link to an inclusive bid group, mRID must correspond to the **InclusiveBidsIdentification of the group**, _not_ the mRID of a bid within the group.||
 | status | The type of the conditional link used, also determines if the **status** value shall be A65 or A66. See the below table for a list of conditional link types used in Finland. |
 ### Conditional link types
 | Code | Conditionally unavailable or available? | Description |
