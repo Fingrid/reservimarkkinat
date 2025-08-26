@@ -5,5 +5,5 @@ This page contains a changelog for VAKSI updates with changes or additions to th
   *  Bids in an inclusive group, i.e. with the same inclusiveBidsIdentification, must have identical links and in the same order.
   *  Can link ordinary bids to aggregated bids and vice versa.
   *  All other conditional link rules apply as normal.
-* **FCR & FFR: RO Code will be ignored if included in bid messages. Removed the text box from bid input and reporting displays.**
+* **FCR & FFR: registeredResource.mRID will be ignored if included in bid messages. Removed the corresponding text boxes from bid input and reporting displays.**
   * This information was not mandatory previously, and now it will not be used or saved anywhere.
