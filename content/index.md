@@ -17,6 +17,7 @@ Here you can find useful information about the reserve markets and the message e
 | 10.4.2025 | Added mFRR energy markets section |
 | 2.7.2025 | Added FFR section |
 | 7.7.2025 | Added FCR section |
+| 26.8.2025 | Added change log page |
 
 ## Development roadmap
 New documentation content is continuously added to the portal on all reserve markets. There will also be a testing section where the market participants are able to test their market data exchange. We will introduce bid submission for aFRR energy markets to the testing portal during 2025. We will adjust the documentation as well as other features based on the feedback we receive. 
