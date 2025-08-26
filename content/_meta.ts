@@ -14,8 +14,8 @@ export default {
   EDX_message_types: "EDX Message Types",
   cim: "Common Information Model - CIM",
   about: { type: "page", title: "About", display: "hidden" },
-  updatelog: { type: "page", title: "Change Log", display: "hidden" },
   glossary: "Glossary",
+  updatelog: "Change Log",
   "1###": { type: "separator", title: "Market Platforms" },
   mFRR_C: {
     type: "page",
