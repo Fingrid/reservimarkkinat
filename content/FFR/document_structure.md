@@ -42,7 +42,6 @@ each bid. When submitting FFR-FCR combination bids, the FCR bids will use the st
 | price_Measure_Unit.name | Always MAW (Megawatt) |
 | Divisible | A02 (Indivisible) | 
 | exclusiveBidsIdentification | Optional. UUID identifier used when linking FFR and FCR bids together. |
-| registeredResource.mRID | For FFR: <br> One of the following options, depending on the asset - **Kulutus** (consumption) / **Tuotanto** (Production) / **Aggregoitu** (Aggregated) | 
 | flowDirection.direction | Always A01 (Up) | 
 | **Series_Period: Exactly one per BidTimeSeries** |
 | timeInterval | The hour of the bid in question, the time interval can be only one hour. <br> Must be in UTC+0. Format: YYYY-MM-DDTHH:MMZ, start and end time | 
