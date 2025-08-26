@@ -45,7 +45,6 @@ The bid time series contains attributes related to individual bids. A Bid docume
 | multipartBidIdentification | Not used |
 | exclusiveBidsIdentification | Not used |
 | blockBid | A02 (No) |
-| registeredResource.mRID | For FCR-N: <br> Regulation object code. This is defined by Fingrid based on the BRP of the reserve site. Information is not mandatory. <br> For FCR-D up: <br> One of the following options, depending on the asset - **Kulutus** (consumption) / **Tuotanto** (Production) / **Aggregoitu** (Aggregated) <br> For FCR-D down: <br> Not used | 
 | flowDirection.direction | A01 – Up (FCR-D up) <br> A02 - Down (FCR-D down) <br> A03 – UP and DOWN (FCR-N) | 
 | marketAgreement.type | A13 (hourly) |
 | standard_MarketProduct.marketProductType | Only for FCR-D: <br> Z02 - dynamic FCR-D <br> Z03 - static FCR-D | 
