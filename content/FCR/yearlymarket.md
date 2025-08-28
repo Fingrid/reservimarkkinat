@@ -1,5 +1,5 @@
 # FCR Yearly Market
-Additionally to the FCR hourly market, Fingrid procures FCR reserves from the yearly market. The below table describes the differences between hourly and yearly markets. Each FCR product - FCR-N, FCR-D up, and FCR-D down, have their own hourly and yearly markets. The technical requirements are the same between markets.
+In addition to the FCR hourly market, Fingrid procures FCR reserves from the yearly market. The below table describes the differences between hourly and yearly markets. Each FCR product - FCR-N, FCR-D up, and FCR-D down, have their own hourly and yearly markets. The technical requirements are the same between markets.
 
 | Attribute | Yearly market | Hourly market |
 |-----------|-------------|-------------|
