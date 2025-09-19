@@ -46,6 +46,7 @@ Conditional links allow for more complex interactions between bids compared to t
 * A bid can only have conditional links to three bids in the previous quarter-hour (QH-1) and to three bids in the quarter-hour before the previous (QH-2), for a total of six conditional links.
 * Only one conditional link is allowed between any two bids.
 * Each link must have a condition. See Document Structure for details on different conditions.
+* Cannot mix conditionally unavailable and conditionally available link conditions on the same bid. See Document Structure for details on different conditions, and which links fall under which state.
 * If a bid within a conditionally linked chain is cancelled, the entire chain after it will become invalid and unable to be activated. BSPs are notified with an Availability Document when they cause an invalid link.
 ## Rules for bid updates
 To update a bid, the BSP can send the bid again with the same mRID and updated attributes. Additionally, the new bid document must have a unique mRID with a fixed revision number of 1, as well as a newer created timestamp than the previous document. Existing bids can be cancelled by setting their volume to 0 in the message.
