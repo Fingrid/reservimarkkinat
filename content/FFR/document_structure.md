@@ -8,7 +8,7 @@ On this page you can find information about the structure and attributes of vari
 * Each document must have a unique identifier in UUID format.
 
 * ## Bid Document
-Bids are submitted to the FFR Market as *ReserveBid_MarketDocument*. Currently version 7.1 of the document schema is used. The document contains one or multiple Bid Time Series along with other document-wide information.
+Bids are submitted to the FFR Market as *ReserveBid_MarketDocument*. Currently version 7.4 of the document schema is used. The document contains one or multiple Bid Time Series along with other document-wide information.
 
 ### Table of document attributes
 | Attribute | Description |
