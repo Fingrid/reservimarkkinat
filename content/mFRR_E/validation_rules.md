@@ -48,6 +48,11 @@ Conditional links allow for more complex interactions between bids compared to t
 * Each link must have a condition. See Document Structure for details on different conditions.
 * Cannot mix conditionally unavailable and conditionally available link conditions on the same bid. See Document Structure for details on different conditions, and which links fall under which state.
 * If a bid within a conditionally linked chain is cancelled, the entire chain after it will become invalid and unable to be activated. BSPs are notified with an Availability Document when they cause an invalid link.
+### Voluntary bid identification
+In order to more easily recognize bids, BSPs may add a voluntary bid identification text in their bid time series using the Reason attribute. The secondary bid ID can be in plain language and not any specific format. The voluntary bid ID is also added into activation, unavailability, and reserve allocation result documents if it exists.
+* Secondary bid ID can be a maximum of 100 characters
+* Allowed characters: Alphanumeric characters, /()+,-_
+* Reason code must be A95 (Complementary Information)
 ## Rules for bid updates
 To update a bid, the BSP can send the bid again with the same mRID and updated attributes. Additionally, the new bid document must have a unique mRID with a fixed revision number of 1, as well as a newer created timestamp than the previous document. Existing bids can be cancelled by setting their volume to 0 in the message.
 * Cannot change market product type. If you want to change it, the bid must first be cancelled and then sent again with the correct market product type.
