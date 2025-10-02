@@ -101,6 +101,10 @@ The example message contains an FCR-N bid.
 				<price.amount>23.49</price.amount>
 			</Point>
 		</Period>
+		<Reason>
+			<code>A95</code> <!--Complementary information-->
+			<text>Example bid identification</text> <!--Free text, 100 characters max, alphanumeric or /()+,-_-->
+		</Reason>
 	</Bid_TimeSeries>
 </ReserveBid_MarketDocument>
 ```
@@ -383,6 +387,10 @@ These are example messages for both types of Reserve Allocation Result documents
     <Reason>
       <code>A73</code> <!--Bid fully accepted-->
     </Reason>
+    <Reason>
+	  <code>A95</code> <!--Complementary information-->
+  	  <text>Example bid identification</text> <!--Original secondary ID of the bid-->
+	</Reason>
   </TimeSeries>
 </ReserveAllocationResult_MarketDocument>
 ```
