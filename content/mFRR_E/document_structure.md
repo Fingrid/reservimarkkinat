@@ -125,6 +125,10 @@ This is an example message of a simple, technically linked bid being submitted.
         <energy_Price.amount>-12</energy_Price.amount>
       </Point>
     </Period>
+	<Reason>
+		<code>A95</code> <!--Complementary information-->
+		<text>Example bid identification</text> <!--Free text, 100 characters max, alphanumeric or /()+,-_-->
+	</Reason>
   </Bid_TimeSeries>
 </ReserveBid_MarketDocument>
 ```
@@ -218,6 +222,10 @@ This is an example of a scheduled activation order being sent to the BSP.
     <Reason>
       <code>B49</code> <!--Balancing-->
     </Reason>
+    <Reason>
+	  <code>A95</code> <!--Complementary information-->
+  	  <text>Example bid identification</text> <!--Original secondary ID of the bid-->
+	</Reason>
   </TimeSeries>
 </Activation_MarketDocument>
 ```
@@ -290,6 +298,10 @@ This is an example of an availability document sent to the BSP. Includes a bid t
       <code>B16</code> <!--Tender unavailable in MOL-->
       <text>Due to conditional bid</text> <!--Conditional links set the bid unavailable-->
     </Reason>
+    <Reason>
+	  <code>A95</code> <!--Complementary information-->
+  	  <text>Example bid identification</text> <!--Original secondary ID of the bid-->
+	</Reason>
   </BidTimeSeries>
 </BidAvailability_MarketDocument>
 ```
@@ -383,6 +395,10 @@ This is an example of a Reserve Allocation Result document sent to the BSP, cont
     <Reason>
       <code>Z58</code> <!--Scheduled activation (SA)-->
     </Reason>
+    <Reason>
+	  <code>A95</code> <!--Complementary information-->
+  	  <text>Example bid identification</text> <!--Original secondary ID of the bid-->
+	</Reason>
   </TimeSeries>
 </ReserveAllocationResult_MarketDocument>
 ```
