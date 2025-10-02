@@ -18,10 +18,10 @@ Bids are submitted to the FFR Market as *ReserveBid_MarketDocument*. Currently v
 | Type | A24 (BidDocument) |
 | process.processType | Z14 (Fast Frequency Reserve) |
 | sender_MarketParticipant.mRID | Identification of the sender party |
-| sender_MarketParticipant.marketRole.type | One of A46 (BSP) or A45 (Service Provider/Data Provider) | 
+| sender_MarketParticipant.marketRole.type | One of A46 (BSP), A45 (Service Provider) or A39 (Data Provider)| 
 | receiver_MarketParticipant.mRID  | The TSO's EIC identification <br> Fingrid = **10X1001A1001A264** | 
 | receiver_MarketParticipant.marketRole.type | A04 (System Operator) | 
-| createdDateTime  | Date and time of document creation in UTC+0 <br> Format: YYYY-MM-DDTHH:MM:SSZ | 
+| createdDateTime | Date and time of document creation in UTC+0 <br> Format: YYYY-MM-DDTHH:MM:SSZ | 
 | reserveBid_Period.timeInterval | Time period covered in the bid document <br> Format: YYYY-MM-DDTHH:MMZ <br> start and end time | 
 | domain.mRID | EIC identification of the control area <br> For Finland **10YFI-1--------U** | 
 | subject_MarketParticipant.mRID  | EIC Identification of the party responsible for the bid | 
@@ -37,12 +37,13 @@ each bid. When submitting FFR-FCR combination bids, the FCR bids will use the st
 | businessType | Z85 - FFR |
 | acquiring_Domain.mRID | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
 | connecting_Domain.mRID | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
-| quantity_Measure_Unit.name | Always MAW (Megawatt) |
+| quantity_Measurement_Unit.name | Always MAW (Megawatt) |
 | currency_Unit.name | Always EUR |
-| price_Measure_Unit.name | Always MAW (Megawatt) |
+| price_Measurement_Unit.name | Always MAW (Megawatt) |
 | Divisible | A02 (Indivisible) | 
 | exclusiveBidsIdentification | Optional. UUID identifier used when linking FFR and FCR bids together. |
 | flowDirection.direction | Always A01 (Up) | 
+| marketAgreement.type | A13 (hourly) |
 | **Series_Period: Exactly one per BidTimeSeries** |
 | timeInterval | The hour of the bid in question, the time interval can be only one hour. <br> Must be in UTC+0. Format: YYYY-MM-DDTHH:MMZ, start and end time | 
 | Resolution | PT60M or PT1H | 
