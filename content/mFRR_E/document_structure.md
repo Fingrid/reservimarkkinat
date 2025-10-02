@@ -52,6 +52,9 @@ The bid time series contains attributes related to individual bids. A Bid docume
 | quantity.quantity | Offered quantity in megawatts | 
 | energy_Price.amount | Offered price in euros | 
 | minimum_Quantity.quantity | Minimum offered quantity in megawatts if activated. Cannot be used for indivisible bids. If bid is divisible, the value can be 0 for fully divisible bids but must not exceed the bid's maximum quantity. | 
+| **Reason: Zero or one per BidTimeSeries, used for voluntary bid identification** |
+| code | A95 (Complementary information) | 
+| text | Voluntary bid identification in text form | 
 | **Linked_BidTimeSeries (associated with BidTimeSeries) - no more than three instances referring to each of MTU-1 and MTU-2, respectively** |
 | mRID | Unique identification of a bid or inclusive bid group in QH-1 or QH-2 <br>To form a conditional link to an inclusive bid group, mRID must correspond to the **InclusiveBidsIdentification of the group**, _not_ the mRID of a bid within the group.||
 | status | The type of the conditional link used, also determines if the **status** value shall be A65 or A66. See the below table for a list of conditional link types used in Finland. |
@@ -165,9 +168,9 @@ The BSP receiving activation messages sends an acknowledgement document to confi
 | **Point: Exactly one per TimeSeries** |
 | Position | Always 1 | 
 | quantity.quantity | Activated quantity in megawatts | 
-| **Reason: Exactly one per BidTimeSeries** |
-| code | **In the activation order:** One of B22 (System regulation) or B49 (Balancing).<br>**In the response:** Only used to provide a reason when the bid is unavailable. i.e. marketObjectStatus.status = A11. In that case, one of B59 (Unavailability of reserve providing unit) or 999 (Unspecified error). | 
-| text  | Not used in the activation order. <br>**In the response,** used to provide further reasoning for unavailability. | 
+| **Reason: One or multiple per BidTimeSeries** |
+| code | **In the activation order:** One of B22 (System regulation) or B49 (Balancing).<br>**In the response:** Only used to provide a reason when the bid is unavailable. i.e. marketObjectStatus.status = A11. In that case, one of B59 (Unavailability of reserve providing unit) or 999 (Unspecified error).<br>If voluntary bid identification exists for the bid, the code A95 (Complementary information) is also used.| 
+| text  | Not used in the activation order. <br>**In the response,** used to provide further reasoning for unavailability.<br>Also used for voluntary bid identification in the activation order, if it exists. | 
 ### Example message
 This is an example of a scheduled activation order being sent to the BSP.
 ```xml
@@ -241,9 +244,9 @@ After the 15-minute market period ends, an Availability Document is sent to the 
 | requestingParty_MarketParticipant.marketRole.type | One of A46 (BSP), A49 (TSO) or A50 (Distribution System Operator) |
 | businessType | One of C40 (Conditional bid), C41 (Thermal limit), C42 (Frequency limit), C43 (Voltage limit), C44 (Current limit), C45 (Short-circuit current limits), or C46 (Dynamic Stability limit) |
 | domain.mRID | Unique identification of the bid in UUID form |
-| **Reason: one instance per time series** |
-| code | Various codes, depending on the value of _businessType_: <br> businessType = C40: B16 (Tender unavailable in MOL) <br> businessType = C41, C43, C44, C45 or C46: B18 (Failure), B46 (Internal congestion), B47 (Operational security constraints, or B60 (Unavailability of automated protection systems |
-| text | Free text explaining the unavailability reason |
+| **Reason: one or two instances per time series** |
+| code | Various codes, depending on the value of _businessType_: <br> businessType = C40: B16 (Tender unavailable in MOL) <br> businessType = C41, C43, C44, C45 or C46: B18 (Failure), B46 (Internal congestion), B47 (Operational security constraints, or B60 (Unavailability of automated protection systems<br>If voluntary bid identification exists for the bid, the second Reason contains code A95 (Complementary information) |
+| text | Free text explaining the unavailability reason, or free text containing voluntary bid identification if exists |
 ### Example message
 This is an example of an availability document sent to the BSP. Includes a bid the TSO has marked unavailable, and a bid that's unavailable due to conditional links.
 ```xml
@@ -329,8 +332,8 @@ After each imbalance settlement period (ISP), BSPs receive a report of every bid
 | energy_Price.amount | Energy price for the activation | 
 | minimum_Quantity.quantity | Minimum offered quantity in megawatts if activated. Cannot be used for indivisible bids. If bid is divisible, the value can be 0 for fully divisible bids but must not exceed the bid's maximum quantity. | 
 | **Reason: Zero, one or multiple per TimeSeries** |
-| code | Populated with either reason codes for activation: B22 (System regulation) or B49 (Balancing); or activation type codes: Z58 (Scheduled activation) or Z59 (Direct activation) | 
-| text | May be used for additional explanations. | 
+| code | Populated with either reason codes for activation: B22 (System regulation) or B49 (Balancing); or activation type codes: Z58 (Scheduled activation) or Z59 (Direct activation)<br>If voluntary bid identification exists for the bid, code A95 (Complementary information) is also used. | 
+| text | May be used for additional explanations or voluntary bid identification if exists. | 
 ### Example message
 This is an example of a Reserve Allocation Result document sent to the BSP, containing one bid that's been subjected to scheduled activation.
 ```xml
