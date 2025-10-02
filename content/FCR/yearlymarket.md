@@ -21,6 +21,7 @@ BSPs can submit Planned Resource Documents to the FCR yearly market for the next
 * EIC code shall be used as sender identification code and subject party code.
 * Time stamps must be in ISO 8601 UTC format
 * It is not allowed to submit reserve plans that exceed the yearly market contracted amount
+* Service providers sending plans for multiple BSPs at once must submit each BSP's plan in their own document.
 
 The table below contains a list of error texts included in the acknowledgement document in case the validation of a planned resource document fails:
 | Description | Level of validation| Error text |
