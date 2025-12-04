@@ -34,18 +34,25 @@ Aggregated or inclusive bids are a group of which that must all be activated whe
 * Bids must be on the same market period (quarter hour)
 * Bids cannot also be multipart or exclusive bids
 * The sum of the group's bid volumes must be a whole number. The individual bids can have decimals as long as the sum condition is met.
-* Bids cannot contain conditional links. Technical links are allowed, as long as every bid in the group has the same technical link ID.
+* Technical links are allowed, as long as every bid in the group has the same technical link ID.
+* Conditional links are allowed, as long as every bid in the group has the same conditional links in the same order.
 ### Bid linking: Technical linking
 Technical links link bids between consecutive quarter-hours: When a technically linked bid is directly activated, the linked bid in the next quarter-hour will become unavailable.
 * Technical links are allowed on both simple and complex bids.
 * Technical links must be unique within the quarter-hour: One bid or complex bid group can use the same technical link ID within the same quarter-hour.
 ### Bid linking: Conditional linking
 Conditional links allow for more complex interactions between bids compared to technical linking. Depending on the exact condition, conditional bids may start as available or unavailable and change into the other state when the condition is met. For more details on conditional link conditions, see the Document Structure page.
-* Conditional links are only allowed for simple bids
+* Conditional links are only allowed for simple bids and aggregated/inclusive bids
 * A bid can only have conditional links to three bids in the previous quarter-hour (QH-1) and to three bids in the quarter-hour before the previous (QH-2), for a total of six conditional links.
 * Only one conditional link is allowed between any two bids.
 * Each link must have a condition. See Document Structure for details on different conditions.
+* Cannot mix conditionally unavailable and conditionally available link conditions on the same bid. See Document Structure for details on different conditions, and which links fall under which state.
 * If a bid within a conditionally linked chain is cancelled, the entire chain after it will become invalid and unable to be activated. BSPs are notified with an Availability Document when they cause an invalid link.
+### Voluntary bid identification
+In order to more easily recognize bids, BSPs may add a voluntary bid identification text in their bid time series using the Reason attribute. The secondary bid ID can be in plain language and not any specific format. The voluntary bid ID is also added into activation, unavailability, and reserve allocation result documents if it exists.
+* Secondary bid ID can be a maximum of 100 characters
+* Allowed characters: Alphanumeric characters, /()+,-_
+* Reason code must be A95 (Complementary Information)
 ## Rules for bid updates
 To update a bid, the BSP can send the bid again with the same mRID and updated attributes. Additionally, the new bid document must have a unique mRID with a fixed revision number of 1, as well as a newer created timestamp than the previous document. Existing bids can be cancelled by setting their volume to 0 in the message.
 * Cannot change market product type. If you want to change it, the bid must first be cancelled and then sent again with the correct market product type.

@@ -16,6 +16,12 @@
 * All bids must be indivisible. FFR bids are always accepted fully.
 * Each Bid Time Series can include only one bid and period (1 hour)
 
+### Voluntary bid identification
+In order to more easily recognize bids, BSPs may add a voluntary bid identification text in their bid time series using the Reason attribute. The secondary bid ID can be in plain language and not any specific format. The voluntary bid ID is also added to bid-level reserve allocation result documents if it exists.
+* Secondary bid ID can be a maximum of 100 characters
+* Allowed characters: Alphanumeric characters, /()+,-_
+* Reason code must be A95 (Complementary Information)
+
 ### Rules for cancelling bids
 * To cancel time series previously sent a new document is sent with the following information:
     * A new unique document mRID (document identification)

@@ -8,7 +8,7 @@ On this page you can find information about the structure and attributes of vari
 * Each document must have a unique identifier in UUID format.
 
 * ## Bid Document
-Bids are submitted to the mFRR Energy Market as *ReserveBid_MarketDocument*. Currently version 7.4 of the document is used. The document contains one or multiple Bid Time Series along with other document-wide information.
+Bids are submitted to the FFR Market as *ReserveBid_MarketDocument*. Currently version 7.4 of the document schema is used. The document contains one or multiple Bid Time Series along with other document-wide information.
 
 ### Table of document attributes
 | Attribute | Description |
@@ -18,10 +18,10 @@ Bids are submitted to the mFRR Energy Market as *ReserveBid_MarketDocument*. Cur
 | Type | A24 (BidDocument) |
 | process.processType | Z14 (Fast Frequency Reserve) |
 | sender_MarketParticipant.mRID | Identification of the sender party |
-| sender_MarketParticipant.marketRole.type | One of A46 (BSP) or A45 (Service Provider/Data Provider) | 
+| sender_MarketParticipant.marketRole.type | One of A46 (BSP), A45 (Service Provider) or A39 (Data Provider)| 
 | receiver_MarketParticipant.mRID  | The TSO's EIC identification <br> Fingrid = **10X1001A1001A264** | 
 | receiver_MarketParticipant.marketRole.type | A04 (System Operator) | 
-| createdDateTime  | Date and time of document creation in UTC+0 <br> Format: YYYY-MM-DDTHH:MM:SSZ | 
+| createdDateTime | Date and time of document creation in UTC+0 <br> Format: YYYY-MM-DDTHH:MM:SSZ | 
 | reserveBid_Period.timeInterval | Time period covered in the bid document <br> Format: YYYY-MM-DDTHH:MMZ <br> start and end time | 
 | domain.mRID | EIC identification of the control area <br> For Finland **10YFI-1--------U** | 
 | subject_MarketParticipant.mRID  | EIC Identification of the party responsible for the bid | 
@@ -42,8 +42,8 @@ each bid. When submitting FFR-FCR combination bids, the FCR bids will use the st
 | price_Measurement_Unit.name | Always MAW (Megawatt) |
 | Divisible | A02 (Indivisible) | 
 | exclusiveBidsIdentification | Optional. UUID identifier used when linking FFR and FCR bids together. |
-| registeredResource.mRID | For FFR: <br> One of the following options, depending on the asset - **Kulutus** (consumption) / **Tuotanto** (Production) / **Aggregoitu** (Aggregated) | 
 | flowDirection.direction | Always A01 (Up) | 
+| marketAgreement.type | A13 (hourly) |
 | **Series_Period: Exactly one per BidTimeSeries** |
 | timeInterval | The hour of the bid in question, the time interval can be only one hour. <br> Must be in UTC+0. Format: YYYY-MM-DDTHH:MMZ, start and end time | 
 | Resolution | PT60M or PT1H | 
@@ -52,6 +52,57 @@ each bid. When submitting FFR-FCR combination bids, the FCR bids will use the st
 | quantity.quantity | Offered quantity in megawatts | 
 | energy_Price.amount | Offered price in euros | 
 ### Example message
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<ReserveBid_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-7:reservebiddocument:7:1" ArchiveFilePath="E:\VAKSIMessageArchive\202506\44X-00000000248K\IN\20250629\A24_Z14_44X-00000000248K__10X1001A1001A264__7fd5112e-927b-483b-8f56-8057a2a1dadb.XML"> <!--ReserveBidDocument schema version 7.1-->
+	<mRID>7fd5112e-927b-483b-8f56-8057a2a16666</mRID>
+	<revisionNumber>1</revisionNumber>
+	<type>A24</type> <!--ReserveBidDocument-->
+	<process.processType>Z14</process.processType> <!--FFR-->
+	<sender_MarketParticipant.mRID codingScheme="A01">-------------</sender_MarketParticipant.mRID> <!--Sender's ID-->
+	<sender_MarketParticipant.marketRole.type>A46</sender_MarketParticipant.marketRole.type> <!--Type BSP-->
+	<receiver_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</receiver_MarketParticipant.mRID> <!--Fingrid'S ID-->
+	<receiver_MarketParticipant.marketRole.type>A04</receiver_MarketParticipant.marketRole.type> <!--Type TSO-->
+	<createdDateTime>2025-06-29T14:30:57Z</createdDateTime> <!--Time and date in UTC+0-->
+	<reserveBid_Period.timeInterval> <!--Time period of the document, all bids must fall within this period-->
+		<start>2025-06-30T01:00Z</start>
+		<end>2025-06-30T02:00Z</end>
+	</reserveBid_Period.timeInterval> 
+	<domain.mRID codingScheme="A01">10YFI-1--------U</domain.mRID> <!--Finland's domain code-->
+	<subject_MarketParticipant.mRID codingScheme="A01">-------------</subject_MarketParticipant.mRID> <!--Subject i.e. responsible BSP's ID--> 
+	<subject_MarketParticipant.marketRole.type>A46</subject_MarketParticipant.marketRole.type> <!--Type BSP-->
+	<Bid_TimeSeries>
+		<mRID>3490160eaf394fdda4ec7a20a40b2666</mRID> <!--Unique UUID for new bids, existing UUID for bid updates-->
+		<auction.mRID>FFR</auction.mRID>
+		<businessType>Z85</businessType> <!--FFR-->
+		<acquiring_Domain.mRID codingScheme="A01">10YFI-1--------U</acquiring_Domain.mRID> <!--Finland's domain code-->
+		<connecting_Domain.mRID codingScheme="A01">10YFI-1--------U</connecting_Domain.mRID> <!--Finland's domain code-->
+		<quantity_Measure_Unit.name>MAW</quantity_Measure_Unit.name> 
+		<currency_Unit.name>EUR</currency_Unit.name>
+		<price_Measure_Unit.name>MAW</price_Measure_Unit.name>
+		<divisible>A02</divisible> <!--Indivisible bid (Mandatory for FFR)-->
+		<exclusiveBidsIdentification>1175020fbcd54756b8d1a2b4e566654c</exclusiveBidsIdentification> <!--Used if part of an FFR-FCR combination bid. FCR part not listed in this example.-->
+		<registeredResource.mRID codingScheme="NFI">Aggregoitu</registeredResource.mRID>
+		<flowDirection.direction>A01</flowDirection.direction> <!--Upwards direction (Mandatory for FFR)-->
+		<Period>
+			<timeInterval> <!--Time period of the bid-->
+				<start>2025-06-30T01:00Z</start>
+				<end>2025-06-30T02:00Z</end>
+			</timeInterval>
+			<resolution>PT60M</resolution>
+			<Point>
+				<position>1</position>
+				<quantity.quantity>1.0</quantity.quantity>
+				<price.amount>23.49</price.amount>
+			</Point>
+		</Period>
+		<Reason>
+			<code>A95</code> <!--Complementary information-->
+			<text>Example bid identification</text> <!--Free text, 100 characters max, alphanumeric or /()+,-_-->
+		</Reason>
+	</Bid_TimeSeries>
+</ReserveBid_MarketDocument>
+```
 ## Reserve Allocation Result Document
 The Reserve Allocation Result document is a report sent to the BSP after the MTU containing information of the price and volume of activations during the MTU. No reference to the actual bids is included in the document; Per-bid results are sent in a separate document. The message is only sent if the receiving BSP has submitted bids that day. The FFR allocation document does not contain information of FCR parts of combination bids.
 ### Table of document attributes
@@ -120,9 +171,224 @@ The per-bid document has a similar structure to normal reserve allocation result
 | **Position** | **1** |
 | Quantity | Accepted quantity in megawatts | 
 | Price | Hour's marginal price | 
-| **Secondary Quantity** | **Original volume of the bid** | 
-| **Secondary Price** | **Original price of the bid** | 
+| Secondary Quantity | Original volume of the bid | 
+| Bid Price | Original price of the bid | 
 ### Example messages
+These are example messages for both types of Reserve Allocation Result documents.
+> [!NOTE]
+> 
+> The different Reserve Allocation Result documents are currently using different schema versions and xml formats.
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ReserveAllocationResultDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:entsoe.eu:wgedi:errp:reserveallocationresultdocument:5:0"> <!--ReserveAllocationResultDocument schema version 5.0-->
+  <DocumentIdentification v="3984c3680a4a4858b88d9f9f9d928444" />
+  <DocumentVersion v="1" />
+  <DocumentType v="A38" /> <!--ReserveAllocationResultDocument-->
+  <ProcessType v="Z14" /> <!--FFR-->
+  <SenderIdentification v="10X1001A1001A264" codingScheme="A01" /> <!--Fingrid'S ID-->
+  <SenderRole v="A04" /> <!--Type TSO-->
+  <ReceiverIdentification v="--------------" codingScheme="A01" /> <!--Receiver'S ID-->
+  <ReceiverRole v="A46" /> <!--Type BSP-->
+  <CreationDateTime v="2025-06-29T15:06:16Z" /> <!--Time and date in UTC+0-->
+  <ReserveBidTimeInterval v="2025-06-29T22:00Z/2025-06-30T22:00Z" /> <!--Time period of the document, always a full CE(S)T day-->
+  <Domain v="10YFI-1--------U" codingScheme="A01" /> <!--Finland's domain code-->
+  <AllocationTimeSeries>
+    <TimeSeriesIdentification v="a28866ebb3074588b50a3851836a4000" />
+    <ReserveBidDocumentIdentification v="NA" />
+    <ReserveBidDocumentVersion v="1" />
+    <ReserveBidIdentification v="NA" />
+    <TenderingParty v="10X1001A1001A264" codingScheme="A01" /> <!--Fingrid'S ID-->
+    <AuctionIdentification v="FFR" />
+    <BusinessType v="Z85" /> <!--FFR-->
+    <AcquiringArea v="10YFI-1--------U" codingScheme="A01" /> <!--Finland's domain code-->
+    <ConnectingArea v="10YFI-1--------U" codingScheme="A01" /> <!--Finland's domain code-->
+    <ContractType v="A01" /> <!--Daily-->
+    <ContractIdentification v="NA" />
+    <MeasureUnitQuantity v="MAW" />
+    <Currency v="EUR" />
+    <MeasureUnitPrice v="MAW" />
+    <Direction v="A01" /> <!--Upwards-->
+    <Period>
+      <TimeInterval v="2025-06-29T22:00Z/2025-06-30T22:00Z" /> <!--Time period of the document, always a full CE(S)T day-->
+      <Resolution v="PT1H" />
+      <Interval> <!--Accepted amounts for each hour of the day, no bid information included-->
+        <Pos v="1" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="2" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="3" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="4" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="5" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="6" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="7" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="8" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="9" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="10" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="11" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="12" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="13" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="14" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="15" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="16" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="17" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="18" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="19" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="20" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="21" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="22" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="23" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+      <Interval>
+        <Pos v="24" />
+        <Qty v="0.0" />
+        <Price v="0" />
+      </Interval>
+    </Period>
+  </AllocationTimeSeries>
+</ReserveAllocationResultDocument>
+```
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ReserveAllocationResult_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-7:reserveallocationresultdocument:6:4"> <!--ReserveAllocationResultDocument schema version 6.4-->
+  <mRID>1a25ff0c413345718edf7d5d7578e555</mRID>
+  <revisionNumber>1</revisionNumber>
+  <type>A38</type> <!--ReserveAllocationResultDocument-->
+  <process.processType>Z14</process.processType> <!--FFR-->
+  <sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!--Fingrid's ID-->
+  <sender_MarketParticipant.marketRole.type>A04</sender_MarketParticipant.marketRole.type> <!--Type TSO-->
+  <receiver_MarketParticipant.mRID codingScheme="A01">44X-00000000266I</receiver_MarketParticipant.mRID> <!--Receiver's ID-->
+  <receiver_MarketParticipant.marketRole.type>A46</receiver_MarketParticipant.marketRole.type> <!--Type BSP-->
+  <createdDateTime>2025-06-29T15:06:22Z</createdDateTime> <!--Time and date in UTC+0-->
+  <reserveBid_Period.timeInterval>
+    <start>2025-06-29T22:00Z</start> <!--Time period of the document, applies to the bids within-->
+    <end>2025-06-30T22:00Z</end>
+  </reserveBid_Period.timeInterval>
+  <domain.mRID codingScheme="A01">10YFI-1--------U</domain.mRID> <!--Finland's domain code-->
+  <TimeSeries>
+    <mRID>d1eaeef63763420ab6b124e58728bcde</mRID>
+    <bid_Original_MarketDocument.bid_BidTimeSeries.mRID>21a07993-4864-42ca-e0ab-08ddb7212cbd</bid_Original_MarketDocument.bid_BidTimeSeries.mRID> <!--ID of the original bid document-->
+    <bid_Original_MarketDocument.tendering_MarketParticipant.mRID codingScheme="A01">--------------</bid_Original_MarketDocument.tendering_MarketParticipant.mRID> <!--ID of the party sending the original bid-->
+    <auction.mRID>FFR_CAPACITY_MARKET</auction.mRID>
+    <businessType>Z85</businessType> <!--FFR-->
+    <acquiring_Domain.mRID codingScheme="A01">10YFI-1--------U</acquiring_Domain.mRID> <!--Finland's domain code-->
+    <connecting_Domain.mRID codingScheme="A01">10YFI-1--------U</connecting_Domain.mRID> <!--Finland's domain code-->
+    <marketAgreement.type>A01</marketAgreement.type> <!--Daily-->
+    <quantity_Measurement_Unit.name>MAW</quantity_Measurement_Unit.name>
+    <currency_Unit.name>EUR</currency_Unit.name>
+    <price_Measurement_Unit.name>MAW</price_Measurement_Unit.name> 
+    <flowDirection.direction>A01</flowDirection.direction> <!--Upwards-->
+    <Period>
+      <timeInterval>
+        <start>2025-06-30T01:00Z</start>
+        <end>2025-06-30T02:00Z</end>
+      </timeInterval>
+      <resolution>PT60M</resolution>
+      <Point>
+        <position>1</position>
+        <quantity>2.4</quantity> <!--Accepted quantity-->
+        <price.amount>5</price.amount> <!--Final price-->
+        <secondaryQuantity>2.4</secondaryQuantity> <!--Original quantity-->
+        <bid_Price.amount>0.65</bid_Price.amount> <!--Original price-->
+      </Point>
+    </Period>
+    <Reason>
+      <code>A73</code> <!--Bid fully accepted-->
+    </Reason>
+    <Reason>
+	  <code>A95</code> <!--Complementary information-->
+  	  <text>Example bid identification</text> <!--Original secondary ID of the bid-->
+	</Reason>
+  </TimeSeries>
+</ReserveAllocationResult_MarketDocument>
+```
 ## Acknowledgement Document
 For every message detailed in this page, an acknowledgement document should be generated and sent back by the receiving party to indicate that the message has been successfully received. The document can be either positive (code A01) or negative (A02).
 ### Table of document attributes
@@ -146,3 +412,37 @@ For every message detailed in this page, an acknowledgement document should be g
 | code | 999 - Error not specifically identified. Other error codes may be used. | 
 | text | Free text field, may be populated with an error message for a bid causing the acknowledgement document to be negative. | 
 ### Example messages
+These are two examples of an acknowledgement for bid documents: One positive and one negative.
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Acknowledgement_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-1:acknowledgementdocument:8:1"> <!--Schema version 8.1-->
+  <mRID>efbeef04-46d8-4bc6-b544-8e8df6553ab7</mRID>
+  <createdDateTime>2025-04-08T12:31:39Z</createdDateTime> <!--Time and date in UTC+0-->
+  <sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!--Fingrid's ID-->
+  <sender_MarketParticipant.marketRole.type>A34</sender_MarketParticipant.marketRole.type> <!--Type Reserve Allocator-->
+  <receiver_MarketParticipant.mRID codingScheme="A01">----------------</receiver_MarketParticipant.mRID> <!--Receiver's ID-->
+  <received_MarketDocument.mRID>7a963d8f-7547-41e5-9bbc-52976f877383</received_MarketDocument.mRID> <!--ID of the document being acknowledged-->
+  <received_MarketDocument.revisionNumber>1</received_MarketDocument.revisionNumber>
+  <received_MarketDocument.createdDateTime>2025-04-08T12:31:34Z</received_MarketDocument.createdDateTime> 
+  <Reason>
+    <code>A01</code> <!--Positive ACK-->
+  </Reason>
+</Acknowledgement_MarketDocument>
+```
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Acknowledgement_MarketDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iec62325.351:tc57wg16:451-1:acknowledgementdocument:8:1" <!--Schema version 8.1-->
+	<mRID>94fbd3a4-8b59-483c-b9e8-f03b366abb2a</mRID>
+	<createdDateTime>2025-04-03T16:15:13Z</createdDateTime> <!--Time and date in UTC+0-->
+	<sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A264</sender_MarketParticipant.mRID> <!--Fingrid's ID-->
+	<sender_MarketParticipant.marketRole.type>A34</sender_MarketParticipant.marketRole.type> <!--Type Reserve Allocator-->
+	<receiver_MarketParticipant.mRID codingScheme="A01">----------------</receiver_MarketParticipant.mRID> <!--Receiver's ID-->
+	<received_MarketDocument.mRID>1aeddd9a-c522-49a2-be20-3822d7d972be</received_MarketDocument.mRID> <!--ID of the document being acknowledged-->
+	<received_MarketDocument.revisionNumber>1</received_MarketDocument.revisionNumber>
+	<received_MarketDocument.createdDateTime>2025-04-03T16:13:39Z</received_MarketDocument.createdDateTime>
+	<Reason>
+		<code>A02</code> <!--Negative ACK-->
+		<text>Message was received after deadline, GateClosure.</text> <!--Explanation-->
+	</Reason>
+</Acknowledgement_MarketDocument>
+```

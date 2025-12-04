@@ -11,9 +11,11 @@ export default {
   "0###": { type: "separator", title: "General" },
   market_platforms: "Market platforms",
   information_exchange: "Information exchange",
+  EDX_message_types: "EDX Message Types",
   cim: "Common Information Model - CIM",
   about: { type: "page", title: "About", display: "hidden" },
   glossary: "Glossary",
+  updatelog: "Change Log",
   "1###": { type: "separator", title: "Market Platforms" },
   mFRR_C: {
     type: "page",
@@ -27,14 +29,6 @@ export default {
     display: "hidden",
   },
   aFRR_E: "Automatic frequency restoration reserve energy markets (aFRR)",
-  FCR: {
-    type: "page",
-    title: "Frequency containment reserves (FCR products)",
-    display: "hidden",
-  },
-  FFR: {
-    type: "page",
-    title: "Fast Frequency Reserve (FFR)",
-    display: "hidden",
-  },
+  FCR: "Frequency containment reserves (FCR products)",
+  FFR: "Fast Frequency Reserve (FFR)",
 };
