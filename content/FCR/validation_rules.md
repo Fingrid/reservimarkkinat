@@ -45,7 +45,11 @@ manually in the Vaksi Web UI.
 * Cannot change the bid's time period
 * Cannot change the bid's resource object (RO)
 If you wish to change either of these bid attributes, you must first cancel the bid (leave a new document with the bid's volume set to 0) and submit a new bid with the attributes changed. Additionally, the new bid document must have a unique UUID identifier, while the revision number stays as 1.
-
+### Portfolio limits
+BSPs have a set portfolio limit depending on their capacity. The TSO can change this portfolio limit when the BSP's total FCR capacity changes.
+* Bids must not exceed the portfolio limit for each MTU.
+* Document containing any bids that exceed the limit will be rejected.
+* FCR-N, FCR-D Up, and FCR-D Down markets all have their own portfolio limit values.
 ### Acknowledgement rules
 * For each bid message received, an acknowledgement document is sent back to the BSP
 * Messages are never partially accepted, only fully accepted or fully rejected
