@@ -126,7 +126,7 @@ Availability documents are sent one minute after the bid availability period has
 | requestingParty_MarketParticipant.mRID | EIC code of the party requesting bid availability update |
 | requestingParty_MarketParticipant.marketRole.type | One of A46 (BSP) or A49 (TSO) |
 | businessType | One of C40 (Conditional bid), C41 (Thermal limit), or C42 (Frequency limit) |
-| domain.mRID | Unique identification of the bid in UUID form |
+| domain.mRID | EIC Identification of the bidding zone, for Finland 10YFI-1--------U |
 ### Example message
 This is an example of a bid availability document sent by Fingrid after a validity period has ended.
 ```xml
