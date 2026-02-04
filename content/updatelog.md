@@ -1,5 +1,12 @@
 # Change Log
 This page contains a changelog for VAKSI updates with changes or additions to the reserve markets that affect BSPs.
+## February 2026
+* **mFRR, FCR & FFR: added portfolio limits per MTU
+  * Bids cannot be sent if the portfolio limit is exceeded in the MTU. Limit can be either megawatts or number of bids (mFRR only).
+  * For mFRR, BSPs can set their own portfolio limits. By default, limit is 2000 MW per direction per MTU, with no quantity limit.
+  * For FCR and FFR, BSPs cannot set their own limit. The limit is set by the TSO according to total capacity offered.
+* **mFRR: tightened validation on technically linked inclusive bids**
+  * It is no longer possible to submit technical links that point to multiple inclusive bid groups. Documents like these will now be rejected.
 ## September 2025
 * **FFR: Updated Bid Document schema to version 7.4.**
   * Added marketAgreement.type attribute to bid time series, same as in FCR bid time series.
