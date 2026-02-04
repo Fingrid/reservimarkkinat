@@ -159,6 +159,7 @@ The BSP receiving activation messages sends an acknowledgement document to confi
 | order_MarketDocument.revisionNumber  | Version of the activated order, incrementing by one for each time the document is sent. Same version number for both the order and response. | 
 | **TimeSeries: one or more per document** |
 | mRID | Unique identification of the bid to be activated in UUID form |
+| resourceProvider_MarketParticipant.mRID | Identification of the Resource Provider/BSP |
 | businessType | Always B97 (mFRR) |
 | acquiring_Domain.mRID | 10Y1001A1001A91G (Nordic Market Area) |
 | connecting_Domain.mRID | EIC Identification of the bidding zone, for Finland 10YFI-1--------U |
