@@ -46,6 +46,11 @@ BSPs may send bids as combination bids for both the FFR and FCR-N or FCR-D Up ma
 * Submitting party must have a valid contract with Fingrid for both FFR and FCR markets
 * Exclusive Bid Identifier must be unique for each combination bid
 
+### Portfolio limits
+BSPs have a set portfolio limit depending on their capacity. The TSO can change this portfolio limit when the BSP's total FFR capacity changes.
+* Bids must not exceed the portfolio limit for each MTU.
+* Document containing any bids that exceed the limit will be rejected.
+
 ### Acknowledgement rules
 * For each bid message received, an acknowledgement document is sent back to the BSP
 * Messages are never partially accepted, only fully accepted or fully rejected
