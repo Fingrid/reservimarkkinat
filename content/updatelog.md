@@ -5,6 +5,7 @@ This page contains a changelog for VAKSI updates with changes or additions to th
   * Bids cannot be sent if the portfolio limit is exceeded in the MTU. Limit can be either megawatts or number of bids (mFRR only).
   * For mFRR, BSPs can set their own portfolio limits. By default, limit is 2000 MW per direction per MTU, with no quantity limit.
   * For FCR and FFR, BSPs cannot set their own limit. The limit is set by the TSO according to total capacity offered.
+  * Validations are present when submitting bids via both ECP messages and UI.
 * **mFRR: tightened validation on technically linked inclusive bids**
   * It is no longer possible to submit technical links that point to multiple inclusive bid groups. Documents like these will now be rejected.
 ## September 2025
