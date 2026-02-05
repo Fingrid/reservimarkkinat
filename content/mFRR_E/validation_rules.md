@@ -57,6 +57,8 @@ In order to more easily recognize bids, BSPs may add a voluntary bid identificat
 BSPs with access to VAKSI can set portfolio limits for themselves, both megawatts and quantity of bids. Bids can be submitted for an MTU up to set portfolio and quantity limits; any bid documents containing bids that exceed the limit will be rejected.
 * Portfolio limit on the mFRR Energy Market is 2000 MW per direction per MTU by default. No quantity limit by default.
     * e.g. BSP can submit up to 2000 MW of upwards regulation bids **and** up to 2000 MW downwards regulation bids on the same MTU.
+* Portfolio limit is symmetrical per direction. Quantity limit counts both upwards and downwards bids in the amount of bids.
+    * e.g. BSP has a quantity limit of 5 bids, and has submitted 5 upwards regulation bids. They cannot submit any more bids, even downwards bids.
 ## Rules for bid updates
 To update a bid, the BSP can send the bid again with the same mRID and updated attributes. Additionally, the new bid document must have a unique mRID with a fixed revision number of 1, as well as a newer created timestamp than the previous document. Existing bids can be cancelled by setting their volume to 0 in the message.
 * Cannot change market product type. If you want to change it, the bid must first be cancelled and then sent again with the correct market product type.
