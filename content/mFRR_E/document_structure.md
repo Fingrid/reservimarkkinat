@@ -160,7 +160,7 @@ The BSP receiving activation messages sends an acknowledgement document to confi
 | **TimeSeries: one or more per document** |
 | mRID | Unique identification of the bid to be activated in UUID form |
 | resourceProvider_MarketParticipant.mRID | Identification of the Resource Provider/BSP |
-| businessType | Always B97 (mFRR) |
+| businessType | Always A97 (mFRR) |
 | acquiring_Domain.mRID | 10Y1001A1001A91G (Nordic Market Area) |
 | connecting_Domain.mRID | EIC Identification of the bidding zone, for Finland 10YFI-1--------U |
 | measurement_Unit.name | Always MAW (Megawatt) |
