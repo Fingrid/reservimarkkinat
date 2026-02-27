@@ -11,6 +11,7 @@ export default {
   "0###": { type: "separator", title: "General" },
   market_platforms: "Market platforms",
   information_exchange: "Information exchange",
+  mimosa: "Mimosa project",
   EDX_message_types: "EDX Message Types",
   cim: "Common Information Model - CIM",
   about: { type: "page", title: "About", display: "hidden" },
