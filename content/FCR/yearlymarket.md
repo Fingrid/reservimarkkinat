@@ -79,7 +79,6 @@ correctly|Time series|Market agreement type required<br>MarketAgreementType must
 | resourceProvider_MarketParticipant.mRID  | EIC Identification of the party responsible for the plan | 
 | marketAgreement.type | A04 (Yearly) |
 | measurement_Unit.name | Always MAW (Megawatt) |
-| standard_MarketProduct.marketProductType | Only for FCR-D: <br> Z02 - dynamic FCR-D <br> Z03 - static FCR-D | 
 | **Series_Period: Exactly one per BidTimeSeries** |
 | timeInterval | The time interval of the provided schedule. <br> Must be in UTC+0. Format: YYYY-MM-DDTHH:MMZ, start and end time | 
 | Resolution | PT60M or PT1H | 
