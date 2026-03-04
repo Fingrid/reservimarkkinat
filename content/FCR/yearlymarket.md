@@ -6,7 +6,7 @@ In addition to the FCR hourly market, Fingrid procures FCR reserves from the yea
 | Participation | Tendering held once a year, can't join mid-year | Can join mid-year as soon as technical requirements met |
 | Procurement | Fingrid purchases the full planned amount according to the planned resources sent | Required amount of bids accepted in price order |
 | Gate closure time for plan/bid submission | Every day 18:00 | Every day 18:30 |
-| Capacity | BSP must maintain their approved capacity | BSP can submit bids for their capacity daily.<br>Note: BSPs participating in the yearly market can only participate in the hourly market after maintaining their capacity in the yearly market. |
+| Capacity | BSP must maintain their approved capacity obligation | BSP can submit bids for their capacity daily.<br>Note: BSPs participating in the yearly market can only participate in the hourly market after fulfilling their approved capacity obligation in the yearly market. |
 | Pricing | Price determined for the whole year, determined by the highest accepted yearly bid | Price determined for every hour, determined by the highest accepted bid for the hour |
 
 ## Planned Resource Document
