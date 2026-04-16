@@ -54,7 +54,7 @@ The bid time series contains attributes related to individual bids. A Bid docume
 | **Point: Exactly one per BidTimeSeries** |
 | Position | Always 1 | 
 | quantity.quantity | Offered quantity in megawatts | 
-| energy_Price.amount | Offered price in euros | 
+| price.amount | Offered price in euros | 
 ### Example message
 The example message contains an FCR-N bid.
 ```xml
