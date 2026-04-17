@@ -50,7 +50,7 @@ each bid. When submitting FFR-FCR combination bids, the FCR bids will use the st
 | **Point: Exactly one per BidTimeSeries** |
 | Position | Always 1 | 
 | quantity.quantity | Offered quantity in megawatts | 
-| energy_Price.amount | Offered price in euros | 
+| price.amount | Offered price in euros | 
 ### Example message
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
