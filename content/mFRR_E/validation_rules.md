@@ -33,6 +33,7 @@ Aggregated or inclusive bids are a group of which that must all be activated whe
 * Bids must have the same price
 * Bids must be on the same market period (quarter hour)
 * Bids cannot also be multipart or exclusive bids
+* Bids must be fully divisible, meaning divisibility attribute must be A01 and minimum quantity must be 0
 * The sum of the group's bid volumes must be a whole number. The individual bids can have decimals as long as the sum condition is met.
 * Technical links are allowed, as long as every bid in the group has the same technical link ID.
 * Conditional links are allowed, as long as every bid in the group has the same conditional links in the same order.
