@@ -1,14 +1,14 @@
 "use client";
 
+import { xmlRegisterInputProvider } from "libxml2-wasm";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { useXmlSchemaStore } from "./xmlSchemaStore";
-import { xmlRegisterInputProvider } from "libxml2-wasm";
-import { StoreBackedInputProvider } from "../_utils/xml/StoreBackedInputProvider";
+import type { SchemaInfo, ValidationResult } from "@/types";
 import { allSchemaConfigs } from "../_config/schemas.config";
-import { validateXml } from "../_utils/xml/xmlValidator";
+import { StoreBackedInputProvider } from "../_utils/xml/StoreBackedInputProvider";
 import { extractXMLNamespace } from "../_utils/xml/utils";
-import { ValidationResult, SchemaInfo } from "@/types";
+import { validateXml } from "../_utils/xml/xmlValidator";
+import { useXmlSchemaStore } from "./xmlSchemaStore";
 
 export type ValidatorState = {
   // Input state
@@ -215,7 +215,7 @@ export const useValidatorStore = create<ValidatorState>()(
           set((state) => {
             state.validationResults = result;
             state.isValidating = false;
-            state.error = null; 
+            state.error = null;
 
             if (result.schema && !state.currentSchemaInfo?.url) {
               state.currentSchemaInfo = {

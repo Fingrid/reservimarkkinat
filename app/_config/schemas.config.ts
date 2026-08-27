@@ -1,4 +1,4 @@
-import { SchemaConfig } from "@/_store/xmlSchemaStore"; // Assuming SchemaConfig type is exported from the store
+import type { SchemaConfig } from "@/_store/xmlSchemaStore"; // Assuming SchemaConfig type is exported from the store
 
 export const commonSchemas: SchemaConfig = {
   location: "/schemas/common/",

@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import {
   Facebook,
   Footer,
@@ -8,8 +7,8 @@ import {
   Rss,
   Twitter,
 } from "@fingrid/design-system-components";
-import { labGrotesqueWeb } from "@/_fonts/fonts";
 import type { FC } from "react";
+import { labGrotesqueWeb } from "@/_fonts/fonts";
 
 const footerContent = {
   bottomLinks: [
@@ -148,16 +147,24 @@ export const PageFooter: FC = () => {
               key="footer_other_links"
               style={{ alignItems: "flex-start", display: "flex", gap: "16px" }}
             >
-              <a key="some_fb" 
+              <a
+                key="some_fb"
                 href="https://www.facebook.com/fingridfi"
                 title="Fingrid on Facebook"
-                aria-label="Visit the Fingrid on Facebook">
-                <Facebook height={40} width={40} aria-label="Fingrid on Facebook" />
+                aria-label="Visit the Fingrid on Facebook"
+              >
+                <Facebook
+                  height={40}
+                  width={40}
+                  aria-label="Fingrid on Facebook"
+                />
               </a>
-              <a key="some_twitter" 
+              <a
+                key="some_twitter"
                 href="https://twitter.com/fingrid_oyj"
                 title="Fingrid on Twitter"
-                aria-label="Visit the Fingrid on Twitter">
+                aria-label="Visit the Fingrid on Twitter"
+              >
                 <Twitter height={40} width={40} />
               </a>
               <a
@@ -176,9 +183,12 @@ export const PageFooter: FC = () => {
               >
                 <Linkedin height={40} width={40} />
               </a>
-              <a key="rss_feed" href="https://www.fingrid.fi/api/rss/news"
+              <a
+                key="rss_feed"
+                href="https://www.fingrid.fi/api/rss/news"
                 title="Fingrid RSS Feed"
-                aria-label="Follow the Fingrid RSS Feed">
+                aria-label="Follow the Fingrid RSS Feed"
+              >
                 <Rss height={40} width={40} />
               </a>
             </div>,

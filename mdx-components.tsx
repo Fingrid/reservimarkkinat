@@ -1,10 +1,9 @@
-import { useMDXComponents as getThemeComponents } from "nextra-theme-docs";
-import { ScalarUI } from "@/_mdx-components/ScalarUI";
-import { Callout } from "@/_mdx-components/Callout";
+import cn from "clsx";
 import { withGitHubAlert } from "nextra/components";
 import type { MDXComponents } from "nextra/mdx-components";
+import { useMDXComponents as getThemeComponents } from "nextra-theme-docs";
 import type { ComponentProps, FC } from "react";
-import cn from "clsx";
+import { Callout } from "@/_mdx-components/Callout";
 
 const themeComponents = getThemeComponents();
 
@@ -22,7 +21,6 @@ const Blockquote: FC<ComponentProps<"blockquote">> = (props) => (
 export function useMDXComponents(components?: MDXComponents) {
   return {
     ...themeComponents,
-    scalarUI: ScalarUI,
     blockquote: withGitHubAlert(({ type, ...props }) => {
       const calloutType = (
         {

@@ -2,7 +2,7 @@ name: publish-to-github-pages
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 permissions:
   contents: read
@@ -17,20 +17,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: enable corepack and set pnpm version to latest stable
-        run: |
-          corepack enable
-          pnpm set version stable
-      - uses: actions/setup-node@v4
+        run: corepack enable
+      - uses: actions/setup-node@v7
         with:
           cache: 'pnpm'
           always-auth: true
-          node-version: 22
+          node-version: 24
           registry-url: https://pkgs.dev.azure.com/fingrid/Ohjelmistokehitys/_packaging/fingrid-npm/npm/registry/
           scope: "@fingrid"
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
         #with: // Still fails - this time due to type error
         #  static_site_generator: next
       - name: Build
@@ -41,7 +39,7 @@ jobs:
           pnpm build
           touch ./out/.nojekyll # Prevent Jekyll from processing the site
       - name: Upload Pages
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./out
   deploy:
@@ -53,4 +51,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

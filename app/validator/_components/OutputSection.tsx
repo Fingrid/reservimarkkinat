@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { useValidatorStore } from "@/_store/validatorStore";
 
 interface ValidationError {
@@ -47,8 +46,11 @@ const ValidationError = ({ errors }: { errors?: ValidationError[] }) => (
     <p>❌ XML is invalid</p>
     {errors && errors.length > 0 && (
       <ul className={classes.errors.list}>
-        {errors.map((error, index) => (
-          <li key={index} className={classes.errors.item}>
+        {errors.map((error) => (
+          <li
+            key={`${error.line}:${error.message}`}
+            className={classes.errors.item}
+          >
             Line {error.line}: {error.message}
           </li>
         ))}

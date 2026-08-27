@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import cn from "clsx";
 import { useValidatorStore } from "@/_store/validatorStore";
 
@@ -18,6 +17,7 @@ export function InputTabs() {
   return (
     <div id="input-type-tabs" className="flex gap-4 mb-4">
       <button
+        type="button"
         className={cn(
           classes.base,
           activeTab === "file" ? classes.active : classes.inactive,
@@ -27,6 +27,7 @@ export function InputTabs() {
         Attach as file
       </button>
       <button
+        type="button"
         disabled
         className={cn(
           classes.base,

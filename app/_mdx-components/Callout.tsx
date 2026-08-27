@@ -1,14 +1,14 @@
 "use client";
 
-import { labGrotesqueWeb } from "@/_fonts/fonts";
-import cn from "clsx";
-import type { FC, ReactElement, ReactNode } from "react";
 import {
-  TipsAndUpdates,
-  Info,
   ErrorOutline,
+  Info,
+  TipsAndUpdates,
   WarningAmber,
 } from "@fingrid/design-system-components";
+import cn from "clsx";
+import type { FC, ReactElement, ReactNode } from "react";
+import { labGrotesqueWeb } from "@/_fonts/fonts";
 
 const TypeToEmoji = {
   default: <TipsAndUpdates aria-hidden="true" height="20" className="x:mt-1" />,

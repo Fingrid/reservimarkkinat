@@ -22,7 +22,7 @@
 - **XML Processing**: libxml2-wasm (WASM) for client-side XSD validation
 - **Components**: Fingrid Design System (@fingrid/design-system-components), Scalar API Reference
 - **Testing**: Vitest with jsdom environment
-- **Code Quality**: ESLint (strict TypeScript rules + Next.js plugin), Prettier
+- **Code Quality**: Biome for linting and formatting
 - **Package Manager**: pnpm with workspace support
 
 ## Developer Workflows
@@ -39,9 +39,9 @@ pnpm clean           # Remove .next and out directories
 ### Code Quality
 
 ```bash
-pnpm lint            # Check for issues
-pnpm lint:fix        # Auto-fix with ESLint
-pnpm format          # Format with Prettier
+pnpm lint            # Check linting and formatting
+pnpm lint:fix        # Apply safe lint and formatting fixes
+pnpm format          # Format with Biome
 ```
 
 ### Testing
@@ -114,7 +114,6 @@ Each has `location` (public path) + `filenames[]`. Schema files fetched via HTTP
 ## Integration Points
 
 - **Fingrid Design System**: Custom components installed as npm package
-- **Scalar API Reference**: Embedded for API docs display (`@scalar/nextjs-api-reference`)
 - **libxml2-wasm**: Requires initialization before use (see `initializeXmlTools()` in validatorStore)
 - **Plausible Analytics**: Tracked on production (data-domain="developers.fingrid.fi")
 - **Pagefind**: Search index built during `build:generate_index` step
@@ -124,4 +123,4 @@ Each has `location` (public path) + `filenames[]`. Schema files fetched via HTTP
 - Build output can be either static export (`out/`) or standalone Node.js app (env: `EXPORT_STANDALONE`)
 - XML validation runs entirely **client-side** in browser via WASM; no backend required
 - Schema fetches are HTTP-based; consider performance with large schema catalogs
-- Strict ESLint + TypeScript ensure code quality; fix errors before committing
+- Biome and strict TypeScript ensure code quality; fix errors before committing

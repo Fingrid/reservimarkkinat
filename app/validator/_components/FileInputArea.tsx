@@ -1,40 +1,47 @@
 "use client";
-import React, { useState, useEffect } from "react";
 import cn from "clsx";
+import type React from "react";
+import { useEffect, useState } from "react";
+import { SuccessIcon, UploadIcon } from "@/_components/Icons";
 import { useValidatorStore } from "@/_store/validatorStore";
 import { highlightCode } from "@/_utils/syntaxHighlighter";
-import { SuccessIcon, UploadIcon } from "@/_components/Icons";
+import type { SchemaInfo } from "@/types";
 import { useFileUpload } from "../_hooks/useFileUpload";
-import { SchemaInfo } from "@/types";
 import { WarningIcon } from "./WarningIcon";
 
 // Styles object
 const classes = {
   container: "flex flex-col gap-2",
-  label: "text-sm font-semibold text-[var(--color-text)] dark:text-[var(--color-dark-text)]",
+  label:
+    "text-sm font-semibold text-[var(--color-text)] dark:text-[var(--color-dark-text)]",
   dropArea: {
     base: "w-full border border-dashed rounded text-center cursor-pointer transition-colors",
-    default: "border-[var(--color-separator)] dark:border-[var(--color-dark-separator)] hover:bg-[var(--color-background-level-2)] dark:hover:bg-[var(--color-dark-background-level-2)]",
-    active: "border-[var(--color-secondary-action)] dark:border-[var(--color-dark-secondary-action)] bg-[var(--color-background-level-2)] dark:bg-[var(--color-dark-background-level-2)]",
+    default:
+      "border-[var(--color-separator)] dark:border-[var(--color-dark-separator)] hover:bg-[var(--color-background-level-2)] dark:hover:bg-[var(--color-dark-background-level-2)]",
+    active:
+      "border-[var(--color-secondary-action)] dark:border-[var(--color-dark-secondary-action)] bg-[var(--color-background-level-2)] dark:bg-[var(--color-dark-background-level-2)]",
     withFile: "p-1 min-h-[1rem]",
     withoutFile: "p-8 min-h-[15rem]",
   },
   text: {
-    primary: "text-sm font-medium text-[var(--color-text)] dark:text-[var(--color-dark-text)]",
-    secondary: "text-xs text-[var(--color-breadcrumb)] dark:text-[var(--color-dark-text)] opacity-70",
+    primary:
+      "text-sm font-medium text-[var(--color-text)] dark:text-[var(--color-dark-text)]",
+    secondary:
+      "text-xs text-[var(--color-breadcrumb)] dark:text-[var(--color-dark-text)] opacity-70",
   },
 };
 
 // FileDropZone subcomponent
-const FileDropZone = ({ 
-  fileInputRef, 
-  fileName, 
-  isDragging, 
-  onDragOver, 
-  onDragEnter, 
-  onDragLeave, 
-  onDrop, 
-  onClick, 
+const FileDropZone = ({
+  fileInputRef,
+  fileName,
+  isDragging,
+  onDragOver,
+  onDragEnter,
+  onDragLeave,
+  onDrop,
+  onClick,
+  onKeyDown,
   onFileChange,
 }: {
   fileInputRef: React.RefObject<HTMLInputElement | null>;
@@ -45,6 +52,7 @@ const FileDropZone = ({
   onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
   onClick: () => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLDivElement>) => void;
   onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   const dropAreaClasses = cn(
@@ -55,9 +63,13 @@ const FileDropZone = ({
   );
 
   return (
+    // biome-ignore lint/a11y/useSemanticElements: The drag target must wrap the hidden file input.
     <div
       className={dropAreaClasses}
+      role="button"
+      tabIndex={0}
       onClick={onClick}
+      onKeyDown={onKeyDown}
       onDragOver={onDragOver}
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
@@ -65,16 +77,13 @@ const FileDropZone = ({
     >
       <input
         type="file"
+        id="xml-file-input"
         accept=".xml"
         className="hidden"
         ref={fileInputRef}
         onChange={onFileChange}
       />
-      {fileName ? (
-        <FileInfoDisplay fileName={fileName} />
-      ) : (
-        <UploadPrompt />
-      )}
+      {fileName ? <FileInfoDisplay fileName={fileName} /> : <UploadPrompt />}
     </div>
   );
 };
@@ -96,7 +105,8 @@ const componentClasses = {
     schemaLink: "underline hover:text-blue-500 dark:hover:text-blue-400",
     content: {
       base: "w-full border rounded p-4 overflow-auto max-h-[20rem]",
-      default: "border-[var(--color-separator)] dark:border-[var(--color-dark-separator)]",
+      default:
+        "border-[var(--color-separator)] dark:border-[var(--color-dark-separator)]",
       error: "border-red-500 dark:border-red-500",
     },
   },
@@ -117,20 +127,18 @@ const FileInfoDisplay = ({ fileName }: { fileName: string }) => (
 const UploadPrompt = () => (
   <div className={componentClasses.uploadPrompt.container}>
     <UploadIcon />
-    <p className={classes.text.primary}>
-      Drag and drop your XML file here
-    </p>
+    <p className={classes.text.primary}>Drag and drop your XML file here</p>
     <p className={classes.text.secondary}>or click to browse</p>
   </div>
 );
 
 // FileContent subcomponent
-const FileContent = ({ 
-  content, 
+const FileContent = ({
+  content,
   schemaInfo,
-  hasValidationErrors
-}: { 
-  content: string; 
+  hasValidationErrors,
+}: {
+  content: string;
   schemaInfo: SchemaInfo | null;
   hasValidationErrors: boolean;
 }) => {
@@ -138,13 +146,13 @@ const FileContent = ({
     componentClasses.fileContent.content.base,
     hasValidationErrors
       ? componentClasses.fileContent.content.error
-      : componentClasses.fileContent.content.default
+      : componentClasses.fileContent.content.default,
   );
 
   return (
     <div className={componentClasses.fileContent.container}>
       <div className={componentClasses.fileContent.header}>
-        <label className={classes.label}>File Content:</label>
+        <p className={classes.label}>File Content:</p>
         {schemaInfo && (
           <div className={componentClasses.fileContent.schemaInfo}>
             {schemaInfo.urn && (
@@ -166,8 +174,9 @@ const FileContent = ({
           </div>
         )}
       </div>
-      <div 
+      <div
         className={contentClasses}
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: highlightCode escapes XML before it is rendered.
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </div>
@@ -176,16 +185,16 @@ const FileContent = ({
 
 // Main component
 export function FileInputArea() {
-  const [highlightedXml, setHighlightedXml] = useState<string>('');
-  const { 
-    fileInput, 
-    fileContent, 
-    currentSchemaInfo, 
-    validationResults, 
-    setFileInput, 
-    setFileContent 
+  const [highlightedXml, setHighlightedXml] = useState<string>("");
+  const {
+    fileInput,
+    fileContent,
+    currentSchemaInfo,
+    validationResults,
+    setFileInput,
+    setFileContent,
   } = useValidatorStore();
-  
+
   const fileName = fileInput?.name || null;
 
   // Handle file content reading
@@ -205,40 +214,57 @@ export function FileInputArea() {
   };
 
   // Setup file upload functionality
-  const { 
-    isDragging, 
-    fileInputRef, 
-    handleDragOver, 
-    handleDragEnter, 
-    handleDragLeave, 
-    handleDrop, 
-    handleFileInput, 
-    openFileExplorer 
+  const {
+    isDragging,
+    fileInputRef,
+    handleDragOver,
+    handleDragEnter,
+    handleDragLeave,
+    handleDrop,
+    handleFileInput,
+    openFileExplorer,
   } = useFileUpload({ onFileSelected: handleFileSelected });
 
   // Update highlighted XML when fileContent or validationResults change
   useEffect(() => {
     if (fileContent) {
-      const errorLines = validationResults?.details?.map(
-        (error: { line: number }) => error.line
-      ) || [];
-      
+      const errorLines =
+        validationResults?.details?.map(
+          (error: { line: number }) => error.line,
+        ) || [];
+
       highlightCode(fileContent, errorLines)
-        .then(highlighted => setHighlightedXml(highlighted))
-        .catch((error: Error) => console.error('Error highlighting XML:', error));
+        .then((highlighted) => setHighlightedXml(highlighted))
+        .catch((error: Error) =>
+          console.error("Error highlighting XML:", error),
+        );
     } else {
-      setHighlightedXml('');
+      setHighlightedXml("");
     }
   }, [fileContent, validationResults]);
 
   // Check if there are any validation errors
-  const hasValidationErrors = validationResults && !validationResults.isValid && !!validationResults.details?.length;
+  const hasValidationErrors =
+    validationResults &&
+    !validationResults.isValid &&
+    !!validationResults.details?.length;
+
+  const handleDropZoneKeyDown = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+  ) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openFileExplorer();
+    }
+  };
 
   return (
     <div id="file-input-area" className={classes.container}>
-      <label className={classes.label}>XML File</label>
-      
-      <FileDropZone 
+      <label htmlFor="xml-file-input" className={classes.label}>
+        XML File
+      </label>
+
+      <FileDropZone
         fileInputRef={fileInputRef}
         fileName={fileName}
         isDragging={isDragging}
@@ -247,12 +273,13 @@ export function FileInputArea() {
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={openFileExplorer}
+        onKeyDown={handleDropZoneKeyDown}
         onFileChange={handleFileInput}
       />
 
       {fileContent && (
-        <FileContent 
-          content={highlightedXml} 
+        <FileContent
+          content={highlightedXml}
           schemaInfo={currentSchemaInfo}
           hasValidationErrors={!!hasValidationErrors}
         />

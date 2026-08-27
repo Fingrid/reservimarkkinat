@@ -1,17 +1,18 @@
 "use client";
-import { useEffect } from "react";
 import cn from "clsx";
-import {
-  InputTabs,
-  TextInputArea,
-  FileInputArea,
-  ButtonSection,
-  OutputSection,
-} from "./_components";
+import { useEffect } from "react";
 import { useValidatorStore } from "@/_store/validatorStore";
+import {
+  ButtonSection,
+  FileInputArea,
+  InputTabs,
+  OutputSection,
+  TextInputArea,
+} from "./_components";
 
 const classes = {
-  container: "xml-validator x:mx-auto x:max-w-(--nextra-content-width) p-[3rem]",
+  container:
+    "xml-validator x:mx-auto x:max-w-(--nextra-content-width) p-[3rem]",
   wrapper: "flex flex-col gap-y-[2.5rem]",
   headerSection: "flex flex-col",
   title: "text-2xl font-bold mb-2",

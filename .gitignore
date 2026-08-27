@@ -11,8 +11,9 @@ Thumbs.db
 
 .vercel/
 .idea/
-.eslintcache
+.biome
 .env*
+.pruner
 
 tsup.config.bundled*
 tsconfig.tsbuildinfo

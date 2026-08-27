@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  XmlInputProvider,
-  readBuffer,
-  openBuffer,
   closeBuffer,
+  openBuffer,
+  readBuffer,
+  type XmlInputProvider,
 } from "libxml2-wasm";
-import { SchemaStoreProvider } from "@/_store/xmlSchemaStore"; // Import type from store
+import type { SchemaStoreProvider } from "@/_store/xmlSchemaStore"; // Import type from store
 
 export class StoreBackedInputProvider implements XmlInputProvider {
   private _storeProvider: SchemaStoreProvider;

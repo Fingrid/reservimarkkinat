@@ -1,0 +1,52 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.10/schema.json",
+  "files": {
+    "includes": [
+      "**/*.cjs",
+      "**/*.cts",
+      "**/*.css",
+      "**/*.js",
+      "**/*.json",
+      "**/*.jsonc",
+      "**/*.jsx",
+      "**/*.md",
+      "**/*.mdx",
+      "**/*.mjs",
+      "**/*.mts",
+      "**/*.ts",
+      "**/*.tsx",
+      "!!.next",
+      "!!.obsidian",
+      "!!node_modules",
+      "!!out"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["public/plausible-exclusion.css"],
+      "linter": {
+        "enabled": false
+      }
+    }
+  ],
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended"
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double"
+    }
+  }
+}

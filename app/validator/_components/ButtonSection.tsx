@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
 import cn from "clsx";
-import { useValidatorStore } from "@/_store/validatorStore";
 import { SpinnerIcon } from "@/_components/Icons";
+import { useValidatorStore } from "@/_store/validatorStore";
 
 const classes = {
   container: "flex items-center",
@@ -18,13 +17,8 @@ const classes = {
 };
 
 export function ButtonSection() {
-  const { 
-    validateInput, 
-    reset, 
-    isValidating, 
-    fileContent, 
-    currentSchemaInfo 
-  } = useValidatorStore();
+  const { validateInput, reset, isValidating, fileContent, currentSchemaInfo } =
+    useValidatorStore();
 
   const handleValidate = () => {
     validateInput();
@@ -37,7 +31,8 @@ export function ButtonSection() {
   // Determine if validation should be disabled
   const isSchemaNotFound = currentSchemaInfo?.urn && !currentSchemaInfo?.url;
   const isNoFileContent = !fileContent;
-  const isValidationDisabled = isValidating || isNoFileContent || isSchemaNotFound;
+  const isValidationDisabled =
+    isValidating || isNoFileContent || isSchemaNotFound;
 
   // Create tooltip message based on the disabled reason
   let disabledTooltip = "";
@@ -50,13 +45,13 @@ export function ButtonSection() {
   return (
     <div id="button-section" className={classes.container}>
       {isValidating ? (
-        <button className={cn(classes.loadingButton)} disabled>
+        <button type="button" className={cn(classes.loadingButton)} disabled>
           <SpinnerIcon />
           <span>Validating...</span>
         </button>
       ) : isValidationDisabled ? (
         <div className="relative group">
-          <button className={cn(classes.disabledButton)} disabled>
+          <button type="button" className={cn(classes.disabledButton)} disabled>
             Validate
           </button>
           {disabledTooltip && (
@@ -66,11 +61,19 @@ export function ButtonSection() {
           )}
         </div>
       ) : (
-        <button className={cn(classes.validateButton)} onClick={handleValidate}>
+        <button
+          type="button"
+          className={cn(classes.validateButton)}
+          onClick={handleValidate}
+        >
           Validate
         </button>
       )}
-      <button className={cn(classes.clearButton)} onClick={handleClear}>
+      <button
+        type="button"
+        className={cn(classes.clearButton)}
+        onClick={handleClear}
+      >
         Clear
       </button>
     </div>

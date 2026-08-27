@@ -1,8 +1,8 @@
+import type { MDXWrapper } from "nextra";
 import { generateStaticParamsFor, importPage } from "nextra/pages";
+import type { ReactNode } from "react";
+import type { ExtractFCType } from "@/types";
 import { useMDXComponents } from "../../mdx-components";
-import { MDXWrapper } from "nextra";
-import { ReactNode } from "react";
-import { ExtractFCType } from "@/types";
 
 export const generateStaticParams = generateStaticParamsFor("mdxPath");
 
@@ -23,6 +23,7 @@ export async function generateMetadata(props: PageProps) {
   return metadata;
 }
 
+// biome-ignore lint/correctness/useHookAtTopLevel: Nextra exposes this server-side component factory with a hook-like name.
 const Wrapper = useMDXComponents().wrapper;
 
 export default async function Page(props: PageProps) {

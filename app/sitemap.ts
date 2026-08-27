@@ -1,7 +1,7 @@
-import { MetadataRoute } from "next";
-import { Folder, MdxFile, Meta, MetaJsonFile, PageMapItem } from "nextra";
+import { URL } from "node:url";
+import type { MetadataRoute } from "next";
+import type { Folder, MdxFile, Meta, MetaJsonFile, PageMapItem } from "nextra";
 import { getPageMap } from "nextra/page-map";
-import { URL } from "url";
 
 export const dynamic = "force-static";
 

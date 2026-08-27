@@ -218,7 +218,7 @@
     }
 
     a {
-       &:hover {
+      &:hover {
         @apply text-[var(--color-primary-hover)];
         @apply dark:text-[var(--color-dark-primary-hover)];
 
@@ -269,7 +269,7 @@
       font-size: 1rem;
 
       &:hover {
-        text-decoration: underline
+        text-decoration: underline;
       }
     }
 
@@ -588,7 +588,7 @@
       a {
         @apply text-[var(--color-text)];
         @apply dark:text-[var(--color-dark-text)];
-        
+
         &:hover {
           @apply text-[var(--color-info-hover)];
           @apply dark:text-[var(--color-info-tip-hover)];
@@ -610,7 +610,7 @@
       a {
         @apply text-[var(--color-text)];
         @apply dark:text-[var(--color-dark-text)];
-        
+
         &:hover {
           @apply text-[var(--color-tip-hover)];
           @apply dark:text-[var(--color-dark-tip-hover)];
@@ -632,7 +632,7 @@
       a {
         @apply text-[var(--color-text)];
         @apply dark:text-[var(--color-dark-text)];
-        
+
         &:hover {
           @apply text-[var(--color-warning-hover)];
           @apply dark:text-[var(--color-dark-warning-hover)];
@@ -654,7 +654,7 @@
       a {
         @apply text-[var(--color-text)];
         @apply dark:text-[var(--color-dark-text)];
-        
+
         &:hover {
           @apply text-[var(--color-important-hover)];
           @apply dark:text-[var(--color-dark-important-hover)];
@@ -676,7 +676,7 @@
       a {
         @apply text-[var(--color-text)];
         @apply dark:text-[var(--color-dark-text)];
-        
+
         &:hover {
           @apply text-[var(--color-error-hover)];
           @apply dark:text-[var(--color-dark-error-hover)];
@@ -729,14 +729,14 @@
         @apply bg-[var(--color-dark-error-background)];
 
         &:before {
-          @apply text-[var(--color-dark-error-text)];    
+          @apply text-[var(--color-dark-error-text)];
         }
       }
       &.error-line {
         @apply bg-[var(--color-error-background)];
 
         &:before {
-          @apply text-[var(--color-error-text)];  
+          @apply text-[var(--color-error-text)];
         }
       }
     }

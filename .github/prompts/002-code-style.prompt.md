@@ -53,8 +53,8 @@ actions:
          - Use barrel exports (index.ts) for component directories
 
       6. Quality standards:
-         - Follow ESLint rules without exceptions
-         - Use Prettier for formatting
+         - Follow Biome rules without exceptions
+         - Use Biome for formatting
          - Run `pnpm lint` before commits
          - Vitest is used to test the application
 

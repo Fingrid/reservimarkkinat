@@ -1,7 +1,6 @@
-import React from "react";
-
 export const SpinnerIcon = () => (
   <svg
+    aria-hidden="true"
     className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -25,6 +24,7 @@ export const SpinnerIcon = () => (
 
 export const SuccessIcon = () => (
   <svg
+    aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
     className="h-10 w-10 text-[var(--color-primary-action)] dark:text-[var(--color-dark-primary-action)]"
     fill="none"
@@ -42,6 +42,7 @@ export const SuccessIcon = () => (
 
 export const UploadIcon = () => (
   <svg
+    aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
     className="h-10 w-10 text-[var(--color-secondary-action)] dark:text-[var(--color-dark-secondary-action)]"
     fill="none"

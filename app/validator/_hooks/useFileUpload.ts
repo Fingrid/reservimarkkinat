@@ -1,5 +1,11 @@
 "use client";
-import { useState, useRef, DragEvent, ChangeEvent, RefObject } from "react";
+import {
+  type ChangeEvent,
+  type DragEvent,
+  type RefObject,
+  useRef,
+  useState,
+} from "react";
 
 interface UseFileUploadResult {
   isDragging: boolean;
@@ -16,7 +22,9 @@ interface UseFileUploadProps {
   onFileSelected: (file: File) => void;
 }
 
-export const useFileUpload = ({ onFileSelected }: UseFileUploadProps): UseFileUploadResult => {
+export const useFileUpload = ({
+  onFileSelected,
+}: UseFileUploadProps): UseFileUploadResult => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -43,7 +51,7 @@ export const useFileUpload = ({ onFileSelected }: UseFileUploadProps): UseFileUp
     e.stopPropagation();
     setIsDragging(false);
     const files = e.dataTransfer.files;
-    
+
     if (files.length) {
       if (fileInputRef.current) {
         fileInputRef.current.files = files;
@@ -72,6 +80,6 @@ export const useFileUpload = ({ onFileSelected }: UseFileUploadProps): UseFileUp
     handleDragLeave,
     handleDrop,
     handleFileInput,
-    openFileExplorer
+    openFileExplorer,
   };
 };

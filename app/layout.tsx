@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Layout, Navbar } from "nextra-theme-docs";
 import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
+import { Layout, Navbar } from "nextra-theme-docs";
 import type { FC, ReactNode } from "react";
+import { FingridLogo } from "@/_components/FingridLogo";
 import { PageFooter } from "@/_components/PageFooter";
 import { labGrotesqueWeb } from "@/_fonts/fonts";
-import { FingridLogo } from "@/_components/FingridLogo";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -37,9 +37,16 @@ const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
             <Navbar
               logo={
                 <div className="fingrid_logo flex align-center items-center">
-                  <a href="https://www.fingrid.fi/" title="Fingrid.fi Homepage"><FingridLogo width={"100%"} /></a>
+                  <a href="https://www.fingrid.fi/" title="Fingrid.fi Homepage">
+                    <FingridLogo width={"100%"} />
+                  </a>
                   <p className="pl-3 ml-3 border-l-[1px] border-l-[var(--color-separator)] dark:border-l-[var(--color-dark-separator)]">
-                    <a className="font-bold" href="https://developers.fingrid.fi/">Developer&nbsp;Portal</a>
+                    <a
+                      className="font-bold"
+                      href="https://developers.fingrid.fi/"
+                    >
+                      Developer&nbsp;Portal
+                    </a>
                   </p>
                 </div>
               }
