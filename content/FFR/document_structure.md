@@ -8,7 +8,7 @@ On this page you can find information about the structure and attributes of vari
 * Each document must have a unique identifier in UUID format.
 
 * ## Bid Document
-Bids are submitted to the FFR Market as *ReserveBid_MarketDocument*. Currently version 7.4 of the document schema is used. The document contains one or multiple Bid Time Series along with other document-wide information.
+Bids are submitted to the FFR Market as *ReserveBid_MarketDocument*. Currently version 7.4 of the document schema is used. The document contains one or multiple Bid Time Series along with other document-wide information. Bid Document may contain information for FFR and FCR bids when submitting combination bids.
 
 ### Table of document attributes
 | Attribute | Description |
@@ -33,24 +33,24 @@ each bid. When submitting FFR-FCR combination bids, the FCR bids will use the st
 | Attribute | Description |
 |-----------|-------------|
 | mRID | Unique identification of the bid in UUID form |
-| auction.mRID | FFR |
-| businessType | Z85 - FFR |
+| auction.mRID | FFR for FFR bids<br>FCR for FCR-D up or FCR-N part of a combination bid |
+| businessType | Z85 - FFR<br>C27 - FCR-D<br>Z94 - FCR-D, one-step activation<br>C26 - FCR-N |
 | acquiring_Domain.mRID | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
 | connecting_Domain.mRID | EIC identification of the national area <br> For Finland **10YFI-1--------U** |
 | quantity_Measurement_Unit.name | Always MAW (Megawatt) |
 | currency_Unit.name | Always EUR |
 | price_Measurement_Unit.name | Always MAW (Megawatt) |
 | Divisible | A02 (Indivisible) | 
-| exclusiveBidsIdentification | Optional. UUID identifier used when linking FFR and FCR bids together. |
-| flowDirection.direction | Always A01 (Up) | 
-| marketAgreement.type | A13 (hourly) |
+| exclusiveBidsIdentification | Optional. UUID identifier used when linking FFR and FCR combination bids together. |
+| flowDirection.direction | Always A01 (Up) for FFR and FCR-D combination bids <br>A03 (Up and down) for FCR-N combination bids | 
+| marketAgreement.type | Optional. Left empty for FFR bids. A13 (hourly market) or A04 (yearly market) for FCR combination bids |
 | **Series_Period: Exactly one per BidTimeSeries** |
 | timeInterval | The hour of the bid in question, the time interval can be only one hour. <br> Must be in UTC+0. Format: YYYY-MM-DDTHH:MMZ, start and end time | 
 | Resolution | PT60M or PT1H | 
 | **Point: Exactly one per BidTimeSeries** |
 | Position | Always 1 | 
 | quantity.quantity | Offered quantity in megawatts | 
-| price.amount | Offered price in euros | 
+| price.amount | Offered price in euros <br> *For FCR yearly market bids, use 0* | 
 ### Example message
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
