@@ -56,11 +56,6 @@
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.1.11"
   },
-  "resolutions": {
-    "js-yaml": "4.1.1",
-    "lodash-es": "4.17.23",
-    "mdast-util-to-hast": "13.2.1"
-  },
   "browser": {
     "fs": false,
     "os": false,
