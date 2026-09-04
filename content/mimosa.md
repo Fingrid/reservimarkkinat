@@ -23,7 +23,7 @@ Message exchange towards market participants will remain unchanged. The platform
 | Procurement decision  | 6/2025  |
 | Delivery project start  | 9/2025  |
 | Base product installation ready | 1/2026 |
-| Solution presentations, webinars | 10/2026 |
+| Solution presentations, webinars | 2/2027 |
 | Market participant tests | 2-3/2027 |
 | Energy markets Go-Live (Stage 1)| 9-10/2027 |
 | Capacity markets Go-Live (Stage 2) | 2028 |
